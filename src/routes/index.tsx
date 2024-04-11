@@ -13,7 +13,7 @@ export default function Routes(){
             options={{ headerShown: false }}
             />
             <Stack.Screen
-            name="SignIn"
+            name="SingIn"
             component={SingIn} 
             options={{ headerShown: false}}
             />

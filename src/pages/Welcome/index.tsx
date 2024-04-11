@@ -1,7 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from "react-native";
+import { useNavigation } from "@react-navigation/native"
 
 export default function Welcome() {
+    const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
             <View style={styles.containerImagemLogin}>
@@ -23,10 +26,15 @@ export default function Welcome() {
                     style={styles.containerInput}
                     placeholder="Digite sua senha"
                 />   
-                <TouchableOpacity style={styles.containerBotao}>
-                    <Text style={styles.botaoTexto}>Entrar</Text>
+                <TouchableOpacity 
+                style={styles.containerBotao}
+                >
+                <Text style={styles.botaoTexto}>Entrar</Text>
                 </TouchableOpacity>
-                <TouchableOpacity><Text style={styles.botaoRegistro}>Ainda não possui cadastro?, cadastre-se aqui</Text></TouchableOpacity>
+                <TouchableOpacity><Text 
+                style={styles.botaoRegistro}
+                onPress={ () => navigation.navigate("SingIn")}
+                >Ainda não possui cadastro? cadastre-se aqui</Text></TouchableOpacity>
             </View>
         </View>
     );
@@ -47,8 +55,9 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width:"100%",
         //backgroundColor: "#D3D9DB",
-        bottom: 100,
-        gap: 35
+        alignSelf: "center",
+        top: "50%",
+        gap: 25,
     },
     containerBotao:{
         alignSelf: "center",
@@ -59,10 +68,17 @@ const styles = StyleSheet.create({
     },
     containerInput:{
         borderWidth: 1,
+        backgroundColor: "#ffffff",
         borderColor: "#000000",
+        shadowColor: "#000000",
+        elevation: 15,
+        shadowOffset:{width: -1,height: 1},
+        shadowOpacity: 0.9,
+        shadowRadius: 1,
         paddingHorizontal: 10,
         fontSize: 15,
         fontWeight: "600",
+        borderRadius: 8,
     },
     botaoTexto:{
         fontWeight: "bold",
