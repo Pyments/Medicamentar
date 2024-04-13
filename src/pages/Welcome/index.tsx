@@ -29,6 +29,11 @@ export default function Welcome() {
                 <TouchableOpacity 
                 style={styles.containerBotao}
                 >
+                <Image 
+                source={require("../../assets/logo_entrar.png")}
+                style={styles.containerImagemBotaoEntrar}
+                >
+                </Image>
                 <Text style={styles.botaoTexto}>Entrar</Text>
                 </TouchableOpacity>
                 <TouchableOpacity><Text 
@@ -61,10 +66,13 @@ const styles = StyleSheet.create({
     },
     containerBotao:{
         alignSelf: "center",
+        alignItems: "center",
+        justifyContent: "center",
         backgroundColor: "#ffffff",
         borderRadius: 15,
         width: 100,
         height:  40,
+        flexDirection: "row",
     },
     containerInput:{
         borderWidth: 1,
@@ -78,15 +86,23 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         fontSize: 15,
         fontWeight: "600",
-        borderRadius: 8,
+        borderRadius: 3,
+        paddingTop: 5,
+        paddingBottom: 5,
     },
     botaoTexto:{
         fontWeight: "bold",
-        top: 5,
         fontSize: 18,
         textAlign: "center"
     },
     botaoRegistro:{
         textDecorationStyle: "dashed",
+        color: '#000000',
+        alignSelf: "center",
+    },
+    containerImagemBotaoEntrar:{
+        width: 20,
+        height: 20,
+        marginRight: 8,
     }
 })  
