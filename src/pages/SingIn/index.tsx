@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 export default function SingIn() {
     return (
@@ -11,30 +12,35 @@ export default function SingIn() {
             <View style={styles.containerForm}>
                 <TextInput
                 style={styles.containerInput} 
-                placeholder="Nome Completo"    
+                placeholder="NOME COMPLETO:"    
                 />
                 <TextInput 
                 style={styles.containerInput}
-                placeholder="Email"    
+                placeholder="EMAIL:"    
                 />
                 <TextInput 
                 style={styles.containerInput}
-                placeholder="Senha"    
+                placeholder="SENHA:"    
                 />
                 <TextInput 
                 style={styles.containerInput}
-                placeholder="Repita sua senha"    
+                placeholder="REPITA SUA SENHA:"    
                 />
                 <View style={styles.containerBotoes}>
                     <TouchableOpacity style={styles.containerBotao}>
-                        <Text style={styles.containerBotaoTexto}>Cadastrar-se</Text>
+                        <Image 
+                        source={require("../../assets/logo_entrar.png")}
+                        style={styles.containerImagemBotaoEntrar}
+                        >
+                        </Image>
+                        <Text style={styles.containerBotaoTexto}>CADASTRAR-SE</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.containerBotaoGoogle}>
                         <Image 
                         source={require("../../assets/logo_google.png")}
                         style={styles.containerLogoGoogle}
                         ></Image>
-                        <Text style={styles.containerBotaoTexto}>Login com Google</Text>
+                        <Text style={styles.containerBotaoTextoGoogle}>Logar com Google</Text>
                     </TouchableOpacity>
                 </View>
             </View>        
@@ -52,53 +58,61 @@ const styles = StyleSheet.create({
         marginTop:60,
         width:151,
         height:151,
-        marginBottom: 40,
+        marginBottom: 15,
+        borderRadius: 100,
     },
     containerForm:{
         //backgroundColor: "#ffffff",
         paddingHorizontal: 25,
         borderRadius:8,
         marginVertical: 30,
-        gap: 25,
+        gap: 15,
     },
     containerInput:{
         borderColor: "#000000",
         backgroundColor: "#ffffff",
-        shadowColor: "#000000",
-        elevation: 15,
-        shadowOffset:{width: -1,height: 1},
-        shadowOpacity: 0.9,
-        shadowRadius: 1,
+        elevation: 10,
+        shadowColor: '#000000',
         borderWidth: 1,
         fontSize:16,
         borderRadius: 15,
-        paddingHorizontal: 10,
+        paddingHorizontal: 15,
+        paddingTop: 2,
+        paddingBottom: 2,
     },
     containerBotoes:{
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
         paddingHorizontal: 0,
+        paddingTop: 15,
+        gap: 5,
     },
     containerBotao:{
         justifyContent: "center",
         alignItems: "center",
         alignSelf: "center",
+        flexDirection: "row",
         backgroundColor: "#ffffff",
-        borderRadius: 15,
-        width: 100,
+        borderRadius: 5,
+        width: 145,
         height:  40,
     },
     containerBotaoTexto:{
         fontWeight: "bold",
         fontSize: 15,
     },
+    containerBotaoTextoGoogle:{
+        fontWeight: "bold",
+        fontSize: 15,
+        color: "#f9faff"
+    },
     containerBotaoGoogle:{
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#ffffff",
-        borderRadius: 15,
+        backgroundColor: "#4086f4",
+        borderRadius: 5,
         width: 160,
         height: 40,
     },
@@ -106,5 +120,12 @@ const styles = StyleSheet.create({
         width: 20,
         height: 20,
         marginRight: 8,
+        backgroundColor: "#ffffff",
+        borderRadius: 5,
+    },
+    containerImagemBotaoEntrar:{
+        width: 20,
+        height: 20,
+        marginRight: 6,
     }
 })
