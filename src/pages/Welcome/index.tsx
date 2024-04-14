@@ -1,12 +1,14 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from "react-native";
 import { useNavigation } from "@react-navigation/native"
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function Welcome() {
     const navigation = useNavigation();
 
     return (
         <View style={styles.container}>
+            <LinearGradient colors={["#ffffff","#BBE7FF", "#2596BE"]} style={{flex: 1}}>
             <View style={styles.containerImagemLogin}>
                 <Image
                     source={ require("../../assets/teste.jpg" )}
@@ -36,11 +38,14 @@ export default function Welcome() {
                 </Image>
                 <Text style={styles.botaoTexto}>Entrar</Text>
                 </TouchableOpacity>
-                <TouchableOpacity><Text 
+                <TouchableOpacity 
+                >
+                <Text 
                 style={styles.botaoRegistro}
                 onPress={ () => navigation.navigate("SingIn")}
                 >Ainda não possui cadastro? cadastre-se aqui</Text></TouchableOpacity>
             </View>
+            </LinearGradient>
         </View>
     );
 }
@@ -48,21 +53,27 @@ export default function Welcome() {
 const styles = StyleSheet.create({
     container:{
         flex:1,
+        width: "100%",
+        height:"100%",
     },
     containerImagemLogin:{
         flex:2,
-        alignItems:"center",
         borderRadius:30, 
+        maxWidth: 450,
+        opacity: 0.45,
+        width: "100%",
+        height: "100%",
     },
     containerForm:{
         justifyContent:"space-around",
         paddingHorizontal:40,
         position: 'absolute',
         width:"100%",
-        //backgroundColor: "#D3D9DB",
         alignSelf: "center",
         top: "50%",
         gap: 25,
+        maxWidth: 400,
+        minWidth: 300,
     },
     containerBotao:{
         alignSelf: "center",
@@ -97,7 +108,8 @@ const styles = StyleSheet.create({
     },
     botaoRegistro:{
         textDecorationStyle: "dashed",
-        color: '#000000',
+        fontStyle: "italic",
+        color: "#000000",
         alignSelf: "center",
     },
     containerImagemBotaoEntrar:{
