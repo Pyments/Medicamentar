@@ -1,10 +1,38 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Platform } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function SingIn() {
+
+    const LoginButton = () => {
+      if (Platform.OS === "ios"){  
+        return (
+            <TouchableOpacity
+                    style={styles.containerBotaoApple}
+                    >
+                    <Image 
+                    source={require("../../assets/logo_apple.png")}
+                    style={styles.containerLogoIos}
+                    >
+                    </Image>
+                    <Text style={styles.containerTextoIos}> Logar com Apple</Text>
+            </TouchableOpacity>
+        )
+      }else{
+        return (
+            <TouchableOpacity style={styles.containerBotaoGoogle}>
+                        <Image 
+                        source={require("../../assets/logo_google.png")}
+                        style={styles.containerLogoGoogle}
+                        ></Image>
+                        <Text style={styles.containerBotaoTextoGoogle}>Logar com Google</Text>
+                    </TouchableOpacity>
+        )
+      }
+    }
     return (
         <View style={styles.container}>
+            <LinearGradient colors={["#ffffff","#BBE7FF", "#2596BE"]} style={{flex: 1}}>
             <Image
                 style={styles.containerLogo}
                 source={require("../../assets/logo.png")}
@@ -35,15 +63,10 @@ export default function SingIn() {
                         </Image>
                         <Text style={styles.containerBotaoTexto}>CADASTRAR-SE</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.containerBotaoGoogle}>
-                        <Image 
-                        source={require("../../assets/logo_google.png")}
-                        style={styles.containerLogoGoogle}
-                        ></Image>
-                        <Text style={styles.containerBotaoTextoGoogle}>Logar com Google</Text>
-                    </TouchableOpacity>
+                    <LoginButton></LoginButton>
                 </View>
-            </View>        
+            </View>
+            </LinearGradient>        
         </View> 
     );
 }
@@ -62,11 +85,12 @@ const styles = StyleSheet.create({
         borderRadius: 100,
     },
     containerForm:{
-        //backgroundColor: "#ffffff",
+        alignSelf: "center",
         paddingHorizontal: 25,
         borderRadius:8,
         marginVertical: 30,
         gap: 15,
+        maxWidth: 450
     },
     containerInput:{
         borderColor: "#000000",
@@ -83,10 +107,12 @@ const styles = StyleSheet.create({
     containerBotoes:{
         flexDirection: "row",
         justifyContent: "space-between",
+        alignSelf: "center",
         alignItems: "center",
         paddingHorizontal: 0,
         paddingTop: 15,
         gap: 5,
+        maxWidth: 400
     },
     containerBotao:{
         justifyContent: "center",
@@ -113,13 +139,14 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#4086f4",
         borderRadius: 5,
-        width: 160,
+        width: 165,
         height: 40,
     },
     containerLogoGoogle:{
         width: 20,
         height: 20,
         marginRight: 8,
+        marginLeft: 3,
         backgroundColor: "#ffffff",
         borderRadius: 5,
     },
@@ -127,5 +154,23 @@ const styles = StyleSheet.create({
         width: 20,
         height: 20,
         marginRight: 6,
+    },
+    containerBotaoApple:{
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#000000",
+        borderRadius: 5,
+        width: 160,
+        height: 40,
+    },
+    containerLogoIos:{
+        width: 20,
+        height: 20,
+        marginRight: 8,
+    },
+    containerTextoIos:{
+        fontWeight: "bold",
+        fontSize: 15,
     }
 })
