@@ -1,6 +1,8 @@
+import { useNavigation } from "@react-navigation/native"
 import React from "react";
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Platform } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+
 
 export default function SingIn() {
 
@@ -33,6 +35,17 @@ export default function SingIn() {
     return (
         <View style={styles.container}>
             <LinearGradient colors={["#ffffff","#BBE7FF", "#2596BE"]} style={{flex: 1}}>
+            <TouchableOpacity
+            style={styles.containerSeta}
+            // Erro a ser concertado
+            onPress={ () => navigation.navigate("Home")}
+            >
+                <Image 
+                source={require("../../assets/seta_preta.png")}
+                style={styles.containerSetaImagem}
+                >
+                </Image>
+            </TouchableOpacity>
             <Image
                 style={styles.containerLogo}
                 source={require("../../assets/logo.png")}
@@ -172,5 +185,14 @@ const styles = StyleSheet.create({
     containerTextoIos:{
         fontWeight: "bold",
         fontSize: 15,
+    },
+    containerSeta:{
+        top: 20,
+        left: 10,
+        position: "absolute",
+    },
+    containerSetaImagem:{
+        width: 30,
+        resizeMode: "contain",
     }
 })
