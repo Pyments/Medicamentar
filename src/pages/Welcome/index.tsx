@@ -36,7 +36,10 @@ export default function Welcome() {
                 style={styles.containerImagemBotaoEntrar}
                 >
                 </Image>
-                <Text style={styles.botaoTexto}>Entrar</Text>
+                <Text 
+                style={styles.botaoTexto}
+                onPress={ () => navigation.navigate("Home")}
+                >Entrar</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                 >
