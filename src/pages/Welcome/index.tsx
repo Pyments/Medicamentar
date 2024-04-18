@@ -5,7 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 export default function Welcome() {
     const navigation = useNavigation();
-
+    
     return (
         <View style={styles.container}>
             <LinearGradient colors={["#ffffff","#BBE7FF", "#2596BE"]} style={{flex: 1}}>
