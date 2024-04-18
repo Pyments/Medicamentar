@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, Animated } from "react-native";
 import { useNavigation } from "@react-navigation/native"
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -12,21 +12,30 @@ export default function Welcome() {
             <View style={styles.containerImagemLogin}>
                 <Image
                     source={ require("../../assets/teste.jpg" )}
-                    style={{ width: "100%", height: "100%" }}
-                    blurRadius={0.5}
+                    style={styles.containerImagemLoginImagem}
                     resizeMode="cover" 
                 />
             </View>
             <View style={styles.containerForm}>
-                {/*(<Text>E-mail</Text>*/}
                 <TextInput
                     style={styles.containerInput}
                     placeholder="Digite seu e-mail"
+                    autoComplete="email"
+                    autoCapitalize="none"
+                    autoCorrect= {false}
+                    keyboardType="email-address"
+                    enterKeyHint="next"
+                    importantForAutofill="yes"
                 />
-                {/*<Text>Senha</Text>*/}
                 <TextInput
                     style={styles.containerInput}
                     placeholder="Digite sua senha"
+                    autoComplete="password"
+                    autoCapitalize="none"
+                    autoCorrect= {false}
+                    enterKeyHint="done"
+                    importantForAutofill="yes"
+                    secureTextEntry= {true}
                 />   
                 <TouchableOpacity 
                 style={styles.containerBotao}
@@ -41,12 +50,16 @@ export default function Welcome() {
                 onPress={ () => navigation.navigate("Home")}
                 >Entrar</Text>
                 </TouchableOpacity>
-
-                <TouchableOpacity>
-                <Text 
-                style={styles.botaoRegistro}
-                onPress={ () => navigation.navigate("SingIn")}
-                >Ainda não possui cadastro? cadastre-se aqui</Text></TouchableOpacity>
+                <View style={styles.Registro}>
+                    <Text style={styles.textoRegistro}>
+                        Ainda não possui cadastro?
+                    </Text> 
+                    <TouchableOpacity onPress={ () => navigation.navigate("SingIn")}>
+                        <Text style={{fontSize: 15, marginLeft: 5, fontStyle: "italic", textDecorationLine: "underline"}}>
+                            cadastre-se aqui
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
             </LinearGradient>
         </View>
@@ -60,12 +73,17 @@ const styles = StyleSheet.create({
         height:"100%",
     },
     containerImagemLogin:{
-        flex:2,
-        borderRadius:30, 
+        flex:1,
         maxWidth: 450,
         opacity: 0.45,
         width: "100%",
         height: "100%",
+        alignSelf: "center",
+    },
+    containerImagemLoginImagem:{
+        width: "100%",
+        height: "100%",
+        alignSelf: "center",
     },
     containerForm:{
         justifyContent:"space-around",
@@ -109,11 +127,13 @@ const styles = StyleSheet.create({
         fontSize: 18,
         textAlign: "center"
     },
-    botaoRegistro:{
-        textDecorationStyle: "dashed",
-        fontStyle: "italic",
-        color: "#000000",
+    Registro:{
         alignSelf: "center",
+        flexDirection: "row"
+    },
+    textoRegistro:{
+        fontSize: 15,
+        fontStyle: "italic",
     },
     containerImagemBotaoEntrar:{
         width: 20,
