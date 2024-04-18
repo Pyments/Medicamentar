@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     containerLogoIos:{
         width: 20,
         height: 20,
-        marginRight: 8,
+        marginRight: 3,
     },
     containerTextoIos:{
         fontWeight: "bold",
@@ -194,5 +194,6 @@ const styles = StyleSheet.create({
     containerSetaImagem:{
         width: 30,
         resizeMode: "contain",
+        color: "#f9faff"
     }
 })
