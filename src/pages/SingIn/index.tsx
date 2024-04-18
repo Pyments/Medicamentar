@@ -35,17 +35,6 @@ export default function SingIn() {
     return (
         <View style={styles.container}>
             <LinearGradient colors={["#ffffff","#BBE7FF", "#2596BE"]} style={{flex: 1}}>
-            <TouchableOpacity
-            style={styles.containerSeta}
-            // Erro a ser concertado
-            onPress={ () => navigation.navigate("Home")}
-            >
-                <Image 
-                source={require("../../assets/seta_preta.png")}
-                style={styles.containerSetaImagem}
-                >
-                </Image>
-            </TouchableOpacity>
             <Image
                 style={styles.containerLogo}
                 source={require("../../assets/logo.png")}
@@ -77,6 +66,16 @@ export default function SingIn() {
                         <Text style={styles.containerBotaoTexto}>CADASTRAR-SE</Text>
                     </TouchableOpacity>
                     <LoginButton></LoginButton>
+                </View>
+                <View style={styles.Login}>
+                    <Text style={styles.textoRegistro}>
+                        Já possui cadastro?
+                    </Text> 
+                    <TouchableOpacity onPress={ () => navigation.navigate("Home")}>
+                        <Text style={{fontSize: 15, marginLeft: 5, fontStyle: "italic", textDecorationLine: "underline"}}>
+                            Faça Login
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             </View>
             </LinearGradient>        
@@ -140,11 +139,13 @@ const styles = StyleSheet.create({
     containerBotaoTexto:{
         fontWeight: "bold",
         fontSize: 15,
+        marginRight: 5,
     },
     containerBotaoTextoGoogle:{
         fontWeight: "bold",
         fontSize: 15,
-        color: "#f9faff"
+        color: "#f9faff",
+        marginRight: 5
     },
     containerBotaoGoogle:{
         flexDirection: "row",
@@ -152,7 +153,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#4086f4",
         borderRadius: 5,
-        width: 165,
+        width: 170,
         height: 40,
     },
     containerLogoGoogle:{
@@ -194,5 +195,14 @@ const styles = StyleSheet.create({
     containerSetaImagem:{
         width: 30,
         resizeMode: "contain",
-    }
+    },
+    Login:{
+        marginTop: 30,
+        alignSelf: "center",
+        flexDirection: "row"
+    },
+    textoRegistro:{
+        fontSize: 15,
+        fontStyle: "italic",
+    },
 })

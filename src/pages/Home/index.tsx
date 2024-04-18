@@ -1,8 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native"
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { StatusBar } from 'expo-status-bar';
 
 export default function Home(){
     return(
@@ -11,7 +9,7 @@ export default function Home(){
         >
             <View
             style={styles.containerTopo} 
-            >
+            >   
                 <Image
                 source={require("../../assets/logo_nome.png")}
                 style={styles.containerImage}
@@ -95,23 +93,17 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignSelf: "center",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "space-around",
         gap: 80,
     },
     containerImage:{
-        //flex: 1,
         width: 190,
         height: 70,
-        //marginLeft: 20,
-        //marginTop: 20,
         resizeMode: "contain",
-        //backgroundColor: "#cccccc"
     },
     containerImageNotificacao:{
-       // flex: 1,
         width: 30,
         resizeMode: "contain",
-        //ackgroundColor: "#cccccc",
     },
     containerFooter:{
         width: "100%",
@@ -122,11 +114,11 @@ const styles = StyleSheet.create({
     },
     containerColumns:{
         flex:1,
-        //backgroundColor:"#000000",
         alignSelf: "center",
         alignItems: "center",
         flexDirection: "row",
         marginBottom: 30,
+        gap: 30,
     },
     containerColumn:{
         flexDirection: "column",
