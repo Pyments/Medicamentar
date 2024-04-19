@@ -1,17 +1,22 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, Animated } from "react-native";
-import { useNavigation } from "@react-navigation/native"
-import { LinearGradient } from "expo-linear-gradient";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 
-export default function Welcome() {
-    const navigation = useNavigation();
-    
-    return (
-        <View style={styles.container}>
+import { LinearGradient } from "expo-linear-gradient";
+import { router } from "expo-router";
+
+export default function LogIn() {
+  return (
+    <View style={styles.container}>
             <LinearGradient colors={["#ffffff","#BBE7FF", "#2596BE"]} style={{flex: 1}}>
             <View style={styles.containerImagemLogin}>
                 <Image
-                    source={ require("../../assets/teste.jpg" )}
+                    source={ require("../../assets/UserAuth/teste.jpg" )}
                     style={styles.containerImagemLoginImagem}
                     resizeMode="cover" 
                 />
@@ -41,20 +46,20 @@ export default function Welcome() {
                 style={styles.containerBotao}
                 >
                 <Image 
-                source={require("../../assets/logo_entrar.png")}
+                source={require("../../assets/UserAuth/logo_entrar.png")}
                 style={styles.containerImagemBotaoEntrar}
                 >
                 </Image>
                 <Text 
                 style={styles.botaoTexto}
-                onPress={ () => navigation.navigate("Home")}
+                onPress={ () => router.navigate("Home")}
                 >Entrar</Text>
                 </TouchableOpacity>
                 <View style={styles.Registro}>
                     <Text style={styles.textoRegistro}>
                         Ainda não possui cadastro?
                     </Text> 
-                    <TouchableOpacity onPress={ () => navigation.navigate("SingIn")}>
+                    <TouchableOpacity onPress={ () => router.navigate("SignIn")}>
                         <Text style={{fontSize: 15, marginLeft: 5, fontStyle: "italic", textDecorationLine: "underline"}}>
                             cadastre-se aqui
                         </Text>

@@ -1,10 +1,7 @@
-import { useNavigation } from "@react-navigation/native"
-import React from "react";
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Platform } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-
-export default function SingIn() {
+export default function SignIn() {
 
     const LoginButton = () => {
       if (Platform.OS === "ios"){  
@@ -13,7 +10,7 @@ export default function SingIn() {
                     style={styles.containerBotaoApple}
                     >
                     <Image 
-                    source={require("../../assets/logo_apple.png")}
+                    source={require("../../assets/UserAuth/logo_apple.png")}
                     style={styles.containerLogoIos}
                     >
                     </Image>
@@ -24,7 +21,7 @@ export default function SingIn() {
         return (
             <TouchableOpacity style={styles.containerBotaoGoogle}>
                         <Image 
-                        source={require("../../assets/logo_google.png")}
+                        source={require("../../assets/UserAuth/logo_apple.png")}
                         style={styles.containerLogoGoogle}
                         ></Image>
                         <Text style={styles.containerBotaoTextoGoogle}>Logar com Google</Text>
@@ -37,7 +34,7 @@ export default function SingIn() {
             <LinearGradient colors={["#ffffff","#BBE7FF", "#2596BE"]} style={{flex: 1}}>
             <Image
                 style={styles.containerLogo}
-                source={require("../../assets/logo.png")}
+                source={require("../../assets/UserAuth/logo.png")}
             />
             <View style={styles.containerForm}>
                 <TextInput
@@ -59,23 +56,13 @@ export default function SingIn() {
                 <View style={styles.containerBotoes}>
                     <TouchableOpacity style={styles.containerBotao}>
                         <Image 
-                        source={require("../../assets/logo_entrar.png")}
+                        source={require("../../assets/UserAuth/logo_entrar.png")}
                         style={styles.containerImagemBotaoEntrar}
                         >
                         </Image>
                         <Text style={styles.containerBotaoTexto}>CADASTRAR-SE</Text>
                     </TouchableOpacity>
                     <LoginButton></LoginButton>
-                </View>
-                <View style={styles.Login}>
-                    <Text style={styles.textoRegistro}>
-                        Já possui cadastro?
-                    </Text> 
-                    <TouchableOpacity onPress={ () => navigation.navigate("Home")}>
-                        <Text style={{fontSize: 15, marginLeft: 5, fontStyle: "italic", textDecorationLine: "underline"}}>
-                            Faça Login
-                        </Text>
-                    </TouchableOpacity>
                 </View>
             </View>
             </LinearGradient>        
@@ -139,13 +126,11 @@ const styles = StyleSheet.create({
     containerBotaoTexto:{
         fontWeight: "bold",
         fontSize: 15,
-        marginRight: 5,
     },
     containerBotaoTextoGoogle:{
         fontWeight: "bold",
         fontSize: 15,
-        color: "#f9faff",
-        marginRight: 5
+        color: "#f9faff"
     },
     containerBotaoGoogle:{
         flexDirection: "row",
@@ -153,7 +138,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#4086f4",
         borderRadius: 5,
-        width: 170,
+        width: 165,
         height: 40,
     },
     containerLogoGoogle:{
@@ -181,27 +166,10 @@ const styles = StyleSheet.create({
     containerLogoIos:{
         width: 20,
         height: 20,
-        marginRight: 3,
+        marginRight: 8,
     },
     containerTextoIos:{
         fontWeight: "bold",
         fontSize: 15,
-    },
-    containerSeta:{
-        top: 20,
-        left: 10,
-        position: "absolute",
-    },
-    containerSetaImagem:{
-        width: 30,
-        resizeMode: "contain",
-    },
-    Login:{
-        marginTop: 30,
-        alignSelf: "center",
-        flexDirection: "row"
-    },
-    textoRegistro:{
-        fontSize: 15,
-        fontStyle: "italic",
-    },
+    }
+})
