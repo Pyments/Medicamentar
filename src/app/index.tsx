@@ -1,7 +1,7 @@
 import { Redirect } from "expo-router"
 
-export default function Root() {
+export default function index() {
     return(
-        <Redirect href="LogIn" />
+        <Redirect href="/(UserAuth)/LogIn" />
     )
 }

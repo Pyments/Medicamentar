@@ -1,9 +1,5 @@
-import { Stack } from "expo-router";
+import { Slot } from "expo-router";
 
-export default function Layout() {
-  return (
-    <Stack>
-      <Stack.Screen name="(UserAuth)" options={{ headerShown: false }} />
-    </Stack>
-  );
+export default function Root() {
+  return <Slot />;
 }

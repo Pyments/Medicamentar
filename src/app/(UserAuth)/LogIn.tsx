@@ -36,7 +36,14 @@ export default function LogIn() {
             style={styles.containerInput}
             placeholder="Digite sua senha"
           />
-          <TouchableOpacity style={styles.containerBotao}>
+          <TouchableOpacity
+            style={styles.containerBotao}
+            onPress={() =>
+              router.navigate({
+                pathname: "../(Main)/Home",
+              })
+            }
+          >
             <Image
               source={require("../../assets/UserAuth/logo_entrar.png")}
               style={styles.containerImagemBotaoEntrar}
