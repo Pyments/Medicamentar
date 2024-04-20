@@ -17,7 +17,8 @@ export default function AdMedicamentos(){
     const navigation = useNavigation();
 
     return (
-        <View style={styles.container}>
+        <View style={styles.containerAll}>
+            <View style={styles.container}>
             <View style={styles.containerBox2}>
             </View>
             <View style={styles.containerForm}>
@@ -41,11 +42,11 @@ export default function AdMedicamentos(){
                 </TextInput>
                 <CheckBox style={styles.containerCheckBox}>  
                 </CheckBox>
-                <Text style={styles.containerTexto}>SIM
+                <Text style={styles.containerTextoCheck}>SIM
                 </Text>
                 <CheckBox style={styles.containerCheckBox}>  
                 </CheckBox>
-                <Text style={styles.containerTexto}>NÃO
+                <Text style={styles.containerTextoCheck}>NÃO
                 </Text>
                 <View style={styles.containerPeriodo}>
                     <Text style={styles.containerTexto3}>PERÍODO:
@@ -72,15 +73,21 @@ export default function AdMedicamentos(){
                 <TouchableOpacity 
                 style={styles.containerBotao}
                 >
-                
-                <Text style={styles.botaoTexto}>SALVAR</Text>
+                    <Image
+                    style={styles.botaoSalvar}
+                    source={require("../../../assets/botao_salvar.png")}
+                    ></Image>
+                    <Text style={styles.botaoTexto}>SALVAR</Text>
                 </TouchableOpacity>
                 </View>
                 <View style={styles.containerBotaoVoltar}>
                 <TouchableOpacity 
                 style={styles.containerBotao}
                 >
-                
+                    <Image 
+                    style={styles.botaoVoltar}
+                    source={require("../../../assets/seta_voltar.png")}
+                    ></Image>
                 
                 <Text style={styles.botaoTexto}>VOLTAR</Text>
                 </TouchableOpacity>
@@ -90,10 +97,29 @@ export default function AdMedicamentos(){
 
             </View>
         </View>
+        </View>
+        
     );
 
 }
 const styles = StyleSheet.create({
+    containerAll:{
+        flex:1,
+        width: "100%",
+        height:"100%",
+        top:-150,
+    },
+    botaoSalvar:{
+        width: 25,
+        height: 25,
+        marginRight: 12,
+
+    },
+    botaoVoltar:{
+        width: 25,
+        height: 25,
+        marginRight: 12,
+    },
     containerBotaoVoltar:{
         justifyContent:"space-around",
         paddingHorizontal:15,
@@ -127,7 +153,8 @@ const styles = StyleSheet.create({
     botaoTexto:{
         fontWeight: "bold",
         fontSize: 18,
-        textAlign: "center"
+        textAlign: "center",
+        fontStyle:"armata"
     },
     containerImagemBotaoEntrar:{
         width: 20,
@@ -185,7 +212,7 @@ const styles = StyleSheet.create({
         color: "#000000",
         fontSize: 15,
         fontWeight: "600",
-        left:-2
+        
     },
     containerInputCompriPeriodo:{
         width:250,
@@ -268,24 +295,33 @@ const styles = StyleSheet.create({
     containerCheckBox:{
         width:30,
         height:30,
-        borderRadius:100,
-        borderWidth:1
+        borderWidth:1,
+
+    },
+    containerTextoCheck:{
+        textDecorationStyle: "dashed",
+        color: "#000000",
+        fontSize: 15,
+        fontWeight: "600",
+        top:5,
+        left:-25
     },
     containerTexto:{
         textDecorationStyle: "dashed",
         color: "#000000",
         fontSize: 15,
-        fontWeight: "600",
+        fontWeight: "600"
     },
     containerBox2:{
         backgroundColor: "#1088c4",
         display: "flex",
-        minHeight:"4%"
+        minHeight:"4%",
+        top:165
     },
     containerBox:{
         backgroundColor: "#1088c4",
         minHeight:"5%",
-        top:"88%"
+        top:"105%"
     },
     containerMenor:{
         justifyContent:"space-around",
