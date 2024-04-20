@@ -1,40 +1,14 @@
-import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Platform } from "react-native";
+import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import BotoesLogin from "../../components/BotoesLogin";
 
 export default function SignIn() {
-
-    const LoginButton = () => {
-      if (Platform.OS === "ios"){  
-        return (
-            <TouchableOpacity
-                    style={styles.containerBotaoApple}
-                    >
-                    <Image 
-                    source={require("../../assets/UserAuth/logo_apple.png")}
-                    style={styles.containerLogoIos}
-                    >
-                    </Image>
-                    <Text style={styles.containerTextoIos}> Logar com Apple</Text>
-            </TouchableOpacity>
-        )
-      }else{
-        return (
-            <TouchableOpacity style={styles.containerBotaoGoogle}>
-                        <Image 
-                        source={require("../../assets/UserAuth/logo_apple.png")}
-                        style={styles.containerLogoGoogle}
-                        ></Image>
-                        <Text style={styles.containerBotaoTextoGoogle}>Logar com Google</Text>
-                    </TouchableOpacity>
-        )
-      }
-    }
     return (
         <View style={styles.container}>
             <LinearGradient colors={["#ffffff","#BBE7FF", "#2596BE"]} style={{flex: 1}}>
             <Image
                 style={styles.containerLogo}
-                source={require("../../assets/UserAuth/logo.png")}
+                source={require("../../assets/UserAuth/imagem_registro.png")}
             />
             <View style={styles.containerForm}>
                 <TextInput
@@ -62,7 +36,7 @@ export default function SignIn() {
                         </Image>
                         <Text style={styles.containerBotaoTexto}>CADASTRAR-SE</Text>
                     </TouchableOpacity>
-                    <LoginButton></LoginButton>
+                    <BotoesLogin></BotoesLogin>
                 </View>
             </View>
             </LinearGradient>        
@@ -76,20 +50,22 @@ const styles = StyleSheet.create({
         backgroundColor: "#BBE7FF"
     },
     containerLogo:{
+        flex: 1,
         alignSelf:"center",
-        marginTop:60,
-        width:151,
-        height:151,
-        marginBottom: 15,
-        borderRadius: 100,
+        width: "100%",
+        height: "100%",
+        maxWidth: 450,
+        opacity: 0.45,
+        resizeMode: "cover"
     },
     containerForm:{
         alignSelf: "center",
+        position: "absolute",
         paddingHorizontal: 25,
-        borderRadius:8,
-        marginVertical: 30,
+        width: "100%",
         gap: 15,
-        maxWidth: 450
+        maxWidth: 450,
+        top: "40%"
     },
     containerInput:{
         borderColor: "#000000",
@@ -98,19 +74,17 @@ const styles = StyleSheet.create({
         shadowColor: '#000000',
         borderWidth: 1,
         fontSize:16,
-        borderRadius: 15,
+        borderRadius: 3,
         paddingHorizontal: 15,
         paddingTop: 2,
         paddingBottom: 2,
     },
     containerBotoes:{
-        flexDirection: "row",
-        justifyContent: "space-between",
+        flexDirection: "column",
         alignSelf: "center",
         alignItems: "center",
-        paddingHorizontal: 0,
         paddingTop: 15,
-        gap: 5,
+        gap: 15,
         maxWidth: 400
     },
     containerBotao:{
@@ -119,57 +93,17 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         flexDirection: "row",
         backgroundColor: "#ffffff",
-        borderRadius: 5,
-        width: 145,
+        borderRadius: 20,
+        width: 155,
         height:  40,
     },
     containerBotaoTexto:{
         fontWeight: "bold",
         fontSize: 15,
     },
-    containerBotaoTextoGoogle:{
-        fontWeight: "bold",
-        fontSize: 15,
-        color: "#f9faff"
-    },
-    containerBotaoGoogle:{
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#4086f4",
-        borderRadius: 5,
-        width: 165,
-        height: 40,
-    },
-    containerLogoGoogle:{
-        width: 20,
-        height: 20,
-        marginRight: 8,
-        marginLeft: 3,
-        backgroundColor: "#ffffff",
-        borderRadius: 5,
-    },
     containerImagemBotaoEntrar:{
         width: 20,
         height: 20,
         marginRight: 6,
     },
-    containerBotaoApple:{
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#000000",
-        borderRadius: 5,
-        width: 160,
-        height: 40,
-    },
-    containerLogoIos:{
-        width: 20,
-        height: 20,
-        marginRight: 8,
-    },
-    containerTextoIos:{
-        fontWeight: "bold",
-        fontSize: 15,
-    }
 })

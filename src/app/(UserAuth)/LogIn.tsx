@@ -16,7 +16,7 @@ export default function LogIn() {
             <LinearGradient colors={["#ffffff","#BBE7FF", "#2596BE"]} style={{flex: 1}}>
             <View style={styles.containerImagemLogin}>
                 <Image
-                    source={ require("../../assets/UserAuth/teste.jpg" )}
+                    source={ require("../../assets/UserAuth/imagem_login.jpg" )}
                     style={styles.containerImagemLoginImagem}
                     resizeMode="cover" 
                 />
