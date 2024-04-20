@@ -1,18 +1,21 @@
-import React, {useState} from 'react'
-import {View, Text, StyleSheet, StatusBar, Image, TouchableOpacity, Switch} from 'react-native'
+import React, {useState} from "react"
+import {SafeAreaView, View, Text, StyleSheet, StatusBar, Image, TouchableOpacity, Switch} from 'react-native'
 
-import {useFonts} from 'expo-font'
-import {LinearGradient} from 'expo-linear-gradient'
+import {useFonts} from "expo-font"
+import {LinearGradient} from "expo-linear-gradient"
 import {router} from "expo-router"
 
 function Configuration() {
-    const fontsLoaded = useFonts({
+    useFonts({
+        "armata-regular-400": require("../../../fonts/armata-regular-400.ttf")
+    });
+
+    /*const fontsLoaded = useFonts({
         "armata-regular-400": require("../../../fonts/armata-regular-400.ttf")
     })
     if(!fontsLoaded){
         return(<Text>Loading...</Text>)
-    }
-
+    }*/
 
     const [isDark, setIsDark] = useState(false);
     const toggleSwitchTheme = () => setIsDark(previousState => !previousState);
@@ -24,7 +27,7 @@ function Configuration() {
 
 
     return(
-        <View style={isDark ? styles.containerDark : styles.container}>
+        <SafeAreaView style={isDark ? styles.containerDark : styles.container}>
             <StatusBar/>
             <View style={isDark ? styles.headerDark : styles.header}>
                 <TouchableOpacity>
@@ -33,6 +36,7 @@ function Configuration() {
                 <Text style={styles.headerText}>CONFIGURAÇÕES</Text>
                 <Image source={require("../../../assets/icon-config.png")}/>
             </View>
+
             <View style={styles.preferences}>
                 <View style={isDark ? styles.settingsDark : styles.settings}>
                     <Text style={isPlusFS ? styles.settingsTextPlus : styles.settingsText}>Tema Escuro</Text>
@@ -56,54 +60,64 @@ function Configuration() {
 
 
             <View style={isDark ? styles.bottomMenuContainerDark : styles.bottomMenuContainer}>
-                <TouchableOpacity onPress={() => router.navigate({pathname: "../Home"})}>
-                    <LinearGradient colors={isDark ? ["#A2A2A2", "#656565"] : ["#20A2EB", "#1A8BCA"]} style={styles.imageBox}>
-                        <Image
-                        source={require("../../../assets/lar-bymuhammad-waqas-khan.png")}
-                        style={styles.imageBottom}
-                        />
-                    </LinearGradient>
-                </TouchableOpacity>
+                <View>
+                    <TouchableOpacity onPress={() => router.navigate({pathname: "../Home"})}>
+                        <LinearGradient colors={isDark ? ["#A2A2A2", "#656565"] : ["#20A2EB", "#1A8BCA"]} style={styles.imageBox}>
+                            <Image
+                            source={require("../../../assets/lar-bymuhammad-waqas-khan.png")}
+                            style={styles.imageBottom}
+                            />
+                        </LinearGradient>
+                    </TouchableOpacity>
+                </View>
 
-                <TouchableOpacity onPress={() => router.navigate({pathname: "./Exames"})}>
-                    <View style={styles.imageBox}>
-                        <Image 
-                        source={require('../../../assets/hospital.png')}
-                        style={styles.imageBottom}
-                        />
-                    </View>
-                </TouchableOpacity>
+                <View>
+                    <TouchableOpacity onPress={() => router.navigate({pathname: "./Exames"})}>
+                        <View style={styles.imageBox}>
+                            <Image 
+                            source={require('../../../assets/hospital.png')}
+                            style={styles.imageBottom}
+                            />
+                        </View>
+                    </TouchableOpacity>
+                </View>
 
-                <TouchableOpacity>
-                    <LinearGradient colors={isDark ? ["#A2A2A2", "#656565"] : ["#20A2EB", "#1A8BCA"]} style={styles.imageBox}>
-                        <Image
-                        source={require("../../../assets/pilulas.png")}
-                        style={styles.imageBottom}
-                        />
-                    </LinearGradient>
-                </TouchableOpacity>
+                <View>
+                    <TouchableOpacity>
+                        <LinearGradient colors={isDark ? ["#A2A2A2", "#656565"] : ["#20A2EB", "#1A8BCA"]} style={styles.imageBox}>
+                            <Image
+                            source={require("../../../assets/pilulas.png")}
+                            style={styles.imageBottom}
+                            />
+                        </LinearGradient>
+                    </TouchableOpacity>
+                </View>
 
-                <TouchableOpacity>
-                    <View style={styles.imageBox}>
-                        <Image
-                        source={require("../../../assets/emergency.png")}
-                        style={styles.imageBottom}
-                        />
-                    </View>
-                </TouchableOpacity>
+                <View>
+                    <TouchableOpacity>
+                        <View style={styles.imageBox}>
+                            <Image
+                            source={require("../../../assets/emergency.png")}
+                            style={styles.imageBottom}
+                            />
+                        </View>
+                    </TouchableOpacity>
+                </View>
 
-                <TouchableOpacity>
-                    <LinearGradient colors={isDark ? ["#A2A2A2", "#656565"] : ["#20A2EB", "#1A8BCA"]} style={styles.imageBox}>
-                        <Image
-                        source={require("../../../assets/user.png")}
-                        style={styles.imageBottom}
-                        />
-                    </LinearGradient>
-                </TouchableOpacity>
+                <View>
+                    <TouchableOpacity>
+                        <LinearGradient colors={isDark ? ["#A2A2A2", "#656565"] : ["#20A2EB", "#1A8BCA"]} style={styles.imageBox}>
+                            <Image
+                            source={require("../../../assets/user.png")}
+                            style={styles.imageBottom}
+                            />
+                        </LinearGradient>
+                    </TouchableOpacity>
+                </View>                
             </View>
-        </View>    
+        </SafeAreaView>    
     )
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -115,13 +129,13 @@ const styles = StyleSheet.create({
         backgroundColor: "#131313"
     },
     header: {
-        alignItems: 'center',
-        justifyContent: 'space-between',
+        alignItems: "center",
+        justifyContent: "space-between",
         paddingHorizontal: 16,
-        flexDirection: 'row',
+        flexDirection: "row",
         height: 88,
         // marginTop: 23,
-        backgroundColor: '#20A2EB'
+        backgroundColor: "#20A2EB"
     },
     headerDark: {
         alignItems: "center",
@@ -134,16 +148,16 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontSize: 23,
-        color: '#FFFFFF',
-        fontFamily: 'armata-regular-400'
+        color: "#FFFFFF",
+        fontFamily: "armata-regular-400"
     },
     preferences: {
         marginTop: 20,
     },
     settings: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
         backgroundColor: "#FFFFFF",
         height: 60,
         marginVertical: 3,
@@ -164,10 +178,10 @@ const styles = StyleSheet.create({
     },
     settingsText: {
         fontSize: 16,
-        fontFamily: 'armata-regular-400',
+        fontFamily: "armata-regular-400",
     },
     settingsTextPlus: {
-        fontFamily: 'armata-regular-400',
+        fontFamily: "armata-regular-400",
         fontSize: 21
     },
     bottomMenuContainer: {
@@ -195,11 +209,21 @@ const styles = StyleSheet.create({
         width: 45
     },
     imageBox: {
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: "center",
+        justifyContent: "center",
         width: 78,
         height: 83
     },
-})
+});
 
 export default Configuration;
+
+
+                /* <TouchableOpacity onPress={() => router.navigate({pathname: "../Home"})}>
+                    <LinearGradient colors={isDark ? ["#A2A2A2", "#656565"] : ["#20A2EB", "#1A8BCA"]} style={styles.imageBox}>
+                        <Image
+                        source={require("../../../assets/lar-bymuhammad-waqas-khan.png")}
+                        style={styles.imageBottom}
+                        />
+                    </LinearGradient>
+                </TouchableOpacity> */
