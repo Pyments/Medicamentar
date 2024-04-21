@@ -5,6 +5,8 @@ export default function UserAuthLayout() {
     <Stack>
       <Stack.Screen name="Exames" options={{ headerShown: false }} />
       <Stack.Screen name="Perfil" options={{ headerShown: false}} />
+      <Stack.Screen name="Configuration" options={{ headerShown: false }}/>
+      <Stack.Screen name="AdMedicamentos" options={{ headerShown: false }}/>
     </Stack>
   );
 }
