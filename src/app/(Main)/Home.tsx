@@ -8,8 +8,8 @@ import {
   TextInput,
   SafeAreaView,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { router } from "expo-router";
+import Footer from "../../components/Footer";
 
 export default function Home() {
   return (
@@ -60,11 +60,12 @@ export default function Home() {
               style={styles.containerBotoes}
             ></Image>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => router.navigate({pathname: "./Perfil"})}>
             <Image
-              source={require("../../assets/perfil.png")}
+              source={require("../../assets/perfil_nome.png")}
               style={styles.containerBotoes}
             ></Image>
+            
           </TouchableOpacity>
           <TouchableOpacity>
             <Image
@@ -74,9 +75,7 @@ export default function Home() {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.containerFooter}>
-        <Text></Text>
-      </View>
+      <Footer></Footer>
     </View>
   );
 }
@@ -107,13 +106,6 @@ const styles = StyleSheet.create({
   containerImageNotificacao: {
     width: 30,
     resizeMode: "contain",
-  },
-  containerFooter: {
-    width: "100%",
-    height: 30,
-    backgroundColor: "#71AAFF",
-    position: "absolute",
-    bottom: 0,
   },
   containerColumns: {
     flex: 1,
