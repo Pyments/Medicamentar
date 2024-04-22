@@ -9,8 +9,27 @@ import {
 
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
+import { useState } from "react";
 
 export default function LogIn() {
+
+    const [EmailState, SetEmailState] = useState(false);
+    const [SenState, SetSenState] = useState(false);
+
+    const updateEmailState = (value:boolean) => {
+        SetEmailState(value);
+    }
+    const updateSenState = (value:boolean) => {
+        SetSenState(value);
+    }
+
+    const emailIsEmpty = (email:string) => {
+        email.length === 0 ?  updateEmailState(true):updateEmailState(false);
+    } 
+    const SenIsEmpty = (senha: string) =>{
+        senha.length === 0 ? updateSenState(true):updateSenState(false)
+    }
+
   return (
     <View style={styles.container}>
             <LinearGradient colors={["#ffffff","#BBE7FF", "#2596BE"]} style={{flex: 1}}>
@@ -23,7 +42,7 @@ export default function LogIn() {
             </View>
             <View style={styles.containerForm}>
                 <TextInput
-                    style={styles.containerInput}
+                    style={EmailState ? styles.error : styles.containerInput}
                     placeholder="Digite seu e-mail"
                     autoComplete="email"
                     autoCapitalize="none"
@@ -31,9 +50,13 @@ export default function LogIn() {
                     keyboardType="email-address"
                     enterKeyHint="next"
                     importantForAutofill="yes"
+                    onChangeText={(email) => emailIsEmpty(email)}
                 />
+                <Text
+                style={EmailState ? styles.textError : styles.noErrorTexto}
+                >Este campo é obrigatório</Text>
                 <TextInput
-                    style={styles.containerInput}
+                    style={SenState ? styles.error : styles.containerInput}
                     placeholder="Digite sua senha"
                     autoComplete="password"
                     autoCapitalize="none"
@@ -41,7 +64,11 @@ export default function LogIn() {
                     enterKeyHint="done"
                     importantForAutofill="yes"
                     secureTextEntry= {true}
+                    onChangeText={(senha) => SenIsEmpty(senha)}
                 />   
+                <Text
+                style={SenState ? styles.textError : styles.noErrorTexto}
+                >Este campo é obrigatório</Text>
                 <TouchableOpacity 
                 style={styles.containerBotao}
                 >
@@ -144,5 +171,26 @@ const styles = StyleSheet.create({
         width: 20,
         height: 20,
         marginRight: 8,
+    },
+    error:{
+        backgroundColor: "#ffffff",
+        borderBottomColor: "#ff5555",
+        borderLeftColor: "#ffffff",
+        borderRightColor: "#ffffff",
+        borderTopColor: "#ffffff",
+        elevation: 10,
+        shadowColor: '#000000',
+        borderWidth: 2,
+        fontSize:16,
+        borderRadius: 3,
+        paddingHorizontal: 15,
+        paddingTop: 2,
+        paddingBottom: 2,
+    },
+    textError:{
+        color: "#ff1111",
+    },
+    noErrorTexto:{
+        display: "none"
     }
 })  

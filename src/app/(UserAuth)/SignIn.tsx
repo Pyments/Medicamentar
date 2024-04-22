@@ -1,8 +1,42 @@
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import BotoesLogin from "../../components/BotoesLogin";
+import { useState } from "react";
 
 export default function SignIn() {
+
+    const [NomState, SetNomState] = useState(false);
+    const [EmailState, SetEmailState] = useState(false);
+    const [SenState, SetSenState] = useState(false);
+
+    // funçoes que atualizam o estado (state)
+    const updateNomState = (value:boolean) => {
+        SetNomState(value);
+    }
+    const updateEmailState = (value:boolean) => {
+        SetEmailState(value);
+    }
+    const updateSenState = (value:boolean) => {
+        SetSenState(value);
+    }
+
+    // Se o campo de input estiver vazio,  retorna um erro. Caso contrário, ativa a flag de validação
+    //  do campo e chama a função que atualiza o estado (state)
+    const nomeIsEmpty = (text:string) => {
+        text.length  === 0 ? updateNomState(true):updateNomState(false);
+    }
+    const emailIsEmpty = (email:string) => {
+        email.length === 0 ?  updateEmailState(true):updateEmailState(false);
+    } 
+    const SenIsEmpty = (senha: string) =>{
+        senha.length === 0 ? updateSenState(true):updateSenState(false)
+    }
+
+    const allEmpty = () => {
+        if (NomState === false || EmailState === false || SenState === false){
+            alert("Por favor, preencha todos os campos antes de continuar!")
+        } 
+    }
     return (
         <View style={styles.container}>
             <LinearGradient colors={["#ffffff","#BBE7FF", "#2596BE"]} style={{flex: 1}}>
@@ -12,23 +46,39 @@ export default function SignIn() {
             />
             <View style={styles.containerForm}>
                 <TextInput
-                style={styles.containerInput} 
+                style={NomState ? styles.error : styles.containerInput} 
                 placeholder="NOME COMPLETO:"    
+                autoCapitalize="words"
+                onChangeText={(text) => nomeIsEmpty(text)}
                 />
+                <Text style={NomState ? styles.textError : styles.noErrorTexto}>Este campo é obrigatório!</Text>
                 <TextInput 
-                style={styles.containerInput}
-                placeholder="EMAIL:"    
+                style={EmailState ? styles.error : styles.containerInput}
+                placeholder="EMAIL:"
+                autoComplete="email"
+                keyboardType="email-address"    
+                onChangeText={(email) => emailIsEmpty(email)}
                 />
+                <Text style={EmailState ? styles.textError : styles.noErrorTexto}>Este campo é obrigatório!</Text>
                 <TextInput 
-                style={styles.containerInput}
+                style={SenState ? styles.error : styles.containerInput}
                 placeholder="SENHA:"    
+                secureTextEntry= {true}  
+                onChangeText={(senha) => SenIsEmpty(senha)}
                 />
+                <Text style={SenState ? styles.textError : styles.noErrorTexto}>Este campo é obrigatório!</Text>
                 <TextInput 
-                style={styles.containerInput}
-                placeholder="REPITA SUA SENHA:"    
+                style={SenState ? styles.error : styles.containerInput}
+                placeholder="REPITA SUA SENHA:"
+                secureTextEntry= {true}      
+                onChangeText={(senha) => SenIsEmpty(senha)}
                 />
+                <Text style={SenState ? styles.textError : styles.noErrorTexto}>Este campo é obrigatório!</Text>
                 <View style={styles.containerBotoes}>
-                    <TouchableOpacity style={styles.containerBotao}>
+                    <TouchableOpacity
+                        style={styles.containerBotao}
+                        onPress={() => allEmpty()}
+                        >
                         <Image 
                         source={require("../../assets/UserAuth/logo_entrar.png")}
                         style={styles.containerImagemBotaoEntrar}
@@ -68,6 +118,9 @@ const styles = StyleSheet.create({
         top: "40%"
     },
     containerInput:{
+        width: "100%",
+        maxWidth: 450,
+        height: 30,
         borderColor: "#000000",
         backgroundColor: "#ffffff",
         elevation: 10,
@@ -76,8 +129,6 @@ const styles = StyleSheet.create({
         fontSize:16,
         borderRadius: 3,
         paddingHorizontal: 15,
-        paddingTop: 2,
-        paddingBottom: 2,
     },
     containerBotoes:{
         flexDirection: "column",
@@ -106,4 +157,25 @@ const styles = StyleSheet.create({
         height: 20,
         marginRight: 6,
     },
+    error:{
+        backgroundColor: "#ffffff",
+        borderBottomColor: "#ff5555",
+        borderLeftColor: "#ffffff",
+        borderRightColor: "#ffffff",
+        borderTopColor: "#ffffff",
+        elevation: 10,
+        shadowColor: '#000000',
+        borderWidth: 2,
+        fontSize:16,
+        borderRadius: 3,
+        paddingHorizontal: 15,
+        paddingTop: 2,
+        paddingBottom: 2,
+    },
+    textError:{
+        color: "#ff1111",
+    },
+    noErrorTexto:{
+        display: "none"
+    }
 })
