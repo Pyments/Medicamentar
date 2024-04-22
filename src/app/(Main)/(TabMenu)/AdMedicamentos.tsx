@@ -1,20 +1,10 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  SafeAreaView,
-  CheckBox
-} from "react-native";
-
-import { useNavigation } from "@react-navigation/native";
-import { router } from "expo-router";
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from "react-native";
+import CheckBox from "expo-checkbox"
+// import { useNavigation } from "@react-navigation/native";
 
 export default function AdMedicamentos(){
-    const navigation = useNavigation();
+    // const navigation = useNavigation();
 
     return (
         <View style={styles.containerAll}>
@@ -40,12 +30,10 @@ export default function AdMedicamentos(){
             <View style={styles.containerMenor}>
                 <TextInput style={styles.containerInputDosagem}>
                 </TextInput>
-                <CheckBox style={styles.containerCheckBox}>  
-                </CheckBox>
+                <CheckBox style={styles.containerCheckBox}/>                  
                 <Text style={styles.containerTextoCheck}>SIM
                 </Text>
-                <CheckBox style={styles.containerCheckBox}>  
-                </CheckBox>
+                <CheckBox style={styles.containerCheckBox} />  
                 <Text style={styles.containerTextoCheck}>NÃO
                 </Text>
                 <View style={styles.containerPeriodo}>
@@ -154,7 +142,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 18,
         textAlign: "center",
-        fontStyle:"armata"
+        // fontStyle:"armata"
     },
     containerImagemBotaoEntrar:{
         width: 20,
