@@ -12,7 +12,7 @@
 - **Registrar futuras consultas:** Permitir que os usuários agendem consultas futuras, inserindo a data e a hora desejadas.
 - **Alarme Text to Speech**: Emitir um alarme sonoro com a opção de converter texto em voz para lembrar os usuários dos horários de tomar os medicamentos.
 ---
-### 2.1 Requisitos não Funcionais
+### 2.1 Requisitos Não-Funcionais
  - **Tema Claro ou Escuro**: Opção de escolher entre um tema claro e um tema escuro para melhorar a experiência de uso, especialmente em ambientes com pouca luz.
  - **Alteração da proporção da fonte**: Permitir que os usuários personalizem o tamanho da fonte para melhor legibilidade e acessibilidade.
  ---
