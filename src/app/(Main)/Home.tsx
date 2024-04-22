@@ -46,7 +46,9 @@ export default function Home() {
               style={styles.containerBotoes}
             ></Image>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => router.navigate({pathname: "./Configuration"})}>
+          <TouchableOpacity
+            onPress={() => router.navigate({ pathname: "./Configuration" })}
+          >
             <Image
               source={require("../../assets/config.png")}
               style={styles.containerBotoes}
@@ -54,7 +56,14 @@ export default function Home() {
           </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              router.navigate({
+                pathname: "./Medicamentos",
+                
+              })
+            }
+          >
             <Image
               source={require("../../assets/medicamentos.png")}
               style={styles.containerBotoes}
