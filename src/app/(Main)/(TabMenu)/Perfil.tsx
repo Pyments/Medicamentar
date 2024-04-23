@@ -8,13 +8,18 @@ import {
     SafeAreaView,
 } from "react-native";
 import Footer from "../../../components/Footer";
+import UserAuthLayout from "./_layout";
+import { DrawerActions } from "@react-navigation/native";
+import { router } from "expo-router";
 
 export default function Perfil(){
     return(
         <SafeAreaView style={styles.container}>
             <View style={styles.containerTopo}>
                 <View style={styles.containerTopoItems}>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                    onPress={() => DrawerActions.toggleDrawer()}
+                    >
                     <Image 
                     source={require("../../../assets/menu-lateral.png")}
                     style={styles.containerTopoMenuLat}
