@@ -1,14 +1,25 @@
-import { View, StyleSheet, Image, Text, SafeAreaView } from "react-native";
+import { View, StyleSheet, Image, Text, SafeAreaView, TouchableOpacity } from "react-native";
 import CardMedicamentos from "../../../components/CardMedicamento";
+import { DrawerActions } from "@react-navigation/native";
+import { useNavigation } from "expo-router";
 
 export default function Medicamentos() {
+
+  const navigation = useNavigation();
+
+    const AbrirNavMenu = () => {
+        navigation.dispatch(DrawerActions.openDrawer());
+    };
+
   return (
     <SafeAreaView style={styles.rootView}>
       <View style={styles.header}>
+        <TouchableOpacity onPress={AbrirNavMenu}>
         <Image
           style={styles.headerHamburguer}
           source={require("../../../assets/menu-lateral.png")}
         ></Image>
+        </TouchableOpacity>
         <Text style={styles.headerTitle}>Medicamentos</Text>
         <Image
           style={styles.headerImage}
