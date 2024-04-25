@@ -7,11 +7,14 @@ import {
   TouchableOpacity,
   TextInput,
   SafeAreaView,
+  Modal,
 } from "react-native";
 import { router } from "expo-router";
+import { useState } from "react";
 import Footer from "../../../components/Footer";
 
 export default function Home() {
+  const [IsModalVisible, setIsModalVisible] = useState(false);
   return (
     <View style={styles.container}>
       <View style={styles.containerTopo}>
@@ -19,12 +22,36 @@ export default function Home() {
           source={require("../../../assets/logo_nome.png")}
           style={styles.containerImage}
         ></Image>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setIsModalVisible(true)}>
           <Image
             source={require("../../../assets/notificacao_logo.png")}
             style={styles.containerImageNotificacao}
           ></Image>
         </TouchableOpacity>
+        <Modal 
+        visible={IsModalVisible}
+        onRequestClose={() => setIsModalVisible(false)}
+        transparent= {true}
+        animationType="slide"
+        presentationStyle="pageSheet"
+        >
+          <View style={styles.containerModal}>
+            <View style={styles.containerModalBox}>
+              <View style={styles.containerModalBoxTitulo}>
+                <Text style={styles.containerModalTitulo}>TITULO PLACEHOLDER</Text>
+              </View>
+              <View style={styles.containerModalMensagem}>
+                <Text style={styles.containerModalMensagemTexto}>MENSAGEM PLACEHOLDER</Text>
+              </View>
+            </View>
+            <TouchableOpacity 
+            style={styles.containerModalBotao}
+            onPress={() => setIsModalVisible(false)}
+            >
+              <Text style={styles.containerModalBotaoTexto}>OK</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
       </View>
       <View style={styles.containerColumns}>
         <View style={styles.containerColumn}>
@@ -133,4 +160,54 @@ const styles = StyleSheet.create({
     height: 120,
     marginBottom: 20,
   },
+  containerModal:{
+    width: "100%",
+    maxWidth: 400,
+    height: "100%",
+    alignSelf: "center",
+    marginTop: 140,
+    borderRadius: 15,
+    backgroundColor: "rgba(232,232,228,1)"
+  },
+  containerModalBox:{
+    width: "90%",
+    height: 73,
+    alignSelf: "center",
+    borderRadius: 3,
+    backgroundColor: "rgba(217, 217, 217, 1)",
+    alignItems: "center",    
+  },
+  containerModalBoxTitulo:{
+    width: "80%",
+    backgroundColor: "rgba(32, 162, 235, 1)",
+    borderRadius: 3,
+  },
+  containerModalTitulo:{
+    color: "#ffffff",
+    textAlign: "center"
+  },
+  containerModalMensagem:{
+    alignSelf: "center",
+    width: "95%",
+  },
+  containerModalMensagemTexto:{
+    textAlign: "center"
+  },
+  containerModalBotao:{
+    width: 90,
+    height: 35,
+    alignSelf: "center",
+    backgroundColor: "rgba(32, 162, 235, 1)",
+    borderRadius: 15,
+    marginTop: 15,
+    marginBottom: 15,
+    justifyContent: "center"
+  },
+  containerModalBotaoTexto:{
+    alignSelf: "center",
+    alignContent: "center",
+    fontSize: 15,
+    fontWeight: "400",
+    color: "#ffffff"
+  }
 });
