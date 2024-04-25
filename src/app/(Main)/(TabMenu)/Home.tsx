@@ -9,19 +9,19 @@ import {
   SafeAreaView,
 } from "react-native";
 import { router } from "expo-router";
-import Footer from "../../components/Footer";
+import Footer from "../../../components/Footer";
 
 export default function Home() {
   return (
     <View style={styles.container}>
       <View style={styles.containerTopo}>
         <Image
-          source={require("../../assets/logo_nome.png")}
+          source={require("../../../assets/logo_nome.png")}
           style={styles.containerImage}
         ></Image>
         <TouchableOpacity>
           <Image
-            source={require("../../assets/notificacao_logo.png")}
+            source={require("../../../assets/notificacao_logo.png")}
             style={styles.containerImageNotificacao}
           ></Image>
         </TouchableOpacity>
@@ -36,13 +36,13 @@ export default function Home() {
             }
           >
             <Image
-              source={require("../../assets/consultaseExames.png")}
+              source={require("../../../assets/consultaseExames.png")}
               style={styles.containerBotoes}
             ></Image>
           </TouchableOpacity>
           <TouchableOpacity>
             <Image
-              source={require("../../assets/emergencia.png")}
+              source={require("../../../assets/emergencia.png")}
               style={styles.containerBotoes}
             ></Image>
           </TouchableOpacity>
@@ -50,7 +50,7 @@ export default function Home() {
             onPress={() => router.navigate({ pathname: "./Configuration" })}
           >
             <Image
-              source={require("../../assets/config.png")}
+              source={require("../../../assets/config.png")}
               style={styles.containerBotoes}
             ></Image>
           </TouchableOpacity>
@@ -65,20 +65,20 @@ export default function Home() {
             }
           >
             <Image
-              source={require("../../assets/medicamentos.png")}
+              source={require("../../../assets/medicamentos.png")}
               style={styles.containerBotoes}
             ></Image>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => router.navigate({pathname: "./Perfil"})}>
             <Image
-              source={require("../../assets/perfil_nome.png")}
+              source={require("../../../assets/perfil_nome.png")}
               style={styles.containerBotoes}
             ></Image>
             
           </TouchableOpacity>
           <TouchableOpacity>
             <Image
-              source={require("../../assets/sair.png")}
+              source={require("../../../assets/sair.png")}
               style={styles.containerBotoes}
             ></Image>
           </TouchableOpacity>

@@ -10,8 +10,17 @@ import {
   Button,
   Alert,
 } from "react-native";
+import { DrawerActions } from "@react-navigation/native";
+import { useNavigation } from "expo-router";
 
 export default function Exames() {
+
+  const navigation = useNavigation();
+
+    const AbrirNavMenu = () => {
+        navigation.dispatch(DrawerActions.openDrawer());
+    };
+
   const [buttonClicked, setButtonClicked] = useState(true);
   const [secondClicked, setSecondClicked] = useState(false);
   const [thirdClicked, setThirdClicked] = useState(true);
@@ -41,7 +50,9 @@ export default function Exames() {
   return (
     <View style={styles.container}>
       <View style={styles.containerTop}>
+          <TouchableOpacity onPress={AbrirNavMenu} >
           <Image style={styles.menu} source={require("../../../assets/menu-lateral.png")}/>
+          </TouchableOpacity>
           <Text style={styles.textContainerTop}>CONSULTAS E EXAMES</Text>
           <Image style={styles.logoHospital} source={require("../../../assets/logo_hospital.png")}/>
         </View>
