@@ -1,345 +1,177 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from "react-native";
-import CheckBox from "expo-checkbox"
-// import { useNavigation } from "@react-navigation/native";
+import CheckBox, { Checkbox } from "expo-checkbox"
+import { useNavigation } from "@react-navigation/native";
 
 export default function AdMedicamentos(){
-    // const navigation = useNavigation();
+    const navigation = useNavigation();
 
-    return (
-        <View style={styles.containerAll}>
-            <View style={styles.container}>
-            <View style={styles.containerBox2}>
-            </View>
-            <View style={styles.containerForm}>
-                <Text style={styles.containerTexto}
-                    >NOME DO PACIENTE:
-                </Text>
-                <TextInput
-                    style={styles.containerInput}
-                />
-                    <Text style={styles.containerTexto}
-                    >MEDICAMENTO:</Text>
-                <TextInput
-                    style={styles.containerInput}
-                    />
-                <Text style={styles.containerTextoDosagem}>DOSAGEM:</Text>
-                <Text style={styles.containerTextoUso}>USO CONTÍNUO</Text>
-            </View>
-            
-            <View style={styles.containerMenor}>
-                <TextInput style={styles.containerInputDosagem}>
-                </TextInput>
-                <CheckBox style={styles.containerCheckBox}/>                  
-                <Text style={styles.containerTextoCheck}>SIM
-                </Text>
-                <CheckBox style={styles.containerCheckBox} />  
-                <Text style={styles.containerTextoCheck}>NÃO
-                </Text>
-                <View style={styles.containerPeriodo}>
-                    <Text style={styles.containerTexto3}>PERÍODO:
-                    </Text>
-                    <TextInput style={styles.containerInputPeriodo}>
-                    </TextInput>
+    return( 
+        <View style={styles.container}>
+            <View style={styles.containerBox1}></View>
+            <View style={styles.conteinerForm}>
+                <Text style={styles.textoForm}>Nome do paciente:</Text>
+                <TextInput style={styles.Input}></TextInput>
+                <Text style={styles.textoForm}>Medicamento:</Text>
+                <TextInput style={styles.Input}></TextInput>
+                <Text style={styles.textoForm}>Dosagem:</Text>
+                <TextInput style={styles.InputDosagem}></TextInput>
+                <Text style={styles.textoForm}>Periodo:</Text>
+                <TextInput style={styles.InputPeriodo}></TextInput>
+                <Text style={styles.textoComprimidoP}>Comprimido por período:</Text>
+                <View style={styles.posicaoComprimidoP}>
+                    <TextInput style={styles.InputComprimidoP}></TextInput>
                 </View>
-                <View style={styles.containerCompriPeriodo}>
-                    <Text style={styles.containerTextoCompriPeriodo}>COMPRIMIDOS POR PERÍODO:</Text>
-                    <TextInput style={styles.containerInputCompriPeriodo}>
-                    </TextInput>
+                <View style={styles.linhaMedico}>
+                    <Text style={styles.textoForm}>Médico:</Text>
+                    <TextInput style={styles.InputMedico}></TextInput>
                 </View>
-                <View style={styles.containerMedico}>
-                    <Text style={styles.containerTextoMedico}>MÉDICO:</Text>
-                    <TextInput style={styles.containerInput}>
-                    </TextInput>
+                <Text style={styles.textoVencimento}>Vencimento:</Text>
+                <View style={styles.posicaoVencimento}>
+                    <TextInput style={styles.InputVenciemnto}></TextInput>
                 </View>
-                <View style={styles.containerVencimento}>
-                    <Text style={styles.containerTextoVencimento}>VENCIMENTO:</Text>
-                    <TextInput style={styles.containerInput}>
-                    </TextInput>
+                <View style={styles.posicaoCheckBox}>
+                    <CheckBox style={styles.checkBox1}></CheckBox>
+                    <CheckBox style={styles.checkBox2}></CheckBox>		
+                    <Text style={styles.sim}>Sim</Text>
+                    <Text style={styles.nao}>Não</Text>
                 </View>
-                <View style={styles.containerBotaoSalvar}>
-                <TouchableOpacity 
-                style={styles.containerBotao}
-                >
-                    <Image
-                    style={styles.botaoSalvar}
-                    source={require("../../../assets/botao_salvar.png")}
-                    ></Image>
-                    <Text style={styles.botaoTexto}>SALVAR</Text>
-                </TouchableOpacity>
-                </View>
-                <View style={styles.containerBotaoVoltar}>
-                <TouchableOpacity 
-                style={styles.containerBotao}
-                >
+                <View style={styles.posicaoBotaoSalvar}>
+                    <TouchableOpacity style={styles.containerBotao}>
                     <Image 
-                    style={styles.botaoVoltar}
+                    source={require("../../../assets/botao_salvar.png")}
+                    style={styles.containerImagemBotaoSalvar}
+                    >
+                    </Image>
+                    <Text style={styles.textoForm}>Salvar</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.posicaoBotaoVoltar}>
+                    <TouchableOpacity style={styles.containerBotao}>
+                    <Image 
                     source={require("../../../assets/seta_voltar.png")}
-                    ></Image>
-                
-                <Text style={styles.botaoTexto}>VOLTAR</Text>
-                </TouchableOpacity>
+                    style={styles.containerImagemBotaoSalvar}
+                    >
+                    </Image>
+                    <Text style={styles.textoForm}>Voltar</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.textoUsoContinuo}>Uso contínuo</Text>
                 </View>
             </View>
-            <View style={styles.containerBox}>
-
-            </View>
+            <View style={styles.containerBox2}></View>
         </View>
-        </View>
-        
     );
+};
 
-}
-const styles = StyleSheet.create({
-    containerAll:{
-        flex:1,
-        width: "100%",
-        height:"100%",
-        top:-150,
-    },
-    botaoSalvar:{
-        width: 25,
-        height: 25,
-        marginRight: 12,
-
-    },
-    botaoVoltar:{
-        width: 25,
-        height: 25,
-        marginRight: 12,
-    },
-    containerBotaoVoltar:{
-        justifyContent:"space-around",
-        paddingHorizontal:15,
-        position:'absolute',
-        width:140,
-        height:50,
-        top: 180,
-        left:215,
-        borderRadius:5,
-        alignSelf:"center",
-        borderWidth: 1,
-        backgroundColor: "#ffffff",
-        borderColor: "#000000",
-        shadowColor: "#000000",
-    },
-    containerBotaoSalvar:{
-        justifyContent:"space-around",
-        paddingHorizontal:15,
-        position:'absolute',
-        width:140,
-        height:50,
-        top: 180,
-        left:55,
-        borderRadius:5,
-        alignSelf:"center",
-        borderWidth: 1,
-        backgroundColor: "#ffffff",
-        borderColor: "#000000",
-        shadowColor: "#000000",
-    },
-    botaoTexto:{
-        fontWeight: "bold",
-        fontSize: 18,
-        textAlign: "center",
-        // fontStyle:"armata"
-    },
-    containerImagemBotaoEntrar:{
-        width: 20,
-        height: 20,
-        marginRight: 8,
-    },
-    containerBotao:{
-        alignSelf: "center",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#ffffff",
-        borderRadius: 15,
-        width: 100,
-        height:  40,
-        flexDirection: "row",
-    },
-    containerTextoVencimento:{
-        top:2,
-        textDecorationStyle: "dashed",
-        color: "#000000",
+    const styles = StyleSheet.create({
+        posicaoBotaoVoltar:{
+            top:-210,
+            left:70
+        },
+        posicaoBotaoSalvar:{
+            top:-170,
+            left:-70
+        },
+        containerImagemBotaoSalvar:{
+            width: 20,
+            height: 20,
+            marginRight: 8,
+        },
+        containerBotao:{
+            borderWidth:1,
+            alignSelf: "center",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "#ffffff",
+            borderRadius: 15,
+            width: 100,
+            height:  40,
+            flexDirection: "row",
+        },
+        posicaoCheckBox:{
+            top:-190,
+            left:30
+        },
+        InputVenciemnto:{
+            borderWidth: 1,
+            backgroundColor: "#ffffff",
+            borderColor: "#000000",
+            shadowColor: "#000000",
+            elevation: 15,
+            shadowOffset:{width: -1,height: 1},
+            shadowOpacity: 0.9,
+            shadowRadius: 1,
+            fontSize: 15,
+            fontWeight: "600",
+            borderRadius: 3,
+            paddingTop: 5,
+            paddingBottom: 5,
+            
+        },
+        posicaoVencimento:{
+            left:200,
+            top:-102,
+            maxWidth:100,
+            minWidth:50,
+        },
+        textoVencimento:{
         fontSize: 15,
-        fontWeight: "600",
-    },
-    containerVencimento:{
-        justifyContent:"space-around",
-        paddingHorizontal:15,
-        position:'absolute',
-        width:158,
-        left:250,
-        top: 100,
-        gap: 5,
-        alignSelf:"center",
-    },
-    containerTextoMedico:{
-        top:2,
-        textDecorationStyle: "dashed",
-        color: "#000000",
-        fontSize: 15,
-        fontWeight: "600",
-    },
-    containerMedico:{
-        justifyContent:"space-around",
-        paddingHorizontal:15,
-        position:'absolute',
-        width:250,
-        left:12,
-        top: 100,
-        gap: 5,
-        alignSelf:"center",
-
-    },
-    containerTextoCompriPeriodo:{
-        top:2,
-        textDecorationStyle: "dashed",
-        color: "#000000",
-        fontSize: 15,
-        fontWeight: "600",
+        //mudar a fonte aqui
+        left:200,
+        top:-101
+        },
+        linhaMedico:{
+            top:-50
+        },
+        InputMedico:{
+            maxWidth:190,
+            minWidth:150,
+            borderWidth: 1,
+            backgroundColor: "#ffffff",
+            borderColor: "#000000",
+            shadowColor: "#000000",
+            elevation: 15,
+            shadowOffset:{width: -1,height: 1},
+            shadowOpacity: 0.9,
+            shadowRadius: 1,
+            fontSize: 15,
+            fontWeight: "600",
+            borderRadius: 3,
+            paddingTop: 5,
+            paddingBottom: 5,
+        },
         
-    },
-    containerInputCompriPeriodo:{
-        width:250,
-        borderWidth: 1,
-        backgroundColor: "#ffffff",
-        borderColor: "#000000",
-        shadowColor: "#000000",
-        elevation: 15,
-        shadowOffset:{width: -1,height: 1},
-        shadowOpacity: 0.9,
-        shadowRadius: 1,
+        posicaoComprimidoP:{
+            left:100,
+            top:-52
+        },
+        InputComprimidoP:{
+            maxWidth:200,
+            minWidth:170,
+            borderWidth: 1,
+            backgroundColor: "#ffffff",
+            borderColor: "#000000",
+            shadowColor: "#000000",
+            elevation: 15,
+            shadowOffset:{width: -1,height: 1},
+            shadowOpacity: 0.9,
+            shadowRadius: 1,
+            fontSize: 15,
+            fontWeight: "600",
+            borderRadius: 3,
+            paddingTop: 5,
+            paddingBottom: 5,
+            width:"100%",
+        },
+        textoComprimidoP:{
         fontSize: 15,
-        fontWeight: "600",
-        borderRadius: 3,
-        paddingTop: 5,
-        paddingBottom: 5,
-    },
-    containerCompriPeriodo:{
-        justifyContent:"space-around",
-        paddingHorizontal:15,
-        position:'absolute',
-        width:400,
-        left:"32%",
-        top: "110%",
-        gap: 5,
-        maxWidth: 400,
-        minWidth: 300,
-        alignSelf:"center",
-    },
-    containerPeriodo:{
-        justifyContent:"space-around",
-        paddingHorizontal:15,
-        position:'absolute',
-        width:200,
-        left:12,
-        top: "190%",
-        gap: 5,
-        maxWidth: 400,
-        minWidth: 300,
-        alignSelf:"center",
-        
-    },
-    containerTexto3:{
-        justifyContent:"space-around",
-        paddingRight:135,
-        position:'absolute',
-        width:"100%",
-        left:15,
-        top: "-70%",
-        gap: 5,
-        maxWidth: 400,
-        minWidth: 300,
-        alignSelf:"center",
-        textDecorationStyle: "dashed",
-        color: "#000000",
-        fontSize: 15,
-        fontWeight: "600",
-    },
-    containerTextoUso:{
-    justifyContent:"space-around",
-    left:150,
-    position:'absolute',
-    width:"100%",
-    top: 122,
-    textDecorationStyle: "dashed",
-    color: "#000000",
-    fontSize: 15,
-    fontWeight: "600",
-},
-    containerTextoDosagem:{
-        justifyContent:"space-around",
-        position:'absolute',
-        width:"100%",
-        top: 122,
-        textDecorationStyle: "dashed",
-        color: "#000000",
-        fontSize: 15,
-        fontWeight: "600",
-    },
-    containerCheckBox:{
-        width:30,
-        height:30,
-        borderWidth:1,
-
-    },
-    containerTextoCheck:{
-        textDecorationStyle: "dashed",
-        color: "#000000",
-        fontSize: 15,
-        fontWeight: "600",
-        top:5,
-        left:-25
-    },
-    containerTexto:{
-        textDecorationStyle: "dashed",
-        color: "#000000",
-        fontSize: 15,
-        fontWeight: "600"
-    },
-    containerBox2:{
-        backgroundColor: "#1088c4",
-        display: "flex",
-        minHeight:"4%",
-        top:165
-    },
-    containerBox:{
-        backgroundColor: "#1088c4",
-        minHeight:"5%",
-        top:"105%"
-    },
-    containerMenor:{
-        justifyContent:"space-around",
-        paddingHorizontal:15,
-        width:"100%",
-        top: "37.5%",
-        right:10,
-        gap: 5,
-        maxWidth: 400,
-        minWidth: 100,
-        alignSelf:"center",
-        flexDirection:"row"
-    },
-    container:{
-        flex:1,
-        width: "100%",
-        height:"100%",
-    },
-    containerForm:{
-        justifyContent:"space-around",
-        paddingHorizontal:16,
-        position: 'absolute',
-        width:"100%",
-        alignSelf: "center",
-        top: "25%",
-        gap: 5,
-        maxWidth: 400,
-        minWidth: 300,
-    },
-    containerInput:{
+        //mudar fonte aqui
+        left:110,
+        top:-52,
+        },
+        InputPeriodo:{
+        maxWidth:90,
+        minWidth:30,
         borderWidth: 1,
         backgroundColor: "#ffffff",
         borderColor: "#000000",
@@ -354,39 +186,103 @@ const styles = StyleSheet.create({
         borderRadius: 3,
         paddingTop: 5,
         paddingBottom: 5,
-    },
-    containerInputPeriodo:{
-        width:100,
-        borderWidth: 1,
-        backgroundColor: "#ffffff",
-        borderColor: "#000000",
-        shadowColor: "#000000",
-        elevation: 15,
-        shadowOffset:{width: -1,height: 1},
-        shadowOpacity: 0.9,
-        shadowRadius: 1,
+        
+        },
+        sim:{
         fontSize: 15,
-        fontWeight: "600",
-        borderRadius: 3,
-        paddingTop: 5,
-        paddingBottom: 5,
-    },
-    containerInputDosagem:{
-        width:100,
-        left:"50%",
-        borderWidth: 1,
-        backgroundColor: "#ffffff",
-        borderColor: "#000000",
-        shadowColor: "#000000",
-        elevation: 15,
-        shadowOffset:{width: -1,height: 1},
-        shadowOpacity: 0.9,
-        shadowRadius: 1,
+        //mudar fonte aqui
+        left:160,
+        top:-93,
+        },
+        nao:{
         fontSize: 15,
-        fontWeight: "600",
-        borderRadius: 3,
-        paddingTop: 5,
-        paddingBottom: 5,
-    },
+        //mudar fonte aqui
+        left:240,
+        top:-113,
+        },
+        checkBox1:{
+            width:25,
+            height:25,
+            left:130,
+            top:-45
+        },
+        checkBox2:{
+            width:25,
+            height:25,
+            left:210,
+            top:-70
 
-})   
+        },
+        textoUsoContinuo:{
+        fontSize: 15,
+        //mudar fonte aqui
+        left:90,
+        top:-218,
+        },
+        InputDosagem:{
+        maxWidth:120,
+        minWidth:80,
+        borderWidth: 1,
+        backgroundColor: "#ffffff",
+        borderColor: "#000000",
+        shadowColor: "#000000",
+        elevation: 15,
+        shadowOffset:{width: -1,height: 1},
+        shadowOpacity: 0.9,
+        shadowRadius: 1,
+        paddingHorizontal: 10,
+        fontSize: 15,
+        fontWeight: "600",
+        borderRadius: 3,
+        paddingTop: 5,
+        paddingBottom: 5,
+        },
+        containerBox1:{
+            backgroundColor:"#20A2EB",
+            width:"100%",
+            height:40,
+            
+        },
+        containerBox2:{
+            backgroundColor:"#20A2EB",
+            width:"100%",
+            height:40,
+            top:"91%",
+        },
+        Input:{
+        borderWidth: 1,
+        backgroundColor: "#ffffff",
+        borderColor: "#000000",
+        shadowColor: "#000000",
+        elevation: 15,
+        shadowOffset:{width: -1,height: 1},
+        shadowOpacity: 0.9,
+        shadowRadius: 1,
+        paddingHorizontal: 10,
+        fontSize: 15,
+        fontWeight: "600",
+        borderRadius: 3,
+        paddingTop: 5,
+        paddingBottom: 5,
+        },
+        conteinerForm:{
+        justifyContent:"space-around",
+        paddingHorizontal:40,
+        position: 'absolute',
+        width:"100%",
+        alignSelf: "center",
+        top:75,
+        gap:0,
+        maxWidth: 380,
+        minWidth: 300,
+        },
+        textoForm:{
+        fontSize: 15,
+        //mudar fonte aqui
+        },
+        container:{
+        flex:1,
+        width: "100%",
+        height:"100%",
+        }
+      });
