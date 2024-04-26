@@ -12,6 +12,7 @@ import {
 import { router } from "expo-router";
 import { useState } from "react";
 import Footer from "../../../components/Footer";
+import NotifiCard from "../../../components/NotifiCard";
 
 export default function Home() {
   const [IsModalVisible, setIsModalVisible] = useState(false);
@@ -36,14 +37,10 @@ export default function Home() {
         presentationStyle="pageSheet"
         >
           <View style={styles.containerModal}>
-            <View style={styles.containerModalBox}>
-              <View style={styles.containerModalBoxTitulo}>
-                <Text style={styles.containerModalTitulo}>TITULO PLACEHOLDER</Text>
-              </View>
-              <View style={styles.containerModalMensagem}>
-                <Text style={styles.containerModalMensagemTexto}>MENSAGEM PLACEHOLDER</Text>
-              </View>
-            </View>
+            <NotifiCard
+            titulo="Titulo Placeholder"
+            mensagem="Mensagem Placeholder"
+            />
             <TouchableOpacity 
             style={styles.containerModalBotao}
             onPress={() => setIsModalVisible(false)}
@@ -168,30 +165,6 @@ const styles = StyleSheet.create({
     marginTop: 140,
     borderRadius: 15,
     backgroundColor: "rgba(232,232,228,1)"
-  },
-  containerModalBox:{
-    width: "90%",
-    height: 73,
-    alignSelf: "center",
-    borderRadius: 3,
-    backgroundColor: "rgba(217, 217, 217, 1)",
-    alignItems: "center",    
-  },
-  containerModalBoxTitulo:{
-    width: "80%",
-    backgroundColor: "rgba(32, 162, 235, 1)",
-    borderRadius: 3,
-  },
-  containerModalTitulo:{
-    color: "#ffffff",
-    textAlign: "center"
-  },
-  containerModalMensagem:{
-    alignSelf: "center",
-    width: "95%",
-  },
-  containerModalMensagemTexto:{
-    textAlign: "center"
   },
   containerModalBotao:{
     width: 90,
