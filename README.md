@@ -4,6 +4,7 @@
 > É um projeto de extensão interdisciplinar referente a disciplina de Sistemas Operacionais, ministrada pela Prof. Myrthis Marinho do Carmo Melo. 
    A ideia do trabalho é criar um software/aplicativo associado ao curso de enfermagem, para que os ajudem na sua jornada de trabalho. O objetivo desse projeto é auxiliar pessoas idosas ou pessoas que têm problemas de esquecimento, a recordarem o horário que precisam tomar seus remédios e até mesmo fazer a reposição dos mesmos. 
    A partir da problemática em questão, resolvemos dar início ao planejamento, onde fizemos um levantamento de requisitos com os profissionais da saúde, analisamos as situações e encontramos uma melhor forma para trabalhar em prol de uma solução.
+   O projeto “Medicamentar” é uma criação pautada em ajudar, com isso diversos benefícios podem ser explorados, como a facilidade de agendamento, auxílio com os profissionais da saúde e uma boa conduta do usuário no app.
 
 ### 2. Requisitos Funcionais
 ---
@@ -16,4 +17,12 @@
  - **Tema Claro ou Escuro**: Opção de escolher entre um tema claro e um tema escuro para melhorar a experiência de uso, especialmente em ambientes com pouca luz.
  - **Alteração da proporção da fonte**: Permitir que os usuários personalizem o tamanho da fonte para melhor legibilidade e acessibilidade.
  ---
+### 3. Funcionalidades
+---
+- **Fazer o login no app**: Para entrar no app é necessário fazer o login, por meio da Google Account ou  pelo preenchimento dos dados pedidos no cadastro.
+- **Alarme**:  É um alarme que é acionado para chamar a atenção do usuário, para que ele possa ficar atento a uma possível reposição de medicamentos, uma consulta ou o horário do remédio.
+- **Notificações**: São notificações de aviso, onde o usuário recebe em sua barra de notificações, para que fique possível ver e ficar atento a situação notificada.
+- **Adicionar Medicamentos**: É a função em que o usuário pode inserir os medicamentos necessários para tomar. 
+- **Agendamento de Consulta e Exames**: É a função onde o usuário pode agendar consultas e exames de rotina.
+- **Número de Emergência**: São números preventivos contra possíveis problemas de saúde.
 
