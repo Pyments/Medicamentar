@@ -32,7 +32,7 @@ export default function LogIn() {
 
   return (
     <View style={styles.container}>
-            <LinearGradient colors={["#ffffff","#BBE7FF", "#2596BE"]} style={{flex: 1}}>
+            <LinearGradient colors={["#ffffff","#FFFFFF", "#2596BE"]} style={{flex: 1}}>
             <View style={styles.containerImagemLogin}>
                 <Image
                     source={ require("../../assets/UserAuth/imagem_login.jpg" )}
@@ -41,6 +41,9 @@ export default function LogIn() {
                 />
             </View>
             <View style={styles.containerForm}>
+                <View style={styles.containerAppTexto}>
+                    <Text style={styles.appTexto}>Medicamentar</Text>
+                </View>
                 <TextInput
                     style={EmailState ? styles.error : styles.containerInput}
                     placeholder="Digite seu e-mail"
@@ -107,7 +110,7 @@ const styles = StyleSheet.create({
     containerImagemLogin:{
         flex:1,
         maxWidth: 450,
-        opacity: 0.45,
+        opacity: 0.25,
         width: "100%",
         height: "100%",
         alignSelf: "center",
@@ -123,7 +126,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width:"100%",
         alignSelf: "center",
-        top: "50%",
+        top: "45%",
         gap: 25,
         maxWidth: 400,
         minWidth: 300,
@@ -191,6 +194,16 @@ const styles = StyleSheet.create({
         color: "#ff1111",
     },
     noErrorTexto:{
+        width: "100%",
         display: "none"
+    },
+    containerAppTexto:{
+        alignSelf: "center",
+    },
+    appTexto:{
+        fontWeight: "400",
+        fontSize: 24,
+        color: "#000000",
+        opacity: 0.40
     }
 })  
