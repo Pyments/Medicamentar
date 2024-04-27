@@ -9,7 +9,6 @@ export default function SignIn() {
     const [EmailState, SetEmailState] = useState(false);
     const [SenState, SetSenState] = useState(false);
 
-    // funçoes que atualizam o estado (state)
     const updateNomState = (value:boolean) => {
         SetNomState(value);
     }
@@ -20,8 +19,6 @@ export default function SignIn() {
         SetSenState(value);
     }
 
-    // Se o campo de input estiver vazio,  retorna um erro. Caso contrário, ativa a flag de validação
-    //  do campo e chama a função que atualiza o estado (state)
     const nomeIsEmpty = (text:string) => {
         text.length  === 0 ? updateNomState(true):updateNomState(false);
     }
@@ -39,7 +36,7 @@ export default function SignIn() {
     }
     return (
         <View style={styles.container}>
-            <LinearGradient colors={["#ffffff","#BBE7FF", "#2596BE"]} style={{flex: 1}}>
+            <LinearGradient colors={["#ffffff","#FFFFFF", "#2596BE"]} style={{flex: 1}}>
             <Image
                 style={styles.containerLogo}
                 source={require("../../assets/UserAuth/imagem_registro.png")}
