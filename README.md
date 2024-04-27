@@ -7,7 +7,6 @@
    O projeto “Medicamentar” é uma criação pautada em ajudar, com isso diversos benefícios podem ser explorados, como a facilidade de agendamento, auxílio com os profissionais da saúde e uma boa conduta do usuário no app.
 
 ### 2. Requisitos Funcionais
----
 - **Integração com Google Account**: Permitir que os usuários acessem o aplicativo usando suas contas do Google.
 - **Cadastro de múltiplas medicações**:  Possibilitar o registro de diferentes medicamentos, incluindo nome, dosagem e horário.
 - **Registrar futuras consultas:** Permitir que os usuários agendem consultas futuras, inserindo a data e a hora desejadas.
@@ -18,7 +17,6 @@
  - **Alteração da proporção da fonte**: Permitir que os usuários personalizem o tamanho da fonte para melhor legibilidade e acessibilidade.
  ---
 ### 3. Funcionalidades
----
 - **Fazer o login no app**: Para entrar no app é necessário fazer o login, por meio da Google Account ou  pelo preenchimento dos dados pedidos no cadastro.
 - **Alarme**:  É um alarme que é acionado para chamar a atenção do usuário, para que ele possa ficar atento a uma possível reposição de medicamentos, uma consulta ou o horário do remédio.
 - **Notificações**: São notificações de aviso, onde o usuário recebe em sua barra de notificações, para que fique possível ver e ficar atento a situação notificada.
