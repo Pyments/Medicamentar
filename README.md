@@ -1,10 +1,10 @@
 # Medicamentar 💊
 
 ### 1. Descrição do projeto
-> É um projeto de extensão interdisciplinar referente a disciplina de Sistemas Operacionais, ministrada pela Prof. Myrthis Marinho do Carmo Melo. 
+> É um projeto de extensão referente a disciplina de Sistemas Operacionais, ministrada pela Prof. Myrthis Marinho do Carmo Melo. 
    A ideia do trabalho é criar um software/aplicativo associado ao curso de enfermagem, para que os ajudem na sua jornada de trabalho. O objetivo desse projeto é auxiliar pessoas idosas ou pessoas que têm problemas de esquecimento, a recordarem o horário que precisam tomar seus remédios e até mesmo fazer a reposição dos mesmos. 
    A partir da problemática em questão, resolvemos dar início ao planejamento, onde fizemos um levantamento de requisitos com os profissionais da saúde, analisamos as situações e encontramos uma melhor forma para trabalhar em prol de uma solução.
-   O projeto “Medicamentar” é uma criação pautada em ajudar, com isso diversos benefícios podem ser explorados, como a facilidade de agendamento, auxílio com os profissionais da saúde e uma boa conduta do usuário no app.
+   O projeto “Medicamentar” é uma criação pautada em ajudar, com isso diversos benefícios podem ser explorados, como a facilidade de agendamento, auxílio aos profissionais da saúde e uma boa conduta do usuário no app.
 
 ### 2. Requisitos Funcionais
 - **Integração com Google Account**: Permitir que os usuários acessem o aplicativo usando suas contas do Google.
