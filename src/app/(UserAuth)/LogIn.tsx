@@ -15,12 +15,16 @@ export default function LogIn() {
 
     const [EmailState, SetEmailState] = useState(false);
     const [SenState, SetSenState] = useState(false);
+    const [ShowPass, SetShowPass] = useState(false);
 
     const updateEmailState = (value:boolean) => {
         SetEmailState(value);
     }
     const updateSenState = (value:boolean) => {
         SetSenState(value);
+    }
+    const updateShowPass = (value:boolean) => {
+        ShowPass == true ? SetShowPass(false):SetShowPass(true);
     }
 
     const emailIsEmpty = (email:string) => {
@@ -29,6 +33,7 @@ export default function LogIn() {
     const SenIsEmpty = (senha: string) =>{
         senha.length === 0 ? updateSenState(true):updateSenState(false)
     }
+        
 
   return (
     <View style={styles.container}>
@@ -58,6 +63,7 @@ export default function LogIn() {
                 <Text
                 style={EmailState ? styles.textError : styles.noErrorTexto}
                 >Este campo é obrigatório</Text>
+                <View style={styles.passSection}>
                 <TextInput
                     style={SenState ? styles.error : styles.containerInput}
                     placeholder="Digite sua senha"
@@ -66,9 +72,22 @@ export default function LogIn() {
                     autoCorrect= {false}
                     enterKeyHint="done"
                     importantForAutofill="yes"
-                    secureTextEntry= {true}
+                    secureTextEntry= {ShowPass}
                     onChangeText={(senha) => SenIsEmpty(senha)}
-                />   
+                />
+                <TouchableOpacity 
+                    style={{alignSelf:"center", position:"absolute", paddingRight:5}}
+                    onPress={() => updateShowPass(true)}
+                    >
+                    <Image 
+                        source={
+                            ShowPass == true ? require("../../assets/olho_bloqueio.png"):require("../../assets/olho.png")
+                        }
+                        style={{width: 37, height: 17, resizeMode: "contain", alignSelf:"center",}}
+                        >
+                    </Image>   
+                </TouchableOpacity>
+                </View>
                 <Text
                 style={SenState ? styles.textError : styles.noErrorTexto}
                 >Este campo é obrigatório</Text>
@@ -142,6 +161,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     containerInput:{
+        flex: 1,
         borderWidth: 1,
         backgroundColor: "#ffffff",
         borderColor: "#000000",
@@ -176,6 +196,7 @@ const styles = StyleSheet.create({
         marginRight: 8,
     },
     error:{
+        flex: 1,
         backgroundColor: "#ffffff",
         borderBottomColor: "#ff5555",
         borderLeftColor: "#ffffff",
@@ -205,5 +226,9 @@ const styles = StyleSheet.create({
         fontSize: 24,
         color: "#000000",
         opacity: 0.40
+    },
+    passSection:{
+        flexDirection: "row",
+        justifyContent: "flex-end",
     }
 })  

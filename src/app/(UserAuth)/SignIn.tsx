@@ -8,6 +8,7 @@ export default function SignIn() {
     const [NomState, SetNomState] = useState(false);
     const [EmailState, SetEmailState] = useState(false);
     const [SenState, SetSenState] = useState(false);
+    const [ShowPass, SetShowPass] = useState(false);
 
     const updateNomState = (value:boolean) => {
         SetNomState(value);
@@ -17,6 +18,9 @@ export default function SignIn() {
     }
     const updateSenState = (value:boolean) => {
         SetSenState(value);
+    }
+    const updateShowPass = (value:boolean) => {
+        ShowPass == true ? SetShowPass(false):SetShowPass(true);
     }
 
     const nomeIsEmpty = (text:string) => {
@@ -57,19 +61,47 @@ export default function SignIn() {
                 onChangeText={(email) => emailIsEmpty(email)}
                 />
                 <Text style={EmailState ? styles.textError : styles.noErrorTexto}>Este campo é obrigatório!</Text>
-                <TextInput 
-                style={SenState ? styles.error : styles.containerInput}
-                placeholder="SENHA:"    
-                secureTextEntry= {true}  
-                onChangeText={(senha) => SenIsEmpty(senha)}
-                />
+                <View style={styles.passSection}>
+                    <TextInput 
+                    style={SenState ? styles.error : styles.containerInput}
+                    placeholder="SENHA:"    
+                    secureTextEntry= {ShowPass}  
+                    onChangeText={(senha) => SenIsEmpty(senha)}
+                    />
+                    <TouchableOpacity 
+                    style={{alignSelf:"center", position:"absolute", paddingRight:5}}
+                    onPress={() => updateShowPass(true)}
+                    >
+                    <Image 
+                        source={
+                            ShowPass == true ? require("../../assets/olho_bloqueio.png"):require("../../assets/olho.png")
+                        }
+                        style={{width: 37, height: 17, resizeMode: "contain", alignSelf:"center",}}
+                        >
+                    </Image>   
+                </TouchableOpacity>
+                </View>
                 <Text style={SenState ? styles.textError : styles.noErrorTexto}>Este campo é obrigatório!</Text>
-                <TextInput 
-                style={SenState ? styles.error : styles.containerInput}
-                placeholder="REPITA SUA SENHA:"
-                secureTextEntry= {true}      
-                onChangeText={(senha) => SenIsEmpty(senha)}
-                />
+                <View style={styles.passSection}>
+                    <TextInput 
+                    style={SenState ? styles.error : styles.containerInput}
+                    placeholder="REPITA SUA SENHA:"
+                    secureTextEntry= {ShowPass}      
+                    onChangeText={(senha) => SenIsEmpty(senha)}
+                    />
+                    <TouchableOpacity 
+                    style={{alignSelf:"center", position:"absolute", paddingRight:5}}
+                    onPress={() => updateShowPass(true)}
+                    >
+                    <Image 
+                        source={
+                            ShowPass == true ? require("../../assets/olho_bloqueio.png"):require("../../assets/olho.png")
+                        }
+                        style={{width: 37, height: 17, resizeMode: "contain", alignSelf:"center",}}
+                        >
+                    </Image>   
+                </TouchableOpacity>
+                </View>
                 <Text style={SenState ? styles.textError : styles.noErrorTexto}>Este campo é obrigatório!</Text>
                 <View style={styles.containerBotoes}>
                     <TouchableOpacity
@@ -155,6 +187,7 @@ const styles = StyleSheet.create({
         marginRight: 6,
     },
     error:{
+        flex: 1,
         backgroundColor: "#ffffff",
         borderBottomColor: "#ff5555",
         borderLeftColor: "#ffffff",
@@ -174,5 +207,9 @@ const styles = StyleSheet.create({
     },
     noErrorTexto:{
         display: "none"
+    },
+    passSection:{
+        flexDirection: "row",
+        justifyContent: "flex-end",
     }
 })
