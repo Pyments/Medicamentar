@@ -1,11 +1,7 @@
-import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from "react-native";
-import CheckBox, { Checkbox } from "expo-checkbox"
-import { useNavigation } from "@react-navigation/native";
+import CheckBox from "expo-checkbox"
 
 export default function AdMedicamentos(){
-    const navigation = useNavigation();
-
     return( 
         <View style={styles.container}>
             <View style={styles.containerBox1}></View>
