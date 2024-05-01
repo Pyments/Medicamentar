@@ -101,7 +101,9 @@ export default function LogIn() {
                 </Image>
                 <Text 
                 style={styles.botaoTexto}
-                onPress={ () => router.navigate("Home")}
+                onPress={ () => router.navigate({
+                    pathname: "../(TabMenu)/Home"
+                })}
                 >Entrar</Text>
                 </TouchableOpacity>
                 <View style={styles.Registro}>

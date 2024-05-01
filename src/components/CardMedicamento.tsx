@@ -1,4 +1,4 @@
-import { router } from "expo-router";
+import { Link, router } from "expo-router";
 import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
 
 export default function CardMedicamentos() {
@@ -10,19 +10,15 @@ export default function CardMedicamentos() {
           <Text style={styles.infoText}>Uso Contínuo </Text>
           <Text style={styles.infoText}>Status: Normal</Text>
         </View>
-      </View>
-      <TouchableOpacity
-        onPress={() =>
-          router.navigate({
-            pathname: "./AdMedicamentos",
-          })
-        }
-      >
-        <Image
-          source={require("../assets/Medicamento_component/Medicamento_icon.png")}
-          style={styles.cardImage}
-        ></Image>
-      </TouchableOpacity>
+      </View>      
+        <TouchableOpacity onPress={
+          ()=>{ router.push("../(DynamicRoutes)/[AdMedicamentos]")}
+        }>
+          <Image
+              source={require("../assets/Medicamento_component/Medicamento_icon.png")}
+              style={styles.cardImage}
+            ></Image>
+        </TouchableOpacity>      
     </View>
   );
 }
