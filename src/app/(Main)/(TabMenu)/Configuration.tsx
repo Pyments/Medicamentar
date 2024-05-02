@@ -4,6 +4,8 @@ import {SafeAreaView, View, Text, StyleSheet, StatusBar, Image, TouchableOpacity
 import {useFonts} from "expo-font"
 import {LinearGradient} from "expo-linear-gradient"
 import {router} from "expo-router"
+import { DrawerActions } from "@react-navigation/native";
+import { useNavigation } from "expo-router";
 
 function Configuration() {
     useFonts({
@@ -25,12 +27,17 @@ function Configuration() {
 
     const styleSwitchFontSize = (darkTheme: boolean) => darkTheme ? "#3E3C3C" : "#20A2EB";        
 
+    const navigation = useNavigation();
+
+    const AbrirNavMenu = () => {
+        navigation.dispatch(DrawerActions.openDrawer());
+    };
 
     return(
         <SafeAreaView style={isDark ? styles.containerDark : styles.container}>
             <StatusBar/>
             <View style={isDark ? styles.headerDark : styles.header}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={AbrirNavMenu}>
                     <Image source={require("../../../assets/menu-lateral.png")}/>
                 </TouchableOpacity>
                 <Text style={styles.headerText}>CONFIGURAÇÕES</Text>

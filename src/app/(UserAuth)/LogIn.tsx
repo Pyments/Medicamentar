@@ -15,12 +15,16 @@ export default function LogIn() {
 
     const [EmailState, SetEmailState] = useState(false);
     const [SenState, SetSenState] = useState(false);
+    const [ShowPass, SetShowPass] = useState(false);
 
     const updateEmailState = (value:boolean) => {
         SetEmailState(value);
     }
     const updateSenState = (value:boolean) => {
         SetSenState(value);
+    }
+    const updateShowPass = (value:boolean) => {
+        ShowPass == true ? SetShowPass(false):SetShowPass(true);
     }
 
     const emailIsEmpty = (email:string) => {
@@ -29,10 +33,11 @@ export default function LogIn() {
     const SenIsEmpty = (senha: string) =>{
         senha.length === 0 ? updateSenState(true):updateSenState(false)
     }
+        
 
   return (
     <View style={styles.container}>
-            <LinearGradient colors={["#ffffff","#BBE7FF", "#2596BE"]} style={{flex: 1}}>
+            <LinearGradient colors={["#ffffff","#FFFFFF", "#2596BE"]} style={{flex: 1}}>
             <View style={styles.containerImagemLogin}>
                 <Image
                     source={ require("../../assets/UserAuth/imagem_login.jpg" )}
@@ -41,6 +46,9 @@ export default function LogIn() {
                 />
             </View>
             <View style={styles.containerForm}>
+                <View style={styles.containerAppTexto}>
+                    <Text style={styles.appTexto}>Medicamentar</Text>
+                </View>
                 <TextInput
                     style={EmailState ? styles.error : styles.containerInput}
                     placeholder="Digite seu e-mail"
@@ -55,6 +63,7 @@ export default function LogIn() {
                 <Text
                 style={EmailState ? styles.textError : styles.noErrorTexto}
                 >Este campo é obrigatório</Text>
+                <View style={styles.passSection}>
                 <TextInput
                     style={SenState ? styles.error : styles.containerInput}
                     placeholder="Digite sua senha"
@@ -63,9 +72,22 @@ export default function LogIn() {
                     autoCorrect= {false}
                     enterKeyHint="done"
                     importantForAutofill="yes"
-                    secureTextEntry= {true}
+                    secureTextEntry= {ShowPass}
                     onChangeText={(senha) => SenIsEmpty(senha)}
-                />   
+                />
+                <TouchableOpacity 
+                    style={{alignSelf:"center", position:"absolute", paddingRight:5}}
+                    onPress={() => updateShowPass(true)}
+                    >
+                    <Image 
+                        source={
+                            ShowPass == true ? require("../../assets/olho_bloqueio.png"):require("../../assets/olho.png")
+                        }
+                        style={{width: 37, height: 17, resizeMode: "contain", alignSelf:"center",}}
+                        >
+                    </Image>   
+                </TouchableOpacity>
+                </View>
                 <Text
                 style={SenState ? styles.textError : styles.noErrorTexto}
                 >Este campo é obrigatório</Text>
@@ -79,7 +101,9 @@ export default function LogIn() {
                 </Image>
                 <Text 
                 style={styles.botaoTexto}
-                onPress={ () => router.navigate("Home")}
+                onPress={ () => router.navigate({
+                    pathname: "../(TabMenu)/Home"
+                })}
                 >Entrar</Text>
                 </TouchableOpacity>
                 <View style={styles.Registro}>
@@ -107,7 +131,7 @@ const styles = StyleSheet.create({
     containerImagemLogin:{
         flex:1,
         maxWidth: 450,
-        opacity: 0.45,
+        opacity: 0.25,
         width: "100%",
         height: "100%",
         alignSelf: "center",
@@ -123,7 +147,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width:"100%",
         alignSelf: "center",
-        top: "50%",
+        top: "45%",
         gap: 25,
         maxWidth: 400,
         minWidth: 300,
@@ -139,6 +163,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     containerInput:{
+        flex: 1,
         borderWidth: 1,
         backgroundColor: "#ffffff",
         borderColor: "#000000",
@@ -173,6 +198,7 @@ const styles = StyleSheet.create({
         marginRight: 8,
     },
     error:{
+        flex: 1,
         backgroundColor: "#ffffff",
         borderBottomColor: "#ff5555",
         borderLeftColor: "#ffffff",
@@ -191,6 +217,20 @@ const styles = StyleSheet.create({
         color: "#ff1111",
     },
     noErrorTexto:{
+        width: "100%",
         display: "none"
+    },
+    containerAppTexto:{
+        alignSelf: "center",
+    },
+    appTexto:{
+        fontWeight: "400",
+        fontSize: 24,
+        color: "#000000",
+        opacity: 0.40
+    },
+    passSection:{
+        flexDirection: "row",
+        justifyContent: "flex-end",
     }
 })  
