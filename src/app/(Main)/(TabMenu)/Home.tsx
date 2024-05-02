@@ -1,13 +1,11 @@
-import React from "react";
 import {
   View,
   Text,
   StyleSheet,
   Image,
   TouchableOpacity,
-  TextInput,
-  SafeAreaView,
   Modal,
+  SafeAreaView,
 } from "react-native";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -17,7 +15,7 @@ import NotifiCard from "../../../components/NotifiCard";
 export default function Home() {
   const [IsModalVisible, setIsModalVisible] = useState(false);
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.containerTopo}>
         <Image
           source={require("../../../assets/logo_nome.png")}
@@ -109,7 +107,7 @@ export default function Home() {
         </View>
       </View>
       <Footer></Footer>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -124,7 +122,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 110,
     minHeight: 100,
-    backgroundColor: "#71AAFF",
+    backgroundColor: "#20A2EB",
     flexDirection: "row",
     alignSelf: "center",
     alignItems: "center",
