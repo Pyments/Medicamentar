@@ -1,3 +1,5 @@
+import { DrawerActions } from "@react-navigation/native";
+import { useNavigation } from "expo-router";
 import React, { useState } from "react";
 import {
   ScrollView,
@@ -13,12 +15,18 @@ import {
 } from "react-native";
 
 export default function Emergencia() {
-  
+
+  const navigation = useNavigation();
+
+  const AbrirNavMenu = () => {
+    navigation.dispatch(DrawerActions.openDrawer());
+    };
+
   const [buttonClicked, setButtonClicked] = useState(true);
   const [secondClicked, setSecondClicked] = useState(false);
   const [thirdClicked, setThirdClicked] = useState(true);
   const [fourthClicked, setFourthClicked] = useState(false);
-  
+
 
   const handleButtonClick = () => {
     setButtonClicked(false);
@@ -44,7 +52,9 @@ export default function Emergencia() {
   return (
     <View style={styles.container}>
       <View style={styles.containerTop}>
+        <TouchableOpacity onPress={AbrirNavMenu}> 
           <Image style={styles.menu} source={require("../../../assets/menu-lateral.png")}/>
+          </TouchableOpacity>
           <Text style={styles.textContainerTop}>Emergência</Text>
           <Image style={styles.logoEmergencia} source={require("../../../assets/Emergencia_icons/Icon_em.png")}/>
         </View>

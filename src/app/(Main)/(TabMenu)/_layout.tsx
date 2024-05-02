@@ -76,6 +76,22 @@ export default function UserAuthLayout() {
             )
           }}
         />
+         <Drawer.Screen
+          name="Emergencia"
+          options={{
+            drawerLabel: "Emergência",
+            title: "Emergência",
+            headerShown: false,
+          
+            drawerIcon: ({}) => (
+              <Image
+                source={require("../../../assets/DrawerIcons/emergencia_icon.png")}
+                resizeMode="contain"
+                style={{width:30, height:30}}
+              />
+            )
+          }}
+        />
        <Drawer.Screen
         name="Configuration"
         options={{
