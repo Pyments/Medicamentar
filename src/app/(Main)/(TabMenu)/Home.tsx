@@ -69,6 +69,7 @@ export default function Home() {
               source={require("../../../assets/emergencia.png")}
               style={styles.containerBotoes}
             ></Image>
+            
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => router.navigate({ pathname: "./Configuration" })}
