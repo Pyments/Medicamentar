@@ -8,13 +8,24 @@ import {
     SafeAreaView,
 } from "react-native";
 import Footer from "../../../components/Footer";
+import { DrawerActions } from "@react-navigation/native";
+import { useNavigation } from "expo-router";
 
 export default function Perfil(){
+
+    const navigation = useNavigation();
+
+    const AbrirNavMenu = () => {
+        navigation.dispatch(DrawerActions.openDrawer());
+    };
+
     return(
         <SafeAreaView style={styles.container}>
             <View style={styles.containerTopo}>
                 <View style={styles.containerTopoItems}>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                    onPress={AbrirNavMenu}
+                    >
                     <Image 
                     source={require("../../../assets/menu-lateral.png")}
                     style={styles.containerTopoMenuLat}
@@ -92,8 +103,10 @@ const styles = StyleSheet.create({
     }, 
     containerTopo:{
         width: "100%",
+        justifyContent: "space-between",
+        flexDirection: "row",
         height: 75,
-        backgroundColor: "#71AAFF",
+        backgroundColor: "#20A2EB",
         alignSelf: "center",
         alignItems:"center",
     },
@@ -106,7 +119,7 @@ const styles = StyleSheet.create({
     containerTopoMenuLat:{
         width: 35,
         height: 25,
-        marginLeft: 10,
+        marginLeft: 15,
         marginTop: 9,
     },
     containerTopoTexto:{
