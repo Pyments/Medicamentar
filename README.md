@@ -23,4 +23,17 @@
 - **Adicionar Medicamentos**: É a função em que o usuário pode inserir os medicamentos necessários para tomar. 
 - **Agendamento de Consulta e Exames**: É a função onde o usuário pode agendar consultas e exames de rotina.
 - **Número de Emergência**: São números preventivos contra possíveis problemas de saúde.
+### 4. Tecnologias Utilizadas
+
+<div>
+<img src = "https://img.shields.io/badge/-React-B0C4DE?style=for-the-badge&logo=react&logoColor=1C1C1C">
+
+<img src = “https://img.shields.io/badge/-TypeScript-008000?style=for-the-badge&logo=typescript&logoColor=white”>
+
+<img src = “https://img.shields.io/badge/-JavaScript-008080?style=for-the-badge&logo=javascript&logoColor=white”>
+
+<img src = “https://img.shields.io/badge/-Expo-FF00FF?style=for-the-badge&logo=expo&logoColor=white”>
+
+</div>
+
 
