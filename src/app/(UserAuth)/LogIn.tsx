@@ -10,6 +10,8 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import { useState } from "react";
+import * as Animatable from "react-native-animatable"
+import BotoesLogin from "../../components/BotoesLogin";
 
 export default function LogIn() {
 
@@ -34,7 +36,6 @@ export default function LogIn() {
         senha.length === 0 ? updateSenState(true):updateSenState(false)
     }
         
-
   return (
     <View style={styles.container}>
             <LinearGradient colors={["#ffffff","#FFFFFF", "#2596BE"]} style={{flex: 1}}>
@@ -45,10 +46,13 @@ export default function LogIn() {
                     resizeMode="cover" 
                 />
             </View>
-            <View style={styles.containerForm}>
-                <View style={styles.containerAppTexto}>
+            <Animatable.View 
+                style={styles.containerForm}
+                animation="fadeInUp"
+                >
+                <Animatable.View animation="slideInRight" delay={250} style={styles.containerAppTexto}>
                     <Text style={styles.appTexto}>Medicamentar</Text>
-                </View>
+                </Animatable.View>
                 <TextInput
                     style={EmailState ? styles.error : styles.containerInput}
                     placeholder="Digite seu e-mail"
@@ -61,8 +65,10 @@ export default function LogIn() {
                     onChangeText={(email) => emailIsEmpty(email)}
                 />
                 <Text
-                style={EmailState ? styles.textError : styles.noErrorTexto}
-                >Este campo é obrigatório</Text>
+                    style={EmailState ? styles.textError : styles.noErrorTexto}
+                >
+                    Este campo é obrigatório
+                </Text>
                 <View style={styles.passSection}>
                 <TextInput
                     style={SenState ? styles.error : styles.containerInput}
@@ -91,8 +97,12 @@ export default function LogIn() {
                 <Text
                 style={SenState ? styles.textError : styles.noErrorTexto}
                 >Este campo é obrigatório</Text>
+                <View style={styles.botoes}>
                 <TouchableOpacity 
                 style={styles.containerBotao}
+                onPress={ () => router.navigate({
+                    pathname: "../(TabMenu)/Home"
+                })}
                 >
                 <Image 
                 source={require("../../assets/UserAuth/logo_entrar.png")}
@@ -101,11 +111,14 @@ export default function LogIn() {
                 </Image>
                 <Text 
                 style={styles.botaoTexto}
-                onPress={ () => router.navigate({
-                    pathname: "../(TabMenu)/Home"
-                })}
-                >Entrar</Text>
+                >
+                Entrar
+                </Text>
                 </TouchableOpacity>
+                <BotoesLogin
+                texto="Logar"
+                />
+                </View>
                 <View style={styles.Registro}>
                     <Text style={styles.textoRegistro}>
                         Ainda não possui cadastro?
@@ -116,7 +129,7 @@ export default function LogIn() {
                         </Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </Animatable.View>
             </LinearGradient>
         </View>
     );
@@ -158,7 +171,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         backgroundColor: "#ffffff",
         borderRadius: 15,
-        width: 100,
+        width: 133,
         height:  40,
         flexDirection: "row",
     },
@@ -168,10 +181,10 @@ const styles = StyleSheet.create({
         backgroundColor: "#ffffff",
         borderColor: "#000000",
         shadowColor: "#000000",
-        elevation: 15,
-        shadowOffset:{width: -1,height: 1},
-        shadowOpacity: 0.9,
-        shadowRadius: 1,
+        elevation: 10,
+        shadowOffset:{width: 0, height: 2},
+        shadowOpacity: 0.6,
+        shadowRadius: 5,
         paddingHorizontal: 10,
         fontSize: 15,
         fontWeight: "600",
@@ -180,9 +193,13 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
     },
     botaoTexto:{
-        fontWeight: "bold",
         fontSize: 18,
         textAlign: "center"
+    },
+    botoes:{
+        alignSelf:"center",
+        flexDirection:"column",
+        gap: 15
     },
     Registro:{
         alignSelf: "center",
@@ -193,8 +210,8 @@ const styles = StyleSheet.create({
         fontStyle: "italic",
     },
     containerImagemBotaoEntrar:{
-        width: 20,
-        height: 20,
+        width: 25.6,
+        height: 23.61,
         marginRight: 8,
     },
     error:{

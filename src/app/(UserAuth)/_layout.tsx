@@ -7,12 +7,15 @@ export default function UserAuthLayout() {
         name="LogIn"
         options={{
           title: "Log In",
+          headerShown: false,
         }}
       />
       <Stack.Screen
         name="SignIn"
         options={{
           title: "Sign In",
+          headerShown: false,
+          animation: "slide_from_right"
         }}
       />
     </Stack>

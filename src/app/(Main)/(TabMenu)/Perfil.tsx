@@ -21,7 +21,6 @@ export default function Perfil(){
 
     return(
         <SafeAreaView style={styles.container}>
-            <View style={styles.containerTopo}>
                 <View style={styles.containerTopoItems}>
                     <TouchableOpacity
                     onPress={AbrirNavMenu}
@@ -39,7 +38,6 @@ export default function Perfil(){
                     >
                     </Image>
                 </View>
-            </View>
             <View style={styles.containerDadosForms}>
                 <Text>NOME:</Text>
                 <TextInput 
@@ -101,36 +99,27 @@ const styles = StyleSheet.create({
         width: "100%",
         height: "100%",
     }, 
-    containerTopo:{
-        width: "100%",
-        justifyContent: "space-between",
-        flexDirection: "row",
-        height: 75,
-        backgroundColor: "#20A2EB",
-        alignSelf: "center",
-        alignItems:"center",
-    },
     containerTopoItems:{
-        width: "100%",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        marginTop: 10,
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"space-between",
+        paddingHorizontal: 20,
+        height: 88,
+        backgroundColor: "#20A2EB"
     },
     containerTopoMenuLat:{
         width: 35,
         height: 25,
-        marginLeft: 15,
-        marginTop: 9,
     },
     containerTopoTexto:{
-        fontSize: 32,
-        fontWeight: "300",
+        fontSize: 24,
+        fontWeight: "400",
         color: "#ffffff"
     },
     containerTopoImagem:{
-        width: 50,
-        height: 50,
-        marginRight: 10,
+        width: 60,
+        height: 60,
+        resizeMode:"contain"
     },
     containerDadosForms:{
         width: "100%",
