@@ -1,8 +1,7 @@
-import { Stack } from "expo-router";
 import Drawer from "expo-router/drawer";
-import { GestureHandlerRootView, Swipeable } from "react-native-gesture-handler";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import NavMenu from "./NavMenu";
-import { View, Image } from "react-native";
+import { Image } from "react-native";
 
 export default function UserAuthLayout() {
   return (
@@ -12,7 +11,8 @@ export default function UserAuthLayout() {
         screenOptions={{
           drawerActiveBackgroundColor: "rgba(255, 255, 255, 0.4)",
           drawerActiveTintColor: "#ffffff",
-          drawerInactiveTintColor: "#d1d1d1"
+          drawerInactiveTintColor: "#ffffff",
+          drawerType:"slide",
         }}>
         <Drawer.Screen
         name="Home"
@@ -37,7 +37,7 @@ export default function UserAuthLayout() {
           headerShown: false,
           drawerIcon: ({}) => (
             <Image
-              source={require("../../../assets/DrawerIcons/usuario_icon.png")}
+              source={require("../../../assets/user.png")}
               resizeMode="contain"
               style={{width:30, height: 30}}
             />
@@ -52,7 +52,7 @@ export default function UserAuthLayout() {
           headerShown: false,
           drawerIcon: ({}) => (
             <Image
-              source={require("../../../assets/DrawerIcons/calendar_icon.png")}
+              source={require("../../../assets/hospital.png")}
               resizeMode="contain"
               style={{width:30, height:30}}
             />
@@ -69,7 +69,7 @@ export default function UserAuthLayout() {
           
             drawerIcon: ({}) => (
               <Image
-                source={require("../../../assets/DrawerIcons/medicamentos_icon.png")}
+                source={require("../../../assets/pilulas.png")}
                 resizeMode="contain"
                 style={{width:30, height:30}}
               />
