@@ -23,6 +23,7 @@
 - **Adicionar Medicamentos**: É a função em que o usuário pode inserir os medicamentos necessários para tomar. 
 - **Agendamento de Consulta e Exames**: É a função onde o usuário pode agendar consultas e exames de rotina.
 - **Número de Emergência**: São números preventivos contra possíveis problemas de saúde.
+---
 ### 4. Tecnologias Utilizadas
 
 <div>
