@@ -85,7 +85,7 @@ export default function AdMedicamentos(){
             flexDirection: "row",
         },
         posicaoCheckBox:{
-            top:-190,
+            top:-230,
             left:30
         },
         InputVenciemnto:{
@@ -106,7 +106,7 @@ export default function AdMedicamentos(){
         },
         posicaoVencimento:{
             left:200,
-            top:-102,
+            top:-110,
             maxWidth:100,
             minWidth:50,
         },
@@ -114,7 +114,7 @@ export default function AdMedicamentos(){
         fontSize: 15,
         //mudar a fonte aqui
         left:200,
-        top:-101
+        top:-111
         },
         linhaMedico:{
             top:-50
@@ -136,10 +136,9 @@ export default function AdMedicamentos(){
             paddingTop: 5,
             paddingBottom: 5,
         },
-        
         posicaoComprimidoP:{
             left:100,
-            top:-52
+            top:-60
         },
         InputComprimidoP:{
             maxWidth:200,
@@ -163,7 +162,7 @@ export default function AdMedicamentos(){
         fontSize: 15,
         //mudar fonte aqui
         left:110,
-        top:-52,
+        top:-61,
         },
         InputPeriodo:{
         maxWidth:90,
@@ -213,7 +212,7 @@ export default function AdMedicamentos(){
         fontSize: 15,
         //mudar fonte aqui
         left:90,
-        top:-218,
+        top:-265,
         },
         InputDosagem:{
         maxWidth:120,
