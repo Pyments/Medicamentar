@@ -1,23 +1,14 @@
 import React, {useState} from "react"
 import {SafeAreaView, View, Text, StyleSheet, StatusBar, Image, TouchableOpacity, Switch} from 'react-native'
-
 import {useFonts} from "expo-font"
+import * as SplashScreen from 'expo-splash-screen';
+import { useCallback } from 'react';
 import {LinearGradient} from "expo-linear-gradient"
 import {router} from "expo-router"
 import { DrawerActions } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
 
-function Configuration() {
-    useFonts({
-        "armata-regular-400": require("../../../fonts/armata-regular-400.ttf")
-    });
-
-    /*const fontsLoaded = useFonts({
-        "armata-regular-400": require("../../../fonts/armata-regular-400.ttf")
-    })
-    if(!fontsLoaded){
-        return(<Text>Loading...</Text>)
-    }*/
+export default function Configuration() {
 
     const [isDark, setIsDark] = useState(false);
     const toggleSwitchTheme = () => setIsDark(previousState => !previousState);
@@ -33,8 +24,24 @@ function Configuration() {
         navigation.dispatch(DrawerActions.openDrawer());
     };
 
+    // Código que faz a fonte funcionar:
+    const [fontsLoaded, fontError] = useFonts({
+        "armata-regular-400": require("../../../fonts/armata-regular-400.ttf"),
+      });   
+
+    const onLayoutRootView = useCallback(async () => {
+        if (fontsLoaded || fontError) {
+            await SplashScreen.hideAsync();
+        }
+    }, [fontsLoaded, fontError]);
+    
+    if (!fontsLoaded && !fontError) {
+        return null;
+    }
     return(
-        <SafeAreaView style={isDark ? styles.containerDark : styles.container}>
+        <SafeAreaView style={isDark ? styles.containerDark : styles.container}
+        onLayout={onLayoutRootView}
+        >
             <StatusBar/>
             <View style={isDark ? styles.headerDark : styles.header}>
                 <TouchableOpacity onPress={AbrirNavMenu}>
@@ -222,8 +229,6 @@ const styles = StyleSheet.create({
         height: 83
     },
 });
-
-export default Configuration;
 
 
                 /* <TouchableOpacity onPress={() => router.navigate({pathname: "../Home"})}>
