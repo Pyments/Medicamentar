@@ -1,5 +1,5 @@
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
-import { Text, View, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { Text, View, Image, TouchableOpacity, StyleSheet, Alert, BackHandler } from "react-native";
 
 export default function NavMenu(props:any){
     const { state, ...rest } = props;
@@ -21,7 +21,20 @@ export default function NavMenu(props:any){
             <DrawerContentScrollView {...props}>
                 <DrawerItemList state={newState} {...rest}/>
             </DrawerContentScrollView>
-                <TouchableOpacity style={styles.containerBotaoSair}>
+                <TouchableOpacity 
+                style={styles.containerBotaoSair}
+                onPress={() => Alert.alert("Deseja sair?", "Você tem certeza que deseja sair do app?",
+                    [{
+                    text: "Não",
+                    style: "cancel",
+                    },
+                    {
+                    text: "Sim",
+                    onPress: () => BackHandler.exitApp()
+                    } 
+                    ]
+                )}
+                >
                     <Image
                     style={styles.containerSairImagem}
                     source={require("../../../assets/sair_drawer.png")}

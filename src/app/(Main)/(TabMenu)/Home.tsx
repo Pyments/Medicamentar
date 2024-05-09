@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   Modal,
   SafeAreaView,
+  BackHandler,
+  Alert,
 } from "react-native";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -106,7 +108,18 @@ export default function Home(this: any) {
             ></Image>
             
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity 
+          onPress={() => Alert.alert("Deseja sair?", "Você tem certeza que deseja sair do app?",
+            [{
+              text: "Não",
+              style: "cancel",
+            },
+            {
+              text: "Sim",
+              onPress: () => BackHandler.exitApp()
+            } 
+            ]
+           )}>
             <Image
               source={require("../../../assets/sair.png")}
               style={styles.containerBotoes}
