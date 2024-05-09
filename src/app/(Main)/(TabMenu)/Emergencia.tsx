@@ -12,6 +12,8 @@ import {
   Pressable,
   Button,
   Alert,
+  Platform,
+  StatusBar,
 } from "react-native";
 
 export default function Emergencia() {
@@ -123,6 +125,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#FFFFFF",
     alignItems:"center",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
  
     

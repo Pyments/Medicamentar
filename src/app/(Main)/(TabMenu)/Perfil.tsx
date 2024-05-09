@@ -6,6 +6,8 @@ import {
     TouchableOpacity,
     TextInput,
     SafeAreaView,
+    Platform,
+    StatusBar,
 } from "react-native";
 import Footer from "../../../components/Footer";
 import { DrawerActions } from "@react-navigation/native";
@@ -98,6 +100,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: "100%",
         height: "100%",
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     }, 
     containerTopoItems:{
         flexDirection:"row",
