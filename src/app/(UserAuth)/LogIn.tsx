@@ -12,6 +12,7 @@ import { router } from "expo-router";
 import { useState } from "react";
 import * as Animatable from "react-native-animatable"
 import BotoesLogin from "../../components/BotoesLogin";
+import { accentThemeColor, bgThemeColor, textThemeColor } from "../../constants/ColorTheming"
 
 export default function LogIn() {
 
@@ -38,7 +39,7 @@ export default function LogIn() {
         
   return (
     <View style={styles.container}>
-            <LinearGradient colors={["#ffffff","#FFFFFF", "#2596BE"]} style={{flex: 1}}>
+            <LinearGradient colors={["#ffffff","#FFFFFF", `${accentThemeColor}`]} style={{flex: 1}}>
             <View style={styles.containerImagemLogin}>
                 <Image
                     source={ require("../../assets/UserAuth/imagem_login.jpg" )}
@@ -169,7 +170,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#ffffff",
+        backgroundColor: `${bgThemeColor}`,
         borderRadius: 15,
         width: 133,
         height:  40,
@@ -178,7 +179,7 @@ const styles = StyleSheet.create({
     containerInput:{
         flex: 1,
         borderWidth: 1,
-        backgroundColor: "#ffffff",
+        backgroundColor: `${bgThemeColor}`,
         borderColor: "#000000",
         shadowColor: "#000000",
         elevation: 10,
@@ -243,7 +244,7 @@ const styles = StyleSheet.create({
     appTexto:{
         fontWeight: "400",
         fontSize: 24,
-        color: "#000000",
+        color: `${textThemeColor}`,
         opacity: 0.40
     },
     passSection:{

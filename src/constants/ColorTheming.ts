@@ -1,7 +1,6 @@
-import React from "react";
 import { Appearance } from "react-native";
 
-const colorScheme = () => (Appearance.getColorScheme() === "dark") ? true : false;
+const colorScheme = () => (Appearance.getColorScheme() === "dark") ? false : true;
 
 const colorTheme = {
   light: {
