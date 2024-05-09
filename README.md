@@ -52,4 +52,6 @@
 
 </div>
 
+### 6. Licença
 
+Este projeto está sob licença [MIT](./.github/LICENSE)
