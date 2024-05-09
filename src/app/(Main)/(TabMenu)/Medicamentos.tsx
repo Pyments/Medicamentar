@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, Text, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Image, Text, SafeAreaView, TouchableOpacity, StatusBar, Platform } from "react-native";
 import CardMedicamentos from "../../../components/CardMedicamento";
 import { DrawerActions } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
@@ -33,6 +33,7 @@ export default function Medicamentos() {
 const styles = StyleSheet.create({
   rootView: {
     flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   header: {
     justifyContent: "space-between",
