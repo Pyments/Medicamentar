@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import {SafeAreaView, View, Text, StyleSheet, StatusBar, Image, TouchableOpacity, Switch} from 'react-native'
+import {SafeAreaView, View, Text, StyleSheet, StatusBar, Image, TouchableOpacity, Switch, Platform} from 'react-native'
 import {useFonts} from "expo-font"
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback } from 'react';
@@ -39,7 +39,7 @@ export default function Configuration() {
         return null;
     }
     return(
-        <SafeAreaView style={isDark ? styles.containerDark : styles.container}
+        <SafeAreaView style={[isDark ? styles.containerDark : styles.container, styles.paddingStatusBar]}
         onLayout={onLayoutRootView}
         >
             <StatusBar/>
@@ -110,6 +110,9 @@ const styles = StyleSheet.create({
         fontSize: 23,
         color: "#FFFFFF",
         fontFamily: "armata-regular-400"
+    },
+    paddingStatusBar: {
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     },
     preferences: {
         marginTop: 20,

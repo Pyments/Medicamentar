@@ -8,6 +8,8 @@ import {
   SafeAreaView,
   BackHandler,
   Alert,
+  Platform,
+  StatusBar
 } from "react-native";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -138,6 +140,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F6F6F6",
     width: "100%",
     height: "100%",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   containerTopo: {
     height: 88,
