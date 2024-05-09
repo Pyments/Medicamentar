@@ -69,7 +69,7 @@ export default function AdMedicamentos(){
     const styles = StyleSheet.create({
         problema5:{
         flexDirection: "row",
-        gap:0
+
         },
         problema4:{
             flexDirection:"row"
@@ -117,7 +117,7 @@ export default function AdMedicamentos(){
             
         },
         InputVenciemnto:{
-            width:"45%",
+            width:"42%",
             borderWidth: 1,
             backgroundColor: "#ffffff",
             borderColor: "#000000",
@@ -131,13 +131,13 @@ export default function AdMedicamentos(){
             borderRadius: 3,
             paddingTop: 5,
             paddingBottom: 5,
-            marginLeft:"2%"
+            marginLeft:"7%"
             
         },
         textoVencimento:{
         fontSize: 15,
         //mudar a fonte aqui
-        marginLeft:"36%"
+        marginLeft:"44%"
         },
         InputMedico:{
             width:"52%",
@@ -157,7 +157,7 @@ export default function AdMedicamentos(){
             
         },      
         InputComprimidoP:{
-            width:"75%",
+            width:"72%",
             minWidth:"40%",
             borderWidth: 1,
             backgroundColor: "#ffffff",
@@ -172,13 +172,13 @@ export default function AdMedicamentos(){
             borderRadius: 3,
             paddingTop: 5,
             paddingBottom: 5,
-            marginLeft:"0%"
+            marginLeft:"5%"
             
         },
         textoComprimidoP:{
         fontSize: 15,
         //mudar fonte aqui
-        marginLeft:"10%"
+        marginLeft:"15%"
         },
         InputPeriodo:{
         width:"23%",
@@ -226,7 +226,7 @@ export default function AdMedicamentos(){
         },
         textoUsoContinuo:{
         fontSize: 15,
-        left:70
+        left:"29%"
         },
         InputDosagem:{
         maxWidth:"40%",
@@ -282,8 +282,8 @@ export default function AdMedicamentos(){
         alignSelf: "center",
         top:75,
         gap:0,
-        maxWidth: 380,
-        minWidth: 300,
+        maxWidth: 450,
+        minWidth: 350,
         },
         textoForm:{
         fontSize: 15,
