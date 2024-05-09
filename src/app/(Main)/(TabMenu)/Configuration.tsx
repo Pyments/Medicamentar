@@ -72,63 +72,9 @@ export default function Configuration() {
                 </View>
             </View>
 
-
-            <View style={isDark ? styles.bottomMenuContainerDark : styles.bottomMenuContainer}>
-                <View>
-                    <TouchableOpacity onPress={() => router.navigate({pathname: "../Home"})}>
-                        <LinearGradient colors={isDark ? ["#A2A2A2", "#656565"] : ["#20A2EB", "#1A8BCA"]} style={styles.imageBox}>
-                            <Image
-                            source={require("../../../assets/lar-bymuhammad-waqas-khan.png")}
-                            style={styles.imageBottom}
-                            />
-                        </LinearGradient>
-                    </TouchableOpacity>
-                </View>
-
-                <View>
-                    <TouchableOpacity onPress={() => router.navigate({pathname: "./Exames"})}>
-                        <View style={styles.imageBox}>
-                            <Image 
-                            source={require('../../../assets/hospital.png')}
-                            style={styles.imageBottom}
-                            />
-                        </View>
-                    </TouchableOpacity>
-                </View>
-
-                <View>
-                    <TouchableOpacity>
-                        <LinearGradient colors={isDark ? ["#A2A2A2", "#656565"] : ["#20A2EB", "#1A8BCA"]} style={styles.imageBox}>
-                            <Image
-                            source={require("../../../assets/pilulas.png")}
-                            style={styles.imageBottom}
-                            />
-                        </LinearGradient>
-                    </TouchableOpacity>
-                </View>
-
-                <View>
-                    <TouchableOpacity>
-                        <View style={styles.imageBox}>
-                            <Image
-                            source={require("../../../assets/emergency.png")}
-                            style={styles.imageBottom}
-                            />
-                        </View>
-                    </TouchableOpacity>
-                </View>
-
-                <View>
-                    <TouchableOpacity>
-                        <LinearGradient colors={isDark ? ["#A2A2A2", "#656565"] : ["#20A2EB", "#1A8BCA"]} style={styles.imageBox}>
-                            <Image
-                            source={require("../../../assets/user.png")}
-                            style={styles.imageBottom}
-                            />
-                        </LinearGradient>
-                    </TouchableOpacity>
-                </View>                
+            <View style={isDark ? styles.footerDark : styles.footer}>
             </View>
+
         </SafeAreaView>    
     )
 };
@@ -198,44 +144,20 @@ const styles = StyleSheet.create({
         fontFamily: "armata-regular-400",
         fontSize: 21
     },
-    bottomMenuContainer: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        height: 83,
-        width: "100%",
-        position: "absolute",
-        bottom: 0,
+    footer: {
         backgroundColor: "#20A2EB",
-    },
-    bottomMenuContainerDark: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        height: 83,
         width: "100%",
+        height: 30,
         position: "absolute",
         bottom: 0,
-        backgroundColor: "#656565"
     },
-    imageBottom: {
-        height: 45,
-        width: 45
-    },
-    imageBox: {
-        alignItems: "center",
-        justifyContent: "center",
-        width: 78,
-        height: 83
-    },
+    footerDark: {
+        backgroundColor: "#656565",
+        width: "100%",
+        height: 30,
+        position: "absolute",
+        bottom: 0,
+    }
+
 });
 
-
-                /* <TouchableOpacity onPress={() => router.navigate({pathname: "../Home"})}>
-                    <LinearGradient colors={isDark ? ["#A2A2A2", "#656565"] : ["#20A2EB", "#1A8BCA"]} style={styles.imageBox}>
-                        <Image
-                        source={require("../../../assets/lar-bymuhammad-waqas-khan.png")}
-                        style={styles.imageBottom}
-                        />
-                    </LinearGradient>
-                </TouchableOpacity> */
