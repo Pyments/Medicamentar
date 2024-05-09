@@ -7,6 +7,8 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Alert,
+  Platform,
+  StatusBar
 } from "react-native";
 import { DrawerActions } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
@@ -76,6 +78,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     maxWidth:"100%",
     alignItems:"center",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   subContainer:{
     alignItems:"center",
