@@ -6,13 +6,16 @@ import {
   TouchableOpacity,
   Modal,
   SafeAreaView,
+  BackHandler,
+  Alert,
 } from "react-native";
 import { router } from "expo-router";
 import { useState } from "react";
 import Footer from "../../../components/Footer";
 import NotifiCard from "../../../components/NotifiCard";
+import * as animatable from "react-native-animatable"
 
-export default function Home() {
+export default function Home(this: any) {
   const [IsModalVisible, setIsModalVisible] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
@@ -21,18 +24,18 @@ export default function Home() {
           source={require("../../../assets/logo_nome.png")}
           style={styles.containerImage}
         ></Image>
-        <TouchableOpacity onPress={() => setIsModalVisible(true)}>
-          <Image
+        <TouchableOpacity onPress={() => {this.animation.shake(600).then(() => setIsModalVisible(true))}}>
+          <animatable.Image     
+            ref={ref => {this.animation = ref;}}
             source={require("../../../assets/notificacao_logo.png")}
             style={styles.containerImageNotificacao}
-          ></Image>
+          ></animatable.Image>
         </TouchableOpacity>
         <Modal 
         visible={IsModalVisible}
         onRequestClose={() => setIsModalVisible(false)}
         transparent= {true}
         animationType="slide"
-        presentationStyle="pageSheet"
         >
           <View style={styles.containerModal}>
             <NotifiCard
@@ -48,7 +51,7 @@ export default function Home() {
           </View>
         </Modal>
       </View>
-      <View style={styles.containerColumns}>
+      <animatable.View animation="zoomIn" delay={200} style={styles.containerColumns}>
         <View style={styles.containerColumn}>
           <TouchableOpacity
             onPress={() =>
@@ -105,14 +108,25 @@ export default function Home() {
             ></Image>
             
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity 
+          onPress={() => Alert.alert("Deseja sair?", "Você tem certeza que deseja sair do app?",
+            [{
+              text: "Não",
+              style: "cancel",
+            },
+            {
+              text: "Sim",
+              onPress: () => BackHandler.exitApp()
+            } 
+            ]
+           )}>
             <Image
               source={require("../../../assets/sair.png")}
               style={styles.containerBotoes}
             ></Image>
           </TouchableOpacity>
         </View>
-      </View>
+      </animatable.View>
       <Footer></Footer>
     </SafeAreaView>
   );
@@ -126,15 +140,12 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   containerTopo: {
-    width: "100%",
-    height: 110,
-    minHeight: 100,
+    height: 88,
     backgroundColor: "#20A2EB",
     flexDirection: "row",
-    alignSelf: "center",
+    paddingHorizontal: 20,
     alignItems: "center",
-    justifyContent: "space-around",
-    gap: 80,
+    justifyContent: "space-between",
   },
   containerImage: {
     width: 190,
@@ -142,7 +153,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   containerImageNotificacao: {
-    width: 30,
+    width: 35,
     resizeMode: "contain",
   },
   containerColumns: {
@@ -150,16 +161,15 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     flexDirection: "row",
-    marginBottom: 30,
-    gap: 30,
+    gap: 65,
   },
   containerColumn: {
     flexDirection: "column",
   },
   containerBotoes: {
     resizeMode: "contain",
-    width: 120,
-    height: 120,
+    width: 110,
+    height: 110,
     marginBottom: 20,
   },
   containerModal:{
@@ -168,8 +178,8 @@ const styles = StyleSheet.create({
     height: "100%",
     alignSelf: "center",
     marginTop: 140,
-    borderRadius: 15,
-    backgroundColor: "rgba(232,232,228,1)"
+    borderRadius: 20,
+    backgroundColor: "#c1c1c1"
   },
   containerModalBotao:{
     width: 90,

@@ -1,7 +1,5 @@
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
-import Drawer from "expo-router/drawer";
-import React from "react";
-import { Text, View, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { Text, View, Image, TouchableOpacity, StyleSheet, Alert, BackHandler } from "react-native";
 
 export default function NavMenu(props:any){
     const { state, ...rest } = props;
@@ -23,16 +21,27 @@ export default function NavMenu(props:any){
             <DrawerContentScrollView {...props}>
                 <DrawerItemList state={newState} {...rest}/>
             </DrawerContentScrollView>
-            <View style={styles.containerSair}>
-                <TouchableOpacity style={styles.containerBotaoSair}>
+                <TouchableOpacity 
+                style={styles.containerBotaoSair}
+                onPress={() => Alert.alert("Deseja sair?", "Você tem certeza que deseja sair do app?",
+                    [{
+                    text: "Não",
+                    style: "cancel",
+                    },
+                    {
+                    text: "Sim",
+                    onPress: () => BackHandler.exitApp()
+                    } 
+                    ]
+                )}
+                >
                     <Image
                     style={styles.containerSairImagem}
-                    source={require("../../../assets/DrawerIcons/sair_icon.png")}
+                    source={require("../../../assets/sair_drawer.png")}
                     >
                     </Image>
                     <Text style={styles.containerBotaoTexto}>Sair</Text>
                 </TouchableOpacity>
-            </View>
         </View> 
     );
 }
@@ -65,23 +74,19 @@ const styles = StyleSheet.create({
     containerNomeCidade:{
         color: "#c1c1c1"
     },
-    containerSair:{
-        width: "90%",
-        alignSelf:"center",
-        //backgroundColor: "rgba(255, 255, 255, 0.4)",
-        marginBottom: 45,
-    },
     containerSairImagem:{
         width: 30,
         height: 30,
     },
     containerBotaoSair:{
-        width: "90%",
+        alignSelf:"flex-start",
         flexDirection: "row",
-        gap: 30
+        gap: 25,
+        marginBottom:30,
+        paddingHorizontal:20
     },
     containerBotaoTexto:{
-        color: "#d1d1d1",
+        color: "#ffffff",
         alignSelf: "center"
     }
 })

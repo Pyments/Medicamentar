@@ -2,7 +2,7 @@ import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity } from "reac
 import { LinearGradient } from "expo-linear-gradient";
 import BotoesLogin from "../../components/BotoesLogin";
 import { useState } from "react";
-
+import * as Animatable from "react-native-animatable"
 export default function SignIn() {
 
     const [NomState, SetNomState] = useState(false);
@@ -45,17 +45,21 @@ export default function SignIn() {
                 style={styles.containerLogo}
                 source={require("../../assets/UserAuth/imagem_registro.png")}
             />
-            <View style={styles.containerForm}>
+            <Animatable.View 
+                style={styles.containerForm}
+                animation="fadeInUp"
+                delay={500}
+                >
                 <TextInput
                 style={NomState ? styles.error : styles.containerInput} 
-                placeholder="NOME COMPLETO:"    
+                placeholder="NOME COMPLETO"    
                 autoCapitalize="words"
                 onChangeText={(text) => nomeIsEmpty(text)}
                 />
                 <Text style={NomState ? styles.textError : styles.noErrorTexto}>Este campo é obrigatório!</Text>
                 <TextInput 
                 style={EmailState ? styles.error : styles.containerInput}
-                placeholder="EMAIL:"
+                placeholder="EMAIL"
                 autoComplete="email"
                 keyboardType="email-address"    
                 onChangeText={(email) => emailIsEmpty(email)}
@@ -64,7 +68,7 @@ export default function SignIn() {
                 <View style={styles.passSection}>
                     <TextInput 
                     style={SenState ? styles.error : styles.containerInput}
-                    placeholder="SENHA:"    
+                    placeholder="SENHA"    
                     secureTextEntry= {ShowPass}  
                     onChangeText={(senha) => SenIsEmpty(senha)}
                     />
@@ -85,7 +89,7 @@ export default function SignIn() {
                 <View style={styles.passSection}>
                     <TextInput 
                     style={SenState ? styles.error : styles.containerInput}
-                    placeholder="REPITA SUA SENHA:"
+                    placeholder="REPITA SUA SENHA"
                     secureTextEntry= {ShowPass}      
                     onChangeText={(senha) => SenIsEmpty(senha)}
                     />
@@ -108,16 +112,13 @@ export default function SignIn() {
                         style={styles.containerBotao}
                         onPress={() => allEmpty()}
                         >
-                        <Image 
-                        source={require("../../assets/UserAuth/logo_entrar.png")}
-                        style={styles.containerImagemBotaoEntrar}
-                        >
-                        </Image>
-                        <Text style={styles.containerBotaoTexto}>CADASTRAR-SE</Text>
+                        <Text style={styles.containerBotaoTexto}>Cadastrar-se</Text>
                     </TouchableOpacity>
-                    <BotoesLogin></BotoesLogin>
+                    <BotoesLogin
+                    texto="Cadastrar-se"
+                    ></BotoesLogin>
                 </View>
-            </View>
+            </Animatable.View>
             </LinearGradient>        
         </View> 
     );
@@ -149,12 +150,10 @@ const styles = StyleSheet.create({
     containerInput:{
         width: "100%",
         maxWidth: 450,
-        height: 30,
-        borderColor: "#000000",
+        height: 43,
         backgroundColor: "#ffffff",
         elevation: 10,
         shadowColor: '#000000',
-        borderWidth: 1,
         fontSize:16,
         borderRadius: 3,
         paddingHorizontal: 15,
@@ -173,13 +172,13 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         flexDirection: "row",
         backgroundColor: "#ffffff",
-        borderRadius: 20,
-        width: 155,
+        borderRadius: 50,
+        width: 160.13,
         height:  40,
     },
     containerBotaoTexto:{
-        fontWeight: "bold",
         fontSize: 15,
+        fontWeight: "400"
     },
     containerImagemBotaoEntrar:{
         width: 20,

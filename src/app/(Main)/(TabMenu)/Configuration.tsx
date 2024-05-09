@@ -1,23 +1,14 @@
 import React, {useState} from "react"
 import {SafeAreaView, View, Text, StyleSheet, StatusBar, Image, TouchableOpacity, Switch} from 'react-native'
-
 import {useFonts} from "expo-font"
+import * as SplashScreen from 'expo-splash-screen';
+import { useCallback } from 'react';
 import {LinearGradient} from "expo-linear-gradient"
 import {router} from "expo-router"
 import { DrawerActions } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
 
-function Configuration() {
-    useFonts({
-        "armata-regular-400": require("../../../fonts/armata-regular-400.ttf")
-    });
-
-    /*const fontsLoaded = useFonts({
-        "armata-regular-400": require("../../../fonts/armata-regular-400.ttf")
-    })
-    if(!fontsLoaded){
-        return(<Text>Loading...</Text>)
-    }*/
+export default function Configuration() {
 
     const [isDark, setIsDark] = useState(false);
     const toggleSwitchTheme = () => setIsDark(previousState => !previousState);
@@ -33,8 +24,24 @@ function Configuration() {
         navigation.dispatch(DrawerActions.openDrawer());
     };
 
+    // Código que faz a fonte funcionar:
+    const [fontsLoaded, fontError] = useFonts({
+        "armata-regular-400": require("../../../fonts/armata-regular-400.ttf"),
+      });   
+
+    const onLayoutRootView = useCallback(async () => {
+        if (fontsLoaded || fontError) {
+            await SplashScreen.hideAsync();
+        }
+    }, [fontsLoaded, fontError]);
+    
+    if (!fontsLoaded && !fontError) {
+        return null;
+    }
     return(
-        <SafeAreaView style={isDark ? styles.containerDark : styles.container}>
+        <SafeAreaView style={isDark ? styles.containerDark : styles.container}
+        onLayout={onLayoutRootView}
+        >
             <StatusBar/>
             <View style={isDark ? styles.headerDark : styles.header}>
                 <TouchableOpacity onPress={AbrirNavMenu}>
@@ -65,63 +72,9 @@ function Configuration() {
                 </View>
             </View>
 
-
-            <View style={isDark ? styles.bottomMenuContainerDark : styles.bottomMenuContainer}>
-                <View>
-                    <TouchableOpacity onPress={() => router.navigate({pathname: "../Home"})}>
-                        <LinearGradient colors={isDark ? ["#A2A2A2", "#656565"] : ["#20A2EB", "#1A8BCA"]} style={styles.imageBox}>
-                            <Image
-                            source={require("../../../assets/lar-bymuhammad-waqas-khan.png")}
-                            style={styles.imageBottom}
-                            />
-                        </LinearGradient>
-                    </TouchableOpacity>
-                </View>
-
-                <View>
-                    <TouchableOpacity onPress={() => router.navigate({pathname: "./Exames"})}>
-                        <View style={styles.imageBox}>
-                            <Image 
-                            source={require('../../../assets/hospital.png')}
-                            style={styles.imageBottom}
-                            />
-                        </View>
-                    </TouchableOpacity>
-                </View>
-
-                <View>
-                    <TouchableOpacity>
-                        <LinearGradient colors={isDark ? ["#A2A2A2", "#656565"] : ["#20A2EB", "#1A8BCA"]} style={styles.imageBox}>
-                            <Image
-                            source={require("../../../assets/pilulas.png")}
-                            style={styles.imageBottom}
-                            />
-                        </LinearGradient>
-                    </TouchableOpacity>
-                </View>
-
-                <View>
-                    <TouchableOpacity>
-                        <View style={styles.imageBox}>
-                            <Image
-                            source={require("../../../assets/emergency.png")}
-                            style={styles.imageBottom}
-                            />
-                        </View>
-                    </TouchableOpacity>
-                </View>
-
-                <View>
-                    <TouchableOpacity>
-                        <LinearGradient colors={isDark ? ["#A2A2A2", "#656565"] : ["#20A2EB", "#1A8BCA"]} style={styles.imageBox}>
-                            <Image
-                            source={require("../../../assets/user.png")}
-                            style={styles.imageBottom}
-                            />
-                        </LinearGradient>
-                    </TouchableOpacity>
-                </View>                
+            <View style={isDark ? styles.footerDark : styles.footer}>
             </View>
+
         </SafeAreaView>    
     )
 };
@@ -191,46 +144,20 @@ const styles = StyleSheet.create({
         fontFamily: "armata-regular-400",
         fontSize: 21
     },
-    bottomMenuContainer: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        height: 83,
-        width: "100%",
-        position: "absolute",
-        bottom: 0,
+    footer: {
         backgroundColor: "#20A2EB",
-    },
-    bottomMenuContainerDark: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        height: 83,
         width: "100%",
+        height: 30,
         position: "absolute",
         bottom: 0,
-        backgroundColor: "#656565"
     },
-    imageBottom: {
-        height: 45,
-        width: 45
-    },
-    imageBox: {
-        alignItems: "center",
-        justifyContent: "center",
-        width: 78,
-        height: 83
-    },
+    footerDark: {
+        backgroundColor: "#656565",
+        width: "100%",
+        height: 30,
+        position: "absolute",
+        bottom: 0,
+    }
+
 });
 
-export default Configuration;
-
-
-                /* <TouchableOpacity onPress={() => router.navigate({pathname: "../Home"})}>
-                    <LinearGradient colors={isDark ? ["#A2A2A2", "#656565"] : ["#20A2EB", "#1A8BCA"]} style={styles.imageBox}>
-                        <Image
-                        source={require("../../../assets/lar-bymuhammad-waqas-khan.png")}
-                        style={styles.imageBottom}
-                        />
-                    </LinearGradient>
-                </TouchableOpacity> */
