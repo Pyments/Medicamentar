@@ -10,27 +10,34 @@ export default function AdMedicamentos(){
                 <TextInput style={styles.Input}></TextInput>
                 <Text style={styles.textoForm}>Medicamento:</Text>
                 <TextInput style={styles.Input}></TextInput>
+                <View style={styles.problema}>
                 <Text style={styles.textoForm}>Dosagem:</Text>
+                <Text style={styles.textoUsoContinuo}>Uso contínuo</Text>
+                </View>
                 <TextInput style={styles.InputDosagem}></TextInput>
-                <Text style={styles.textoForm}>Periodo:</Text>
-                <TextInput style={styles.InputPeriodo}></TextInput>
-                <Text style={styles.textoComprimidoP}>Comprimido por período:</Text>
-                <View style={styles.posicaoComprimidoP}>
-                    <TextInput style={styles.InputComprimidoP}></TextInput>
-                </View>
-                <View style={styles.linhaMedico}>
-                    <Text style={styles.textoForm}>Médico:</Text>
-                    <TextInput style={styles.InputMedico}></TextInput>
-                </View>
-                <Text style={styles.textoVencimento}>Vencimento:</Text>
-                <View style={styles.posicaoVencimento}>
-                    <TextInput style={styles.InputVenciemnto}></TextInput>
-                </View>
                 <View style={styles.posicaoCheckBox}>
                     <CheckBox style={styles.checkBox1}></CheckBox>
                     <CheckBox style={styles.checkBox2}></CheckBox>		
                     <Text style={styles.sim}>Sim</Text>
                     <Text style={styles.nao}>Não</Text>
+                </View>
+                <View style={styles.conteiner2}>
+                    <View style={styles.problema2}>
+                    <Text style={styles.textoForm}>Periodo:</Text> 
+                    <Text style={styles.textoComprimidoP}>Comprimidos por Período:</Text>
+                    </View>
+                    <View style={styles.problema3}>
+                    <TextInput style={styles.InputPeriodo}></TextInput>
+                    <TextInput style={styles.InputComprimidoP}></TextInput>
+                    </View>
+                    <View style={styles.problema4}>
+                    <Text style={styles.textoForm}>Médico:</Text>
+                    <Text style={styles.textoVencimento}>Vencimento:</Text>
+                    </View>
+                    <View style={styles.problema5}>
+                    <TextInput style={styles.InputMedico}></TextInput>
+                    <TextInput style={styles.InputVenciemnto}></TextInput>
+                    </View>                 
                 </View>
                 <View style={styles.posicaoBotaoSalvar}>
                     <TouchableOpacity style={styles.containerBotao}>
@@ -51,8 +58,8 @@ export default function AdMedicamentos(){
                     </Image>
                     <Text style={styles.textoForm}>Voltar</Text>
                     </TouchableOpacity>
-                    <Text style={styles.textoUsoContinuo}>Uso contínuo</Text>
                 </View>
+
             </View>
             <View style={styles.containerBox2}></View>
         </View>
@@ -60,13 +67,33 @@ export default function AdMedicamentos(){
 };
 
     const styles = StyleSheet.create({
+        problema5:{
+        flexDirection: "row",
+        gap:0
+        },
+        problema4:{
+            flexDirection:"row"
+        },
+        problema3:{
+            flexDirection:"row",
+            gap:5
+        },
+        problema2:{
+            flexDirection:"row"
+        },
+        conteiner2:{
+            top:-100
+        },
+        problema:{
+            flexDirection:"row"
+        },
         posicaoBotaoVoltar:{
-            top:-210,
-            left:70
+            top:-110,
+            left:"25%"
         },
         posicaoBotaoSalvar:{
-            top:-170,
-            left:-70
+            top:-70,
+            left:"-23%"
         },
         containerImagemBotaoSalvar:{
             width: 20,
@@ -79,16 +106,41 @@ export default function AdMedicamentos(){
             alignItems: "center",
             justifyContent: "center",
             backgroundColor: "#ffffff",
-            borderRadius: 15,
+            borderRadius: 5,
             width: 100,
             height:  40,
             flexDirection: "row",
         },
         posicaoCheckBox:{
-            top:-230,
-            left:30
+            left:"5%",
+            top:20
+            
         },
         InputVenciemnto:{
+            width:"45%",
+            borderWidth: 1,
+            backgroundColor: "#ffffff",
+            borderColor: "#000000",
+            shadowColor: "#000000",
+            elevation: 15,
+            shadowOffset:{width: -1,height: 1},
+            shadowOpacity: 0.9,
+            shadowRadius: 1,
+            fontSize: 15,
+            fontWeight: "600",
+            borderRadius: 3,
+            paddingTop: 5,
+            paddingBottom: 5,
+            marginLeft:"2%"
+            
+        },
+        textoVencimento:{
+        fontSize: 15,
+        //mudar a fonte aqui
+        marginLeft:"36%"
+        },
+        InputMedico:{
+            width:"52%",
             borderWidth: 1,
             backgroundColor: "#ffffff",
             borderColor: "#000000",
@@ -103,46 +155,10 @@ export default function AdMedicamentos(){
             paddingTop: 5,
             paddingBottom: 5,
             
-        },
-        posicaoVencimento:{
-            left:200,
-            top:-110,
-            maxWidth:100,
-            minWidth:50,
-        },
-        textoVencimento:{
-        fontSize: 15,
-        //mudar a fonte aqui
-        left:200,
-        top:-111
-        },
-        linhaMedico:{
-            top:-50
-        },
-        InputMedico:{
-            maxWidth:190,
-            minWidth:150,
-            borderWidth: 1,
-            backgroundColor: "#ffffff",
-            borderColor: "#000000",
-            shadowColor: "#000000",
-            elevation: 15,
-            shadowOffset:{width: -1,height: 1},
-            shadowOpacity: 0.9,
-            shadowRadius: 1,
-            fontSize: 15,
-            fontWeight: "600",
-            borderRadius: 3,
-            paddingTop: 5,
-            paddingBottom: 5,
-        },
-        posicaoComprimidoP:{
-            left:100,
-            top:-60
-        },
+        },      
         InputComprimidoP:{
-            maxWidth:200,
-            minWidth:170,
+            width:"75%",
+            minWidth:"40%",
             borderWidth: 1,
             backgroundColor: "#ffffff",
             borderColor: "#000000",
@@ -156,17 +172,17 @@ export default function AdMedicamentos(){
             borderRadius: 3,
             paddingTop: 5,
             paddingBottom: 5,
-            width:"100%",
+            marginLeft:"0%"
+            
         },
         textoComprimidoP:{
         fontSize: 15,
         //mudar fonte aqui
-        left:110,
-        top:-61,
+        marginLeft:"10%"
         },
         InputPeriodo:{
-        maxWidth:90,
-        minWidth:30,
+        width:"23%",
+        minWidth:"21%",
         borderWidth: 1,
         backgroundColor: "#ffffff",
         borderColor: "#000000",
@@ -186,37 +202,35 @@ export default function AdMedicamentos(){
         sim:{
         fontSize: 15,
         //mudar fonte aqui
-        left:160,
-        top:-93,
+        left:"54%",
+        top:-110,
         },
         nao:{
         fontSize: 15,
         //mudar fonte aqui
-        left:240,
-        top:-113,
+        left:"80%",
+        top:-130,
         },
         checkBox1:{
-            width:25,
-            height:25,
-            left:130,
-            top:-45
+            width:33,
+            height:33,
+            left:"40%",
+            top:-52
         },
         checkBox2:{
-            width:25,
-            height:25,
-            left:210,
-            top:-70
+            width:33,
+            height:33,
+            left:"65%",
+            top:-85
 
         },
         textoUsoContinuo:{
         fontSize: 15,
-        //mudar fonte aqui
-        left:90,
-        top:-265,
+        left:70
         },
         InputDosagem:{
-        maxWidth:120,
-        minWidth:80,
+        maxWidth:"40%",
+        minWidth:"20%",
         borderWidth: 1,
         backgroundColor: "#ffffff",
         borderColor: "#000000",
@@ -241,7 +255,7 @@ export default function AdMedicamentos(){
         containerBox2:{
             backgroundColor:"#20A2EB",
             width:"100%",
-            height:40,
+            height:60,
             top:"91%",
         },
         Input:{
