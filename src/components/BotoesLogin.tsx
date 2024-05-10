@@ -12,7 +12,7 @@ export default function BotoesLogin(props:any){
                         style={routeName == "LogIn"?styles.containerBotaoAppleTelaLogin:styles.containerBotaoApple}
                         >
                         <Image 
-                        source={require("../assets/UserAuth/logo_apple.png")}
+                        source={require("../assets/UserAuth/logo_apple_preta.png")}
                         style={styles.containerLogoIos}
                         >
                         </Image>
@@ -68,30 +68,34 @@ const styles = StyleSheet.create({
         backgroundColor: "transparent",
     },
     containerBotaoApple:{
+        alignSelf: "center",
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#000000",
-        borderRadius: 5,
-        width: 160,
+        backgroundColor: "#ffffff",
+        borderRadius: 50,
+        width: 255,
         height: 40,
+        opacity: 0.8
     },
     containerBotaoAppleTelaLogin:{
+        alignSelf: "center",
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#000000",
-        borderRadius: 5,
-        width: 102,
+        backgroundColor: "#ffffff",
+        borderRadius: 50,
+        width: 197,
         height: 40,
+        opacity: 0.8
     },
     containerLogoIos:{
-        width: 20,
+        width: 24,
         height: 20,
         marginRight: 8,
     },
     containerTextoIos:{
-        fontWeight: "bold",
-        fontSize: 15,
+        fontWeight: "400",
+        fontSize: 13,
     }
 })
