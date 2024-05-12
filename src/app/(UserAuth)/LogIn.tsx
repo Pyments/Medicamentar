@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  Appearance,
 } from "react-native";
 
 import { LinearGradient } from "expo-linear-gradient";
@@ -12,10 +13,9 @@ import { router } from "expo-router";
 import { useState } from "react";
 import * as Animatable from "react-native-animatable"
 import BotoesLogin from "../../components/BotoesLogin";
-import { accentThemeColor, bgThemeColor, textThemeColor } from "../../constants/ColorTheming"
+import { accentThemeColor, bgThemeColor, fgThemeColor, textThemeColor } from "../../constants/ColorTheming"
 
 export default function LogIn() {
-
     const [EmailState, SetEmailState] = useState(false);
     const [SenState, SetSenState] = useState(false);
     const [ShowPass, SetShowPass] = useState(false);
@@ -36,10 +36,11 @@ export default function LogIn() {
     const SenIsEmpty = (senha: string) =>{
         senha.length === 0 ? updateSenState(true):updateSenState(false)
     }
-        
+    console.log(Appearance.getColorScheme());
   return (
+
     <View style={styles.container}>
-            <LinearGradient colors={["#ffffff","#FFFFFF", `${accentThemeColor}`]} style={{flex: 1}}>
+            <LinearGradient colors={[Appearance.getColorScheme() === "dark" ? "#d0d0d0": "#ffffff", Appearance.getColorScheme() === "dark" ? "#d0d0d0": "#ffffff", `${accentThemeColor}`]} style={{flex: 1}}>
             <View style={styles.containerImagemLogin}>
                 <Image
                     source={ require("../../assets/UserAuth/imagem_login.jpg" )}
@@ -51,7 +52,7 @@ export default function LogIn() {
                 style={styles.containerForm}
                 animation="fadeInUp"
                 >
-                <Animatable.View animation="slideInRight" delay={250} style={styles.containerAppTexto}>
+                <Animatable.View animation="fadeIn" delay={200} style={styles.containerAppTexto}>
                     <Text style={styles.appTexto}>Medicamentar</Text>
                 </Animatable.View>
                 <TextInput
@@ -182,6 +183,7 @@ const styles = StyleSheet.create({
         backgroundColor: `${bgThemeColor}`,
         borderColor: "#000000",
         shadowColor: "#000000",
+        color: `${textThemeColor}`,
         elevation: 10,
         shadowOffset:{width: 0, height: 2},
         shadowOpacity: 0.6,
@@ -195,7 +197,8 @@ const styles = StyleSheet.create({
     },
     botaoTexto:{
         fontSize: 18,
-        textAlign: "center"
+        textAlign: "center",
+        color: `${textThemeColor}`
     },
     botoes:{
         alignSelf:"center",
@@ -243,9 +246,9 @@ const styles = StyleSheet.create({
     },
     appTexto:{
         fontWeight: "400",
+        letterSpacing: 3,
         fontSize: 24,
         color: `${textThemeColor}`,
-        opacity: 0.40
     },
     passSection:{
         flexDirection: "row",
