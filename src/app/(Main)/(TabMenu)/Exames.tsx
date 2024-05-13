@@ -1,8 +1,6 @@
 import { View, StyleSheet, Text, Image, SafeAreaView, TouchableOpacity, Alert, Platform, StatusBar } from "react-native";
 import { DrawerActions } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
-import Footer from "../../../components/Footer";
-import ExameCard from "../../../components/ExameCard";
 
 import Footer from "@/src/components/Footer";
 import ExameCard from "@/src/components/ExameCard";
