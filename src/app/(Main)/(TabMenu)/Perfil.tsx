@@ -1,9 +1,25 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, SafeAreaView, Platform, StatusBar } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  SafeAreaView,
+  Platform,
+  StatusBar,
+  Appearance,
+} from "react-native";
 import { DrawerActions } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
 
 import Footer from "@/src/components/Footer";
-import { bgThemeColor, fgThemeColor, textThemeColor } from "@/src/constants/ColorTheming";
+import {
+  bgThemeColor,
+  fgThemeColor,
+  secBgThemeColor,
+  textThemeColor,
+} from "@/src/constants/ColorTheming";
 
 export default function Perfil() {
   const navigation = useNavigation();
@@ -17,13 +33,13 @@ export default function Perfil() {
       <View style={styles.containerTopoItems}>
         <TouchableOpacity onPress={AbrirNavMenu}>
           <Image
-            source={require("../../../assets/menu-lateral.png")}
+            source={require("@/src/assets/menu-lateral.png")}
             style={styles.containerTopoMenuLat}
           ></Image>
         </TouchableOpacity>
         <Text style={styles.containerTopoTexto}>PERFIL</Text>
         <Image
-          source={require("../../../assets/perfil.png")}
+          source={require("@/src/assets/perfil.png")}
           style={styles.containerTopoImagem}
         ></Image>
       </View>
@@ -32,26 +48,26 @@ export default function Perfil() {
         <TextInput
           style={styles.containerInput}
           placeholder="ex. João Carlos de  Oliveira"
-          placeholderTextColor={"#a9a9a9"}
+          placeholderTextColor={Appearance.getColorScheme() === ("light") ? "#00000080": "#FFFFFF80"}
           autoCapitalize="words"
         ></TextInput>
         <Text style={styles.containerDadosTitulo}>IDADE:</Text>
         <TextInput
           style={styles.containerInput}
           placeholder="ex. 35"
-          placeholderTextColor={"#a9a9a9"}
+          placeholderTextColor={Appearance.getColorScheme() === ("light") ? "#00000080": "#FFFFFF80"}
         ></TextInput>
         <Text style={styles.containerDadosTitulo}>ENDEREÇO:</Text>
         <TextInput
           style={styles.containerInput}
           placeholder="ex. Rua Oliveira 123 - Bairro  Jardim América"
-          placeholderTextColor={"#a9a9a9"}
+          placeholderTextColor={Appearance.getColorScheme() === ("light") ? "#00000080": "#FFFFFF80"}
         ></TextInput>
         <Text style={styles.containerDadosTitulo}>TIPO SANGUINEO:</Text>
         <TextInput
           style={styles.containerInput}
           placeholder="ex. A+"
-          placeholderTextColor={"#a9a9a9"}
+          placeholderTextColor={Appearance.getColorScheme() === ("light") ? "#00000080": "#FFFFFF80"}
         ></TextInput>
         <View
           style={{
@@ -71,24 +87,30 @@ export default function Perfil() {
           }}
         >
           <TextInput
-            style={{
-              width: "49%",
-              height: 50,
-              backgroundColor: "#d9d9d9",
-              paddingHorizontal: 10,
-            }}
+            style={[
+              styles.containerDadosTitulo,
+              {
+                backgroundColor: `${secBgThemeColor}`,
+                paddingHorizontal: 10,
+                width: "49%",
+                height: 50,
+              },
+            ]}
             placeholder="ex. 70"
-            placeholderTextColor={"#a9a9a9"}
+            placeholderTextColor={Appearance.getColorScheme() === ("light") ? "#00000080": "#FFFFFF80"}
           ></TextInput>
           <TextInput
-            style={{
-              width: "49%",
-              height: 50,
-              backgroundColor: "#d9d9d9",
-              paddingHorizontal: 10,
-            }}
+            style={[
+              styles.containerDadosTitulo,
+              {
+                width: "49%",
+                height: 50,
+                backgroundColor: `${secBgThemeColor}`,
+                paddingHorizontal: 10,
+              },
+            ]}
             placeholder="ex. 1.75"
-            placeholderTextColor={"#a9a9a9"}
+            placeholderTextColor={Appearance.getColorScheme() === ("light") ? "#00000080": "#FFFFFF80"}
           ></TextInput>
         </View>
       </View>
@@ -99,49 +121,50 @@ export default function Perfil() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    width: "100%",
-    height: "100%",
     backgroundColor: `${bgThemeColor}`,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    height: "100%",
+    width: "100%",
+    flex: 1,
   },
   containerTopoItems: {
-    flexDirection: "row",
-    alignItems: "center",
+    backgroundColor: `${fgThemeColor}`,
     justifyContent: "space-between",
     paddingHorizontal: 20,
+    alignItems: "center",
+    flexDirection: "row",
     height: 88,
-    backgroundColor: `${fgThemeColor}`,
   },
   containerTopoMenuLat: {
-    width: 35,
     height: 25,
+    width: 35,
   },
   containerDadosTitulo: {
     color: `${textThemeColor}`,
+    fontSize: 15,
   },
   containerTopoTexto: {
-    fontSize: 24,
     fontWeight: "400",
-    color: "#ffffff",
+    color: "#FFFFFF",
+    fontSize: 24,
   },
   containerTopoImagem: {
-    width: 60,
-    height: 60,
     resizeMode: "contain",
+    height: 60,
+    width: 60,
   },
   containerDadosForms: {
+    paddingHorizontal: 15,
+    alignSelf: "center",
+    paddingTop: 15,
     width: "100%",
     maxWidth: 400,
-    paddingTop: 15,
-    alignSelf: "center",
-    paddingHorizontal: 15,
     gap: 5,
   },
   containerInput: {
+    backgroundColor: `${secBgThemeColor}`,
+    paddingHorizontal: 10,
+    borderRadius: 5,
     width: "100%",
     height: 50,
-    backgroundColor: "#d9d9d9",
-    paddingHorizontal: 10,
   },
 });

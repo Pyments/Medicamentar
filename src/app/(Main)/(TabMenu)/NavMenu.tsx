@@ -1,5 +1,7 @@
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
-import { Text, View, Image, TouchableOpacity, StyleSheet, Alert, BackHandler, StatusBar, Platform } from "react-native";
+import { Text, View, Image, TouchableOpacity, StyleSheet, Alert, BackHandler } from "react-native";
+
+import { accentThemeColor, fgThemeColor, secBgThemeColor } from "@/src/constants/ColorTheming";
 
 export default function NavMenu(props:any){
     const { state, ...rest } = props;
@@ -11,7 +13,7 @@ export default function NavMenu(props:any){
             <View style={styles.containerTopo}>
                 <Image
                 style={styles.containerImage}
-                source={require("../../../assets/DrawerIcons/usuario_icon.png")}
+                source={require("@/src/assets/DrawerIcons/usuario_icon.png")}
                 />
                 <View style={styles.containerTopoTextos}>
                     <Text style={styles.containerNomeUsuario}>Usuário Placeholder</Text>
@@ -37,7 +39,7 @@ export default function NavMenu(props:any){
                 >
                     <Image
                     style={styles.containerSairImagem}
-                    source={require("../../../assets/sair_drawer.png")}
+                    source={require("@/src/assets/sair_drawer.png")}
                     >
                     </Image>
                     <Text style={styles.containerBotaoTexto}>Sair</Text>
@@ -49,8 +51,7 @@ export default function NavMenu(props:any){
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor:"#20a2eb",
-        //paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+        backgroundColor:`${fgThemeColor}`,
     },
     containerTopo:{
         width: "80%",
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
         width: 70,
         height: 70,
         borderWidth: 4,
-        borderColor: "#0C689C",
+        borderColor: `${accentThemeColor}`,
         borderRadius: 100
     },
     containerTopoTextos:{

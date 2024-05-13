@@ -4,7 +4,7 @@ import { useNavigation } from "expo-router";
 
 import Footer from "@/src/components/Footer";
 import ExameCard from "@/src/components/ExameCard";
-import { bgThemeColor, fgThemeColor } from "@/src/constants/ColorTheming";
+import { accentThemeColor, bgThemeColor, fgThemeColor, textThemeColor } from "@/src/constants/ColorTheming";
 
 export default function Exames() {
 
@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
     backgroundColor: `${bgThemeColor}`,
     maxWidth:"100%",
     alignItems:"center",
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   subContainer:{
     alignItems:"center",
@@ -113,13 +112,12 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84, 
     elevation: 5, 
     flexDirection:"row",
-    
     justifyContent: "center",
     alignItems: "center",
     height: 59,
     borderRadius: 3,
     marginBottom: 10,
-    backgroundColor: "#BBE7FF",
+    backgroundColor: `${accentThemeColor}`,
   },
   circleInvisible:{
     borderRadius: 100,
@@ -129,7 +127,6 @@ const styles = StyleSheet.create({
     marginLeft:10,
   },
   stylesContainerExamesAddText:{
- 
     flex:1,
     height:23,
     borderColor:"#FF0000",
@@ -137,7 +134,7 @@ const styles = StyleSheet.create({
     marginRight:61,
     fontSize:15,
     fontWeight:"400",
-    
+    color: `${textThemeColor}`,    
   },
 
 });

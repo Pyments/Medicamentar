@@ -4,6 +4,7 @@ import { useNavigation } from "expo-router";
 
 import { fgThemeColor } from "@/src/constants/ColorTheming";
 import CardMedicamentos from "@/src/components/CardMedicamento";
+import Footer from "@/src/components/Footer";
 
 export default function Medicamentos() {
 
@@ -32,13 +33,13 @@ export default function Medicamentos() {
         </View>
       </View>
       <CardMedicamentos />
+      <Footer/>
     </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
   rootView: {
     flex: 1,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   header: {
     justifyContent: "space-between",
