@@ -1,7 +1,9 @@
 import { View, StyleSheet, Image, Text, SafeAreaView, TouchableOpacity, StatusBar, Platform } from "react-native";
-import CardMedicamentos from "../../../components/CardMedicamento";
 import { DrawerActions } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
+
+import { fgThemeColor } from "@/src/constants/ColorTheming";
+import CardMedicamentos from "@/src/components/CardMedicamento";
 
 export default function Medicamentos() {
 
@@ -16,15 +18,18 @@ export default function Medicamentos() {
       <View style={styles.header}>
         <TouchableOpacity onPress={AbrirNavMenu}>
         <Image
-          style={styles.headerHamburguer}
-          source={require("../../../assets/menu-lateral.png")}
-        ></Image>
+            style={styles.headerHamburguer}
+            source={require("@/src/assets/menu-lateral.png")}
+          ></Image>
+        
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Medicamentos</Text>
-        <Image
-          style={styles.headerImage}
-          source={require("../../../assets/Medicamento_icon.png")}
-        ></Image>
+        <View style={styles.imageWrapper}>
+          <Image
+            style={styles.headerImage}
+            source={require("@/src/assets/Medicamento_icon.png")}
+          ></Image>
+        </View>
       </View>
       <CardMedicamentos />
     </SafeAreaView>
@@ -37,7 +42,7 @@ const styles = StyleSheet.create({
   },
   header: {
     justifyContent: "space-between",
-    backgroundColor: "#20A2EB",
+    backgroundColor: `${fgThemeColor}`,
     paddingHorizontal: 20,
     flexDirection: "row",
     alignItems: "center",
@@ -50,8 +55,14 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 24,
   },
+  imageWrapper:{
+    backgroundColor: "#ffffff",
+    borderRadius: 10,
+    padding: 4,
+  },
   headerImage: {
     resizeMode: "contain",
-    width: 70,
+    width: 56,
+    height: 56,
   },
 });

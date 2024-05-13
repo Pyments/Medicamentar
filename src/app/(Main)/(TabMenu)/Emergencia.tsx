@@ -1,34 +1,22 @@
+import { View, StyleSheet, Text, Image, TouchableOpacity, Alert, Platform, StatusBar } from "react-native";
 import { DrawerActions } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
-import React, { useState } from "react";
-import {
-  ScrollView,
-  View,
-  StyleSheet,
-  Text,
-  Image,
-  SafeAreaView,
-  TouchableOpacity,
-  Pressable,
-  Button,
-  Alert,
-  Platform,
-  StatusBar,
-} from "react-native";
+import { useState } from "react";
+
+import Footer from "@/src/components/Footer";
+import { fgThemeColor } from "@/src/constants/ColorTheming";
 
 export default function Emergencia() {
-
   const navigation = useNavigation();
 
   const AbrirNavMenu = () => {
     navigation.dispatch(DrawerActions.openDrawer());
-    };
+  };
 
   const [buttonClicked, setButtonClicked] = useState(true);
   const [secondClicked, setSecondClicked] = useState(false);
   const [thirdClicked, setThirdClicked] = useState(true);
   const [fourthClicked, setFourthClicked] = useState(false);
-
 
   const handleButtonClick = () => {
     setButtonClicked(false);
@@ -54,89 +42,115 @@ export default function Emergencia() {
   return (
     <View style={styles.container}>
       <View style={styles.containerTop}>
-        <TouchableOpacity onPress={AbrirNavMenu}> 
-          <Image style={styles.menu} source={require("../../../assets/menu-lateral.png")}/>
-          </TouchableOpacity>
-          <Text style={styles.textContainerTop}>Emergência</Text>
-          <Image style={styles.logoEmergencia} source={require("../../../assets/Emergencia_icons/Icon_em.png")}/>
-        </View>
-        
-             
-        <View style={styles.containerEmergencia}>
-          {buttonClicked && (
-            <TouchableOpacity onPress={handleButtonClick} style={styles.stylesContainerEmergencia}>
-              
-              <Image style = {styles.imagEM} source={require("../../../assets/Emergencia_icons/SAMU_em.png")}/>
-              <View style = {styles.textContainer}>
+        <TouchableOpacity onPress={AbrirNavMenu}>
+          <Image
+            style={styles.menu}
+            source={require("@/src/assets/menu-lateral.png")}
+          />
+        </TouchableOpacity>
+        <Text style={styles.textContainerTop}>Emergência</Text>
+        <Image
+          style={styles.logoEmergencia}
+          source={require("@/src/assets/Emergencia_icons/Icon_em.png")}
+        />
+      </View>
+
+      <View style={styles.containerEmergencia}>
+        {buttonClicked && (
+          <TouchableOpacity
+            onPress={handleButtonClick}
+            style={styles.stylesContainerEmergencia}
+          >
+            <Image
+              style={styles.imagEM}
+              source={require("@/src/assets/Emergencia_icons/SAMU_em.png")}
+            />
+            <View style={styles.textContainer}>
               <Text style={styles.stylesContainerEmergenciaText}>SAMU</Text>
               <Text style={styles.stylesContainerEmergenciaNumber}>192</Text>
-              </View>
-            </TouchableOpacity>
-          )}
+            </View>
+          </TouchableOpacity>
+        )}
 
-         {buttonClicked && (
-            <TouchableOpacity onPress={handleButtonClick} style={styles.stylesContainerEmergencia}>
-              
-              <Image style = {styles.imagEM} source={require("../../../assets/Emergencia_icons/BOMB_em.png")}/>
-              <View style = {styles.textContainer}>
-              <Text style={styles.stylesContainerEmergenciaText}>BOMBEIROS</Text>
-              <Text style={styles.stylesContainerEmergenciaNumber}>193</Text> 
-              </View>
-            </TouchableOpacity>
-          )}
-          {buttonClicked && (
-            <TouchableOpacity onPress={handleButtonClick} style={styles.stylesContainerEmergencia}>
-              <Image style = {styles.imagEM} source={require("../../../assets/Emergencia_icons/CVV_em.png")}/>
-              <View style = {styles.textContainer}>
-              <Text style={styles.stylesContainerEmergenciaText}>CT.DE VALORIZAÇÃO A VIDA</Text>
-              <Text style ={styles.stylesContainerEmergenciaNumber}>188</Text>
-              </View>
-              
-            </TouchableOpacity>
-          )}
-          {buttonClicked && (
-            <TouchableOpacity onPress={handleButtonClick} style={styles.stylesContainerEmergencia}>
-              
-              <Image style = {styles.imagEM} source={require("../../../assets/Emergencia_icons/PM_em.png")}/>
-              <View style = {styles.textContainer}>
-              <Text  style={styles.stylesContainerEmergenciaText}>POLÍCIA MILITAR</Text>
+        {buttonClicked && (
+          <TouchableOpacity
+            onPress={handleButtonClick}
+            style={styles.stylesContainerEmergencia}
+          >
+            <Image
+              style={styles.imagEM}
+              source={require("@/src/assets/Emergencia_icons/BOMB_em.png")}
+            />
+            <View style={styles.textContainer}>
+              <Text style={styles.stylesContainerEmergenciaText}>
+                BOMBEIROS
+              </Text>
+              <Text style={styles.stylesContainerEmergenciaNumber}>193</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+        {buttonClicked && (
+          <TouchableOpacity
+            onPress={handleButtonClick}
+            style={styles.stylesContainerEmergencia}
+          >
+            <Image
+              style={styles.imagEM}
+              source={require("@/src/assets/Emergencia_icons/CVV_em.png")}
+            />
+            <View style={styles.textContainer}>
+              <Text style={styles.stylesContainerEmergenciaText}>
+                CT.DE VALORIZAÇÃO A VIDA
+              </Text>
+              <Text style={styles.stylesContainerEmergenciaNumber}>188</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+        {buttonClicked && (
+          <TouchableOpacity
+            onPress={handleButtonClick}
+            style={styles.stylesContainerEmergencia}
+          >
+            <Image
+              style={styles.imagEM}
+              source={require("@/src/assets/Emergencia_icons/PM_em.png")}
+            />
+            <View style={styles.textContainer}>
+              <Text style={styles.stylesContainerEmergenciaText}>
+                POLÍCIA MILITAR
+              </Text>
               <Text style={styles.stylesContainerEmergenciaNumber}>190</Text>
-              </View>
-          
-            </TouchableOpacity>
-          )}
-         
-        </View>
-      <View style = {styles.containerFooter}><Text></Text></View>
+            </View>
+          </TouchableOpacity>
+        )}
+      </View>
+      <Footer />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  imagEM:{
+  imagEM: {
     height: 60,
     width: 59,
     left: 10,
-    alignItems:"center",
-    marginLeft:20,
-    flexDirection: "row" ,
+    alignItems: "center",
+    marginLeft: 20,
+    flexDirection: "row",
   },
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
-    alignItems:"center",
+    alignItems: "center",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
- 
-    
-  
   containerTop: {
-    backgroundColor: "#20A2EB",
+    backgroundColor: `${fgThemeColor}`,
     height: 88,
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 10,
-    width:"100%",
+    width: "100%",
   },
   textContainerTop: {
     flex: 1,
@@ -147,66 +161,57 @@ const styles = StyleSheet.create({
     fontWeight: "400",
   },
   logoEmergencia: {
-    height: 89,
-    width: 90,
+    resizeMode: "contain",
+    width: 56,
     marginRight: 20,
-    marginLeft: 15,
   },
   menu: {
     marginLeft: 20,
     marginRight: 15,
   },
   containerEmergencia: {
-  paddingHorizontal:"25%"
-    
+    paddingHorizontal: "25%",
   },
   stylesContainerEmergencia: {
     justifyContent: "center",
-    flexDirection:"row",
+    flexDirection: "row",
     alignItems: "center",
     height: "30%",
-    width:"100%" ,
-    minWidth:300,
+    width: "100%",
+    minWidth: 300,
     top: 14,
     backgroundColor: "#ffff",
     borderRadius: 3,
     marginBottom: 10,
-    shadowColor: "#000", 
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 4, 
+      height: 4,
     },
-    shadowOpacity: 0.25, 
-    shadowRadius: 3.84, 
-    elevation: 5, 
-  
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
-
-  textContainer:{
+  textContainer: {
     flexDirection: "column",
-    flex:1,
-    textAlign:"center",
-    alignItems:"center"
-    
+    flex: 1,
+    textAlign: "center",
+    alignItems: "center",
   },
-  
   stylesContainerEmergenciaText: {
     verticalAlign: "top",
-    fontSize:15,
-    fontWeight:"400",
+    fontSize: 15,
+    fontWeight: "400",
   },
   stylesContainerEmergenciaNumber: {
-    flex:1,
-    height:33,
-    textAlign:"center",
+    flex: 1,
+    height: 33,
+    textAlign: "center",
     verticalAlign: "middle",
-    fontSize:36,
-    alignItems:"center",
-    fontWeight:"500",
-    
+    fontSize: 36,
+    alignItems: "center",
+    fontWeight: "500",
   },
-
-  
   containerFooter: {
     width: "100%",
     height: 30,
