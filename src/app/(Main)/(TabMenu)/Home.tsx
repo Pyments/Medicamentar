@@ -1,31 +1,31 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Modal,
-  SafeAreaView,
-  BackHandler,
-  Alert,
-  Platform,
-  StatusBar
-} from "react-native";
-import { router } from "expo-router";
+import { View, Text, StyleSheet, Image, TouchableOpacity, Modal, SafeAreaView, BackHandler, Alert, Platform, StatusBar } from "react-native";
+import { router, useNavigation } from "expo-router";
 import { useState } from "react";
-import Footer from "../../../components/Footer";
-import NotifiCard from "../../../components/NotifiCard";
 import * as animatable from "react-native-animatable"
+import { DrawerActions } from "@react-navigation/native";
+
+import NotifiCard from "@/src/components/NotifiCard";
+import Footer from "@/src/components/Footer";
+import { bgThemeColor, fgThemeColor } from "@/src/constants/ColorTheming"
 
 export default function Home(this: any) {
   const [IsModalVisible, setIsModalVisible] = useState(false);
+
+  const navigation = useNavigation();
+
+  const AbrirNavMenu = () => {
+      navigation.dispatch(DrawerActions.openDrawer());
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.containerTopo}>
-        <Image
-          source={require("../../../assets/logo_nome.png")}
-          style={styles.containerImage}
-        ></Image>
+        <TouchableOpacity onPress={AbrirNavMenu}>
+          <Image
+            source={require("../../../assets/logo_nome.png")}
+            style={styles.containerImage}
+          ></Image>
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => {this.animation.shake(600).then(() => setIsModalVisible(true))}}>
           <animatable.Image     
             ref={ref => {this.animation = ref;}}
@@ -53,7 +53,7 @@ export default function Home(this: any) {
           </View>
         </Modal>
       </View>
-      <animatable.View animation="zoomIn" delay={200} style={styles.containerColumns}>
+      <animatable.View animation="zoomIn" delay={50} style={styles.containerColumns}>
         <View style={styles.containerColumn}>
           <TouchableOpacity
             onPress={() =>
@@ -129,7 +129,7 @@ export default function Home(this: any) {
           </TouchableOpacity>
         </View>
       </animatable.View>
-      <Footer></Footer>
+      <Footer />
     </SafeAreaView>
   );
 }
@@ -137,14 +137,14 @@ export default function Home(this: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F6F6F6",
+    backgroundColor: `${bgThemeColor}`,
     width: "100%",
     height: "100%",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   containerTopo: {
     height: 88,
-    backgroundColor: "#20A2EB",
+    backgroundColor: `${fgThemeColor}`,
     flexDirection: "row",
     paddingHorizontal: 20,
     alignItems: "center",
