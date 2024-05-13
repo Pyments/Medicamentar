@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
     backgroundColor: `${bgThemeColor}`,
     width: "100%",
     height: "100%",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   containerTopo: {
     height: 88,

@@ -205,6 +205,11 @@ const styles = StyleSheet.create({
         flexDirection:"column",
         gap: 15
     },
+    botoes:{
+        alignSelf:"center",
+        flexDirection:"column",
+        gap: 15
+    },
     Registro:{
         alignSelf: "center",
         flexDirection: "row"

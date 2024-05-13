@@ -40,6 +40,7 @@ export default function Medicamentos() {
 const styles = StyleSheet.create({
   rootView: {
     flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   header: {
     justifyContent: "space-between",
