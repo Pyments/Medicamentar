@@ -1,7 +1,7 @@
-import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
+import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
 import { Text, View, Image, TouchableOpacity, StyleSheet, Alert, BackHandler } from "react-native";
 
-import { accentThemeColor, fgThemeColor, secBgThemeColor } from "@/src/constants/ColorTheming";
+import { accentThemeColor, fgThemeColor } from "@/src/constants/ColorTheming";
 
 export default function NavMenu(props:any){
     const { state, ...rest } = props;
