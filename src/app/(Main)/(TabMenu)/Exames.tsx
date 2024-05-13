@@ -1,19 +1,10 @@
-import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  Image,
-  SafeAreaView,
-  TouchableOpacity,
-  Alert,
-  Platform,
-  StatusBar
-} from "react-native";
+import { View, StyleSheet, Text, Image, SafeAreaView, TouchableOpacity, Alert, Platform, StatusBar } from "react-native";
 import { DrawerActions } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
-import Footer from "../../../components/Footer";
-import ExameCard from "../../../components/ExameCard";
+
+import Footer from "@/src/components/Footer";
+import ExameCard from "@/src/components/ExameCard";
+import { accentThemeColor, bgThemeColor, fgThemeColor, textThemeColor } from "@/src/constants/ColorTheming";
 
 export default function Exames() {
 
@@ -32,10 +23,10 @@ export default function Exames() {
     <SafeAreaView style={styles.container}>
       <View style={styles.containerTop}>
           <TouchableOpacity onPress={AbrirNavMenu} >
-          <Image style={styles.menu} source={require("../../../assets/menu-lateral.png")}/>
+          <Image style={styles.menu} source={require("@/src/assets/menu-lateral.png")}/>
           </TouchableOpacity>
           <Text style={styles.textContainerTop}>CONSULTAS E EXAMES</Text>
-          <Image style={styles.logoHospital} source={require("../../../assets/logo_hospital.png")}/>
+          <Image style={styles.logoHospital} source={require("@/src/assets/logo_hospital.png")}/>
         </View>
         
       <View style = {styles.subContainer}>        
@@ -64,7 +55,7 @@ export default function Exames() {
          </TouchableOpacity>
         </View> 
       </View>
-      <Footer></Footer>
+      <Footer />
     </SafeAreaView>
     
     
@@ -75,7 +66,7 @@ const styles = StyleSheet.create({
  
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: `${bgThemeColor}`,
     maxWidth:"100%",
     alignItems:"center",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
@@ -85,7 +76,7 @@ const styles = StyleSheet.create({
     width:"auto",
   },
   containerTop: {
-    backgroundColor: "#20A2EB",
+    backgroundColor: `${fgThemeColor}`,
     height: 88,
     flexDirection: "row",
     alignItems: "center",
@@ -112,14 +103,6 @@ const styles = StyleSheet.create({
     paddingRight: 17,
     paddingLeft: 17,
   },
- 
-  containerFooter: {
-    width: "100%",
-    height: 30,
-    backgroundColor: "#71AAFF",
-    position: "absolute",
-    bottom: 0,
-  },
   stylesContainerExamesAdd: {
     shadowColor: "#000", 
     shadowOffset: {
@@ -130,13 +113,12 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84, 
     elevation: 5, 
     flexDirection:"row",
-    
     justifyContent: "center",
     alignItems: "center",
     height: 59,
     borderRadius: 3,
     marginBottom: 10,
-    backgroundColor: "#BBE7FF",
+    backgroundColor: `${accentThemeColor}`,
   },
   circleInvisible:{
     borderRadius: 100,
@@ -146,7 +128,6 @@ const styles = StyleSheet.create({
     marginLeft:10,
   },
   stylesContainerExamesAddText:{
- 
     flex:1,
     height:23,
     borderColor:"#FF0000",
@@ -154,7 +135,7 @@ const styles = StyleSheet.create({
     marginRight:61,
     fontSize:15,
     fontWeight:"400",
-    
+    color: `${textThemeColor}`,    
   },
 
 });
