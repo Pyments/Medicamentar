@@ -37,7 +37,22 @@
 - **Agendamento de Consulta e Exames**: É a função onde o usuário pode agendar consultas e exames de rotina.
 - **Número de Emergência**: São números preventivos contra possíveis problemas de saúde.
 ---
-### 5. Tecnologias Utilizadas
+### 5. Guias de Uso
+
+
+
+---
+### 6. Licença
+
+Este projeto está sob licença [MIT](./.github/LICENSE)
+
+---
+### 7. Contribuidores
+
+- Vinícius Alves Ferreira dos Santos
+- Pablo Henrique Dantas de Sá
+---
+### 8. Tecnologias Utilizadas
 
 <div>
 <img src = "https://img.shields.io/badge/-React-B0C4DE?style=for-the-badge&logo=react&logoColor=1C1C1C">
@@ -52,6 +67,3 @@
 
 </div>
 
-### 6. Licença
-
-Este projeto está sob licença [MIT](./.github/LICENSE)
