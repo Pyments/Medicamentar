@@ -39,7 +39,38 @@
 ---
 ### 5. Guias de Uso
 
+<h3>Tela de Login</h3>
 
+<h3>Tela Inicial</h3>
+
+![Tela Inicial](https://github.com/Vinilves/Medicamentar/assets/128435810/ed50b474-17fd-40f9-b02c-e52ba5be31ef)
+
+Após o login, o usuário pode utilizar todas as funcionalidades disponíveis nesta tela: Consultas e Exames, Perfil, Medicamentos, Números de Emergência, Configurações e a Saída do aplicativo. Além de usar o sininho das notificações que está na parte de cima da tela.
+
+<h3>Tela de Perfil</h3>
+
+![Tela de Perfil](https://github.com/Vinilves/Medicamentar/assets/128435810/57497b0c-8e6a-4ef1-a563-42008d8c4b51)
+
+Aqui o usuário deve preencher todos os campos que se pedem com seus dados (Nome, Idade, Endereço, Tipo Sanguíneo, Peso e Altura), para realizar o seu cadastro e avançar para o próximo passo no aplicativo.
+
+<h3>Tela de Configurações</h3>
+
+![Tela de Configurações](https://github.com/Vinilves/Medicamentar/assets/128435810/dd3f256f-860a-4d22-b10c-fb4ad7b48115)
+
+Nessa aba das configurações, o usuário tem apenas 2 configurações disponíveis no app: A mudança de tema (Claro ou Escuro) e a opção de aumentar a letra, caso o usuário queira.
+
+<h3>Tela de Consultas e Exames</h3>
+
+![Tela de Consulta 1](https://github.com/Vinilves/Medicamentar/assets/128435810/e6abe982-0d3c-4d45-8111-8707ce2d40b1)
+![Tela de Consulta 2](https://github.com/Vinilves/Medicamentar/assets/128435810/a9eec1f2-9e47-4d91-924a-91857a8151bf)
+
+Aqui o usuário marca e tem acesso as suas consultas e exames, podendo ver as consultas e os exames marcados, como também pode adicionar um exame novo ao quadro de exames no app.
+
+<h3>Tela de Medicamentos</h3>
+
+<h3>Tela de Emergência</h3>
+
+<h3>Tela de Notificação</h3>
 
 ---
 ### 6. Licença
