@@ -35,6 +35,7 @@ export default function Configuration() {
     if (!fontsLoaded && !fontError) {
         return null;
     }
+    
     return(
         <SafeAreaView style={[styles.container, styles.paddingStatusBar]}
         onLayout={onLayoutRootView}

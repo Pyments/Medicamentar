@@ -1,6 +1,6 @@
 import { View, StyleSheet, Text, Image, SafeAreaView, TouchableOpacity, Alert, Platform, StatusBar } from "react-native";
 import { DrawerActions } from "@react-navigation/native";
-import { useNavigation } from "expo-router";
+import { useNavigation, router } from "expo-router";
 
 import Footer from "@/src/components/Footer";
 import ExameCard from "@/src/components/ExameCard";
@@ -15,7 +15,8 @@ export default function Exames() {
     };
     
   const handlePressAddExames = () => {
-    Alert.alert("indisponível no momento");
+    //Alert.alert("indisponível no momento");   
+    return router.navigate({ pathname: "./ConsultasAdd" });
   };
 
   return (
@@ -50,20 +51,16 @@ export default function Exames() {
          imagem={false}
          ></ExameCard>
          <TouchableOpacity onPress={handlePressAddExames} style={styles.stylesContainerExamesAdd}>
-            <View style= {styles.circleInvisible}></View>
-            <Text style={styles.stylesContainerExamesAddText}>ADICIONAR EXAME</Text>
+            <Text>ADICIONAR CONSULTA/EXAME</Text>
          </TouchableOpacity>
         </View> 
       </View>
       <Footer />
     </SafeAreaView>
-    
-    
   );
 }
 {/* Falta a fonte*/}
 const styles = StyleSheet.create({
- 
   container: {
     flex: 1,
     backgroundColor: `${bgThemeColor}`,
@@ -137,5 +134,4 @@ const styles = StyleSheet.create({
     fontWeight:"400",
     color: `${textThemeColor}`,    
   },
-
 });
