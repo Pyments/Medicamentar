@@ -13,7 +13,8 @@ export default function UserAuthLayout() {
           drawerActiveTintColor: "#ffffff",
           drawerInactiveTintColor: "#ffffff",
           drawerType:"slide",
-        }}>
+        }}
+        >
         <Drawer.Screen
         name="Home"
         options={{
@@ -22,7 +23,7 @@ export default function UserAuthLayout() {
           headerShown: false,
           drawerIcon: ({}) => (
             <Image
-              source={require("../../../assets/DrawerIcons/home_icon.png")}
+              source={require("@/src/assets/DrawerIcons/home_icon.png")}
               resizeMode="contain"
               style={{width:30, height:30}}
             />
@@ -37,7 +38,7 @@ export default function UserAuthLayout() {
           headerShown: false,
           drawerIcon: ({}) => (
             <Image
-              source={require("../../../assets/user.png")}
+              source={require("@/src/assets/user.png")}
               resizeMode="contain"
               style={{width:30, height: 30}}
             />
@@ -52,7 +53,7 @@ export default function UserAuthLayout() {
           headerShown: false,
           drawerIcon: ({}) => (
             <Image
-              source={require("../../../assets/hospital.png")}
+              source={require("@/src/assets/hospital.png")}
               resizeMode="contain"
               style={{width:30, height:30}}
             />
@@ -69,7 +70,7 @@ export default function UserAuthLayout() {
           
             drawerIcon: ({}) => (
               <Image
-                source={require("../../../assets/pilulas.png")}
+                source={require("@/src/assets/pilulas.png")}
                 resizeMode="contain"
                 style={{width:30, height:30}}
               />
@@ -85,7 +86,7 @@ export default function UserAuthLayout() {
           
             drawerIcon: ({}) => (
               <Image
-                source={require("../../../assets/DrawerIcons/emergencia_icon.png")}
+                source={require("@/src/assets/DrawerIcons/emergencia_icon.png")}
                 resizeMode="contain"
                 style={{width:30, height:30}}
               />
@@ -100,7 +101,7 @@ export default function UserAuthLayout() {
           headerShown: false,
           drawerIcon: ({}) => (
             <Image
-              source={require("../../../assets/DrawerIcons/config_icon.png")}
+              source={require("@/src/assets/DrawerIcons/config_icon.png")}
               resizeMode="contain"
               style={{width:30, height:30}}
             />

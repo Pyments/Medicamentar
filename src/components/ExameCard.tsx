@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet,Image } from 'react-native';
+import { secBgThemeColor, textThemeColor } from '../constants/ColorTheming';
 
 interface ExameCardprops{
   dia:string;
@@ -35,7 +36,7 @@ const ExameCard = (props:ExameCardprops) => {
           <Text style={styles.stylesContainerExamesTextAlert}>{props.consultaOuExame}</Text>
           {!props.imagem && <View style={styles.invisibleSpace}></View>}
           </View>
-          {props.imagem && <Image style={styles.imagAlert} source={require("../assets/imagem_alerta.png")} />}
+          {props.imagem && <Image style={styles.imagAlert} source={require("@/src/assets/imagem_alerta.png")} />}
           
         </View>
       </TouchableOpacity>
@@ -73,6 +74,7 @@ const styles = StyleSheet.create({
     
   },
   stylesContainerExamesClickedInfoAdd:{
+    color: `${textThemeColor}`,
     alignItems:"center",
     paddingTop:1,
     width:"90%",
@@ -81,16 +83,19 @@ const styles = StyleSheet.create({
   
   },  
   stylesContainerExamesClickedInfoAddText:{
+    color: `${textThemeColor}`,
     fontSize:15,
     fontWeight:"400",
     marginTop:28,
     
   },
   stylesContainerExamesClickedInfoAddTextLocal:{
+    color: `${textThemeColor}`,
     fontSize:15,
     fontWeight:"400",
   },
   stylesContainerExamesClickedInfoAddHour:{
+    color: `${textThemeColor}`,
     fontSize:24,
     lineHeight:24,
     marginTop:16,
@@ -103,7 +108,7 @@ const styles = StyleSheet.create({
     height: 59,
     borderRadius: 3,
     marginBottom: 10,
-    backgroundColor: "#E8E8E8",
+    backgroundColor: `${secBgThemeColor}`,
     shadowColor: "#000", 
     shadowOffset: {
       width: 0,
@@ -111,11 +116,9 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25, 
     shadowRadius: 3.84, 
-    elevation: 5, 
-  
+    elevation: 5,   
   },
-  containerExamesAlert:{
-    
+  containerExamesAlert:{    
     alignItems:"center",
     flexDirection:"row",
   },
@@ -131,23 +134,24 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     textAlign: "center",
     fontSize:24,
+    color: `${textThemeColor}`
   },
   testeLinha:{
     borderWidth:0.8,
+    borderColor: `${textThemeColor}`,
     backgroundColor:"#000000",
     width:"60%"
   },
   stylesContainerExamesTextAlert: {
     height:23,
-    borderColor:"#FFB800",
+    borderColor:`${textThemeColor}`,
     fontSize:15,
     fontWeight:"400",
-    
+    color: `${textThemeColor}`
   },
   imagAlert:{
     alignItems:"center",
     marginRight:34,
-
   },
  
   stylesContainerExamesClicked: {
@@ -159,8 +163,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop:-10,
     borderTopWidth:2,
-
-    backgroundColor: "#E8E8E8",
+    backgroundColor: `${secBgThemeColor}`,
     shadowColor: "#000", 
     shadowOffset: {
       width: 0,
