@@ -14,7 +14,6 @@ import * as SplashScreen from "expo-splash-screen";
 import DateTimerPicker from "@react-native-community/datetimepicker";
 import RNPickerSelect from "react-native-picker-select";
 
-SplashScreen.preventAutoHideAsync();
 
 function ConsultasAdd() {
     const placeholder = {
@@ -120,7 +119,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#E8E8E8",
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     },
     header: {
         height: 31,
