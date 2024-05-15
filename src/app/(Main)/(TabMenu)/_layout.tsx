@@ -107,6 +107,14 @@ export default function UserAuthLayout() {
           )
         }}
         />
+        <Drawer.Screen
+          name="ConsultasAdd"
+          options={{
+            drawerLabel: "Adicionar Consultas",
+            title: "Adicionar Consultas",
+            headerShown: false,
+          }}
+        />
       </Drawer>
     </GestureHandlerRootView>
   );

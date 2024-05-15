@@ -3,8 +3,6 @@ import {SafeAreaView, View, Text, StyleSheet, StatusBar, Image, TouchableOpacity
 import {useFonts} from "expo-font"
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback } from 'react';
-import {LinearGradient} from "expo-linear-gradient"
-import {router} from "expo-router"
 import { DrawerActions } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
 
@@ -38,6 +36,7 @@ export default function Configuration() {
     if (!fontsLoaded && !fontError) {
         return null;
     }
+    
     return(
         <SafeAreaView style={[isDark ? styles.containerDark : styles.container, styles.paddingStatusBar]}
         onLayout={onLayoutRootView}
