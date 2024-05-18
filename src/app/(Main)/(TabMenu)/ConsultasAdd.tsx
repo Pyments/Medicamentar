@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import {
     SafeAreaView,
     View,
@@ -7,20 +7,44 @@ import {
     StyleSheet,
     Platform,
     Button,
-    TextInput
+    TextInput,
+    TouchableOpacity,
+    Image
 } from "react-native";
+import { DrawerActions } from "@react-navigation/native";
+import { useNavigation } from "expo-router";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import DateTimerPicker from "@react-native-community/datetimepicker";
 import RNPickerSelect from "react-native-picker-select";
 
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
+
+import {
+    bgThemeColor,
+    fgThemeColor,
+    secBgThemeColor,
+    textThemeColor,
+  } from "@/src/constants/ColorTheming";
+
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: true,
+    }),
+  });
 
 function ConsultasAdd() {
-    const placeholder = {
-        label: "Selecione uma Especialidade",
-        value: null,
-        color: "#555555",
-    }
+
+    const navigation = useNavigation();
+
+    const AbrirNavMenu = () => {
+        navigation.dispatch(DrawerActions.openDrawer());
+    };
+
 
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState("date");
@@ -61,26 +85,22 @@ function ConsultasAdd() {
     
     return(
         <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
-            <StatusBar/>
-            <View style={styles.header}></View>
-            
-            <View style={styles.selectContainer}>
-                <RNPickerSelect
-                    placeholder={placeholder}
-                    onValueChange={ value => console.log(value) }
-                    items={[
-                        { label: "Cardiologista", value: "cardiologista" },
-                        { label: "Dentista", value: "dentista"},
-                        { label: "Endocrinologista", value: "endocrinologista"},
-                        { label: "Ginecologista", value: "ginecologista" },
-                        { label: "Ortopedista", value: "ortopedista"},
-                        { label: "Urologista", value: "urologista" },
-                    ]}
-                />
+            <View style={styles.containerTopoItems}>
+                <TouchableOpacity onPress={AbrirNavMenu}>
+                <Image
+                    source={require("@/src/assets/menu-lateral.png")}
+                    style={styles.containerTopoMenuLat}
+                ></Image>
+                </TouchableOpacity>
+                <Text style={styles.containerTopoTexto}>CONSULTAS E EXAMES</Text>
+                <Image
+                source={require("@/src/assets/perfil.png")}
+                style={styles.containerTopoImagem}
+                ></Image>
             </View>
                
             <View>
-                <Text style={styles.dateTimeText}>{text}</Text>
+                {/*<Text style={styles.dateTimeText}>{text}</Text>*/}
                 <View>
                     <Button title="Escolher Data" onPress={() => showMode("date")}/>
                 </View>
@@ -101,15 +121,37 @@ function ConsultasAdd() {
 
             <View style={styles.containerInput}>
                 <View style={styles.inputOne}>
-                    <Text style={styles.labelTextInput}>Médico:</Text>
+                    <Text style={styles.labelTextInput}>Especialidade</Text>
                     <TextInput style={styles.textInput}></TextInput>
                 </View>
-                <View >
+                <View>
                     <Text style={styles.labelTextInput}>Clínica/Hospital:</Text>
                     <TextInput style={styles.textInput}></TextInput>
                 </View>
+                <View>
+                    <Text style={styles.labelTextInput}>Descrição</Text>
+                    <TextInput
+                    style={{backgroundColor:"#E8E8E8", borderRadius:10, height:"auto", padding:10, marginHorizontal: 26,}} 
+                    multiline={true} 
+                    numberOfLines={4}
+                    maxLength={300}
+                    >
+                    </TextInput>
+                </View>        
+                <TouchableOpacity><Text>Adicionar Lembrete</Text></TouchableOpacity>        
+                <TouchableOpacity style={styles.botaoConcluido}>
+                    <Text style={styles.textoBotaoConcluido}>Concluido</Text>
+                </TouchableOpacity>
+
+                {/* Teste exemplo de notificação/}
+                {/*<Button title="teste notifi" onPress={() => Notifications.scheduleNotificationAsync({
+                        content: {title: "teste", body:"teste"}, trigger:null
+                    })
+                }>
+                
+                </Button>
+                */}
             </View>
-            
             <View style={styles.footer}></View>
         </SafeAreaView>
     )
@@ -118,13 +160,32 @@ function ConsultasAdd() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#E8E8E8",
+        backgroundColor: "#ffffff",
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     },
-    header: {
-        height: 31,
-        width: "100%",
-        backgroundColor: "#20A2EB",
-        
+    containerTopoItems: {
+        backgroundColor: `${fgThemeColor}`,
+        justifyContent: "space-between",
+        paddingHorizontal: 20,
+        alignItems: "center",
+        flexDirection: "row",
+        height: 88,
+    },
+    containerTopoMenuLat: {
+        height: 25,
+        width: 35,
+    },
+    containerTopoTexto: {
+        flex:1,
+        textAlign:"center",
+        fontWeight: "400",
+        color: "#FFFFFF",
+        fontSize: 24,
+      },
+    containerTopoImagem: {
+        resizeMode: "contain",
+        height: 60,
+        width: 60,
     },
     selectContainer: {
         paddingHorizontal: 30,
@@ -143,14 +204,32 @@ const styles = StyleSheet.create({
     },
     labelTextInput: {
         fontFamily: "armata-regular-400",
+        marginHorizontal: 26,
     },
     textInput: {
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#E8E8E8",
         height: 40,
         borderRadius: 10,
+        marginHorizontal: 26,
     },
     inputOne: {
         marginBottom: 20,
+    },
+    botaoConcluido:{
+        backgroundColor: "#58C0F3", // #58C0F3 PARA DISABLED
+        width: 310,
+        height: 59,
+        alignSelf:"center",
+        borderRadius:5,
+        marginTop: 15,
+    },
+    textoBotaoConcluido:{
+        margin:"auto",
+        fontSize:24,
+        color: "#ffffff",
+        fontWeight: "400",
+        lineHeight: 30,
+        opacity: 0.6
     },
     footer: {
         height: 31,
@@ -159,7 +238,6 @@ const styles = StyleSheet.create({
         position: "absolute",
         bottom: 0,
     },
-
 });
 
 export default ConsultasAdd;
