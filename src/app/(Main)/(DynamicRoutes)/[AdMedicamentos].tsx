@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import CheckBox from "expo-checkbox";
 import { fgThemeColor } from "@/src/constants/ColorTheming";
+import { router } from "expo-router";
 
 export default function AdMedicamentos() {
   return (
@@ -59,7 +60,11 @@ export default function AdMedicamentos() {
           </TouchableOpacity>
         </View>
         <View style={styles.posicaoBotaoVoltar}>
-          <TouchableOpacity style={styles.containerBotao}>
+          <TouchableOpacity 
+          onPress={
+            ()=>router.push("../(TabMenu)/Medicamentos")
+          }
+          style={styles.containerBotao}>
             <Image
               source={require("@/src/assets/seta_voltar.png")}
               style={styles.containerImagemBotaoSalvar}
