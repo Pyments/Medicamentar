@@ -1,6 +1,6 @@
 import { View, StyleSheet, Image, Text, SafeAreaView, TouchableOpacity, StatusBar, Platform } from "react-native";
 import { DrawerActions } from "@react-navigation/native";
-import { useNavigation } from "expo-router";
+import { router, useNavigation } from "expo-router";
 
 import { fgThemeColor } from "@/src/constants/ColorTheming";
 import CardMedicamentos from "@/src/components/CardMedicamento";
@@ -33,6 +33,17 @@ export default function Medicamentos() {
         </View>
       </View>
       <CardMedicamentos />
+      <View style ={{flex:1}}>
+        <TouchableOpacity 
+        onPress={
+          ()=>router.push("../(DynamicRoutes)/[AdMedicamento]")
+        }
+        style ={{position:"absolute", width:50, bottom:40,right:24}}>
+
+          <Image source={require("@/src/assets/botao_adicionar.png")}></Image>
+
+        </TouchableOpacity>
+      </View>
       <Footer/>
     </SafeAreaView>
   );
@@ -51,7 +62,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     height: 88,
   },
-  headerHamburguer: {
+  headerHamburguer: { 
   },
   headerTitle: {
     color: "#FFFFFF",
