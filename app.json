@@ -29,8 +29,13 @@
     },
     "plugins": [
       "expo-router",
-      "expo-font"
+      "expo-font",
+      "expo-notifications"
     ],
+    "notification":{
+      "icon": "./src/assets/logo_notification.png",
+      "color:": "#ffffff"
+    },
     "fonts": [
       {
         "fonts": ["./src/assets/fonts/armata-regular-400.ttf"]
