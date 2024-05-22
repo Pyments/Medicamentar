@@ -21,6 +21,7 @@ import RNPickerSelect from "react-native-picker-select";
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
+import Footer from "@/src/components/Footer";
 
 import {
     bgThemeColor,
@@ -101,11 +102,19 @@ function ConsultasAdd() {
                
             <View>
                 {/*<Text style={styles.dateTimeText}>{text}</Text>*/}
-                <View>
-                    <Button title="Escolher Data" onPress={() => showMode("date")}/>
-                </View>
-                <View>
-                    <Button title="Escolher Hora" onPress={() => showMode("time")}/>
+                <View style={styles.viewBotoesNotificacao}>
+                    <TouchableOpacity
+                    style={styles.botoesNotificacao}
+                    onPress={() => showMode("date")}
+                    >
+                        <Text style={styles.textoBotoesNotificacao}>Escolher Data</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                    style={styles.botoesNotificacao}
+                    onPress={() => showMode("time")}
+                    >
+                        <Text style={styles.textoBotoesNotificacao}>Escolher Hora</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
             {show && (
@@ -121,24 +130,23 @@ function ConsultasAdd() {
 
             <View style={styles.containerInput}>
                 <View style={styles.inputOne}>
-                    <Text style={styles.labelTextInput}>Especialidade</Text>
+                    <Text style={styles.labelTextInput}>Médico</Text>
                     <TextInput style={styles.textInput}></TextInput>
                 </View>
                 <View>
-                    <Text style={styles.labelTextInput}>Clínica/Hospital:</Text>
+                    <Text style={styles.labelTextInput}>Especialidade</Text>
                     <TextInput style={styles.textInput}></TextInput>
                 </View>
                 <View>
                     <Text style={styles.labelTextInput}>Descrição</Text>
                     <TextInput
-                    style={{backgroundColor:"#E8E8E8", borderRadius:10, height:"auto", padding:10, marginHorizontal: 26,}} 
+                    style={{backgroundColor:`${secBgThemeColor}`, borderRadius:10, height:"auto", padding:10, marginHorizontal: 26,}} 
                     multiline={true} 
-                    numberOfLines={4}
+                    numberOfLines={5}
                     maxLength={300}
                     >
                     </TextInput>
-                </View>        
-                <TouchableOpacity><Text>Adicionar Lembrete</Text></TouchableOpacity>        
+                </View>                
                 <TouchableOpacity style={styles.botaoConcluido}>
                     <Text style={styles.textoBotaoConcluido}>Concluido</Text>
                 </TouchableOpacity>
@@ -152,7 +160,7 @@ function ConsultasAdd() {
                 </Button>
                 */}
             </View>
-            <View style={styles.footer}></View>
+            <Footer/>
         </SafeAreaView>
     )
 }
@@ -160,7 +168,7 @@ function ConsultasAdd() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#ffffff",
+        backgroundColor: `${bgThemeColor}`,
         paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     },
     containerTopoItems: {
@@ -179,7 +187,7 @@ const styles = StyleSheet.create({
         flex:1,
         textAlign:"center",
         fontWeight: "400",
-        color: "#FFFFFF",
+        color: "#ffffff",
         fontSize: 24,
       },
     containerTopoImagem: {
@@ -203,11 +211,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     },
     labelTextInput: {
+        color: `${textThemeColor}`,
+        backgroundColor: `${bgThemeColor}`,
         fontFamily: "armata-regular-400",
         marginHorizontal: 26,
     },
     textInput: {
-        backgroundColor: "#E8E8E8",
+        backgroundColor: `${secBgThemeColor}`,
         height: 40,
         borderRadius: 10,
         marginHorizontal: 26,
@@ -216,12 +226,30 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     botaoConcluido:{
-        backgroundColor: "#58C0F3", // #58C0F3 PARA DISABLED
+        backgroundColor: `${fgThemeColor}`, // #58C0F3 PARA DISABLED
         width: 310,
         height: 59,
         alignSelf:"center",
         borderRadius:5,
         marginTop: 15,
+    },
+    viewBotoesNotificacao:{
+        gap: 10,
+        marginTop: 25
+    },
+    botoesNotificacao:{
+        width:310,
+        height: 33,
+        alignSelf:"center",
+        backgroundColor: `${fgThemeColor}`,
+        borderRadius: 3
+    },
+    textoBotoesNotificacao:{
+        color: "#ffffff",
+        margin: "auto",
+        fontSize: 15,
+        fontWeight: "400",
+        opacity: 0.6
     },
     textoBotaoConcluido:{
         margin:"auto",
@@ -230,13 +258,6 @@ const styles = StyleSheet.create({
         fontWeight: "400",
         lineHeight: 30,
         opacity: 0.6
-    },
-    footer: {
-        height: 31,
-        width: "100%",
-        backgroundColor: "#20A2EB",
-        position: "absolute",
-        bottom: 0,
     },
 });
 
