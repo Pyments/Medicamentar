@@ -25,7 +25,7 @@
 - **Registrar futuras consultas:** Permitir que os usuários agendem consultas futuras, inserindo a data e a hora desejadas.
 - **Alarme Text to Speech**: Emitir um alarme sonoro com a opção de converter texto em voz para lembrar os usuários dos horários de tomar os medicamentos.
 ---
-### 3.1 Requisitos Não-Funcionais
+### 3.1. Requisitos Não-Funcionais
  - **Tema Claro ou Escuro**: Opção de escolher entre um tema claro e um tema escuro para melhorar a experiência de uso, especialmente em ambientes com pouca luz.
  - **Alteração da proporção da fonte**: Permitir que os usuários personalizem o tamanho da fonte para melhor legibilidade e acessibilidade.
  ---
@@ -84,11 +84,16 @@ Para que o usuário possa ver suas notificações no app, basta apenas clicar no
 <h3>Tela de Consultas e Exames</h3>
 
 ![Tela de Consulta 1](https://github.com/Vinilves/Medicamentar/assets/128435810/e6abe982-0d3c-4d45-8111-8707ce2d40b1) 
-![Tela de Consulta 2](https://github.com/Vinilves/Medicamentar/assets/128435810/a9eec1f2-9e47-4d91-924a-91857a8151bf)
+![Tela de Consulta 2](https://github.com/Vinilves/Medicamentar/assets/128435810/4d213100-0568-4d8c-9207-a401125b7b6a)
 
 Aqui o usuário marca e tem acesso as suas consultas e exames, podendo ver as consultas e os exames marcados, como também pode adicionar um exame novo ao quadro de exames no app.
 
 <h3>Tela de Medicamentos</h3>
+
+![Tela de Medicamentos 1](https://github.com/Vinilves/Medicamentar/assets/128435810/437f03c6-083b-4af5-b7f5-fb81f415a619)
+![Tela de Medicamentos 2](https://github.com/Vinilves/Medicamentar/assets/128435810/fba97f95-f075-4a11-a13b-e817f44771f1)
+
+Essa aba é destinada para que o usuário possa fazer a sua reposição e até mesmo pedir novos medicamentos, basta apenas descrever qual o medicamento necessitado, a dose que precisa ser tomada, o período de uso do remédio, assim como a definição se é de uso contínuo ou não.
 
 <h3>Tela de Emergência</h3>
 
