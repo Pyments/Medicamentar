@@ -1,49 +1,109 @@
+import { useEffect, useState } from "react";
 import { Link, router } from "expo-router";
-import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
+import {bgThemeColor,fgThemeColor,secBgThemeColor,textThemeColor} from "@/src/constants/ColorTheming";
+import { ScrollView, View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
+import { MMKV } from "react-native-mmkv";
+
+const storage = new MMKV();
+
+interface Medicamento {
+  medicamento: string;
+  dose: string;
+  quantidade: string;
+  periodo: string;
+  vencimento: string;
+  usoContinuo: boolean;
+}
 
 export default function CardMedicamentos() {
+  const [medicamentos, setMedicamentos] = useState<Medicamento[]>([]);
+
+  useEffect(() => {
+    const medicamentosString = storage.getString("medicamentos");
+    const medicamentosArray: Medicamento[] = medicamentosString ? JSON.parse(medicamentosString) : [];
+    setMedicamentos(medicamentosArray);
+  }, []);
+
+  const handleDelete = (index: number) => {
+    const updatedMedicamentos = [...medicamentos];
+    updatedMedicamentos.splice(index, 1);
+    setMedicamentos(updatedMedicamentos);
+    storage.set("medicamentos", JSON.stringify(updatedMedicamentos));
+  };
+
   return (
-    <View style={styles.card}>
-      <View>
-        <Text style={styles.cardTitle}>MEDICAMENTO 1</Text>
-        <View style={styles.infoWrapper}>
-          <Text style={styles.infoText}>Uso Contínuo </Text>
-          <Text style={styles.infoText}>Status: Normal</Text>
+  <ScrollView contentContainerStyle={styles.scrollViewContent}>
+    <View>
+      {medicamentos.map((medicamentoData, index) => (
+        <View key={index} style={styles.card}>
+          <TouchableOpacity onPress={() => handleDelete(index)} style={styles.deleteButton}>
+            <Image source={require("../assets/Medicamento_component/Lixeira_icon.png")} style={[styles.deleteIcon, { opacity: 0.7 }]} />
+          </TouchableOpacity>
+          <View>
+            <Text style={styles.cardTitle}>{medicamentoData.medicamento}</Text>
+            <View style={styles.infoWrapper}>
+              <Text style={styles.infoText}>USO CONTÍNUO: {medicamentoData.usoContinuo ? "Sim" : "Não"}</Text>
+              <Text style={styles.infoText}>Quantidade: {medicamentoData.quantidade}</Text>
+              <Text style={styles.infoText}>Vencimento: {medicamentoData.vencimento}</Text>
+              <Text style={styles.infoText}>Dose: {medicamentoData.dose}</Text>
+              <Text style={styles.infoText}>Período: {medicamentoData.periodo}</Text>
+              
+            </View>
+          </View>
         </View>
-      </View>      
-        <TouchableOpacity onPress={
-          ()=>{ router.push("../(DynamicRoutes)/[AdMedicamentos]")}
-        }>
-          <Image
-              source={require("../assets/Medicamento_component/Medicamento_icon.png")}
-              style={styles.cardImage}
-            ></Image>
-        </TouchableOpacity>      
+      ))}
     </View>
+  </ScrollView>
   );
 }
+
 const styles = StyleSheet.create({
+  scrollViewContent: {
+    paddingBottom: 100,
+  },
+
   card: {
     justifyContent: "space-between",
-    backgroundColor: "#D9D9D9",
+    backgroundColor: `${secBgThemeColor}`,
     paddingHorizontal: 15,
     flexDirection: "row",
     alignItems: "center",
     display: "flex",
-    minHeight: 95,
+    minHeight: 140,
     margin: 14,
+    position: "relative",
+  },
+  deleteButton: {
+    position: "absolute",
+    top: "50%",
+    transform: [{ translateY: "-50%" }],
+    right: 35,
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  deleteIcon: {
+    width: 30,
+    height: 34,
   },
   infoWrapper: {
     flexDirection: "column",
     display: "flex",
-    marginLeft: 10,
+    marginLeft: 20,
   },
   infoText: {
-    marginVertical: 2,
-    fontSize: 15,
+    fontFamily: "armata-regular-400",
+    fontSize: 13,
+    color: `${textThemeColor}`,
   },
   cardTitle: {
-    fontSize: 23,
+    color: `${textThemeColor}`,
+    fontFamily: "armata-regular-400",
+    fontSize: 18,
+    marginLeft: 20,
+    marginBottom: 10,
   },
   cardImage: {
     resizeMode: "contain",

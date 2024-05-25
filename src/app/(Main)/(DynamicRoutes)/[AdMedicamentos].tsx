@@ -1,31 +1,43 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  Appearance,
-  SafeAreaView,
-} from "react-native";
+import {View,Text,StyleSheet,Image,TouchableOpacity,TextInput,Appearance,SafeAreaView} from "react-native";
 import CheckBox from "expo-checkbox";
-import {
-  bgThemeColor,
-  fgThemeColor,
-  secBgThemeColor,
-  textThemeColor,
-} from "@/src/constants/ColorTheming";import { router } from "expo-router";
-import { useState } from "react";
+import {bgThemeColor,fgThemeColor,secBgThemeColor,textThemeColor} from "@/src/constants/ColorTheming";
+import { router } from "expo-router";
+import {useState} from "react";
 import Footer from "@/src/components/Footer";
+import {MMKV} from "react-native-mmkv";
+
+const storage = new MMKV();
 
 export default function AdMedicamentos() {
-  const [toggleCheckBox, setToggleCheckBox] = useState(false)
+  const [medicamento, setMedicamento] = useState("");
+  const [dose, setDose] = useState("");
+  const [quantidade, setQuantidade] = useState("");
+  const [periodo, setPeriodo] = useState("");
+  const [vencimento, setVencimento] = useState("");
   const [isChecked, setIsChecked] = useState(false);
+
+  const handleSave = () => {
+    const novoMedicamento = {
+      medicamento,
+      dose,
+      quantidade,
+      periodo,
+      vencimento,
+      usoContinuo: isChecked,
+    };
+
+    const medicamentos = storage.getString("medicamentos");
+    const medicamentosArray = medicamentos ? JSON.parse(medicamentos) : [];
+    medicamentosArray.push(novoMedicamento);
+    storage.set("medicamentos", JSON.stringify(medicamentosArray));
+    router.push("../(TabMenu)/Medicamentos");
+
+  };
 
   return (
     <SafeAreaView style={styles.container}>
        <View style={styles.header}>
-       <Text style={styles.headerTitle}>Medicamentos</Text>
+       <Text style={styles.headerTitle}>MEDICAMENTOS</Text>
         <View style={styles.imageWrapper}>
           <Image
             style={styles.headerImage}
@@ -35,26 +47,26 @@ export default function AdMedicamentos() {
         </View>
       <View style={styles.conteinerForm}>
         <Text style = {styles.containerDadosTitulo}>Medicamento</Text>
-        <TextInput style={[styles.containerInput,{maxWidth:332} ]} ></TextInput>
+        <TextInput style={[styles.containerInput,{maxWidth:332} ]} value={medicamento} onChangeText={setMedicamento}></TextInput>
 
         <View style={styles.containerInputsTst}>
           <View style={{ borderColor:"red", marginRight:20,}}>
             <Text style = {styles.containerDadosTitulo}>Dose</Text>
-            <TextInput style={[styles.containerInput,{width:86}]} ></TextInput>
+            <TextInput style={[styles.containerInput,{width:86}]} value={dose} onChangeText={setDose}></TextInput>
           </View>
           <View style={{ borderColor:"blue",}}>
             <Text style = {styles.containerDadosTitulo}>Quantidade por dose</Text>
-            <TextInput style={[styles.containerInput,{width:227}]} ></TextInput>
+            <TextInput style={[styles.containerInput,{width:227}]} value={quantidade} onChangeText={setQuantidade}></TextInput>
           </View>
         </View>
         <View style={{flexDirection:"row"}}>
             <View style={{ borderColor:"blue",marginRight:20}}>
               <Text style = {styles.containerDadosTitulo}>Período</Text>
-              <TextInput style={[styles.containerInput,{width:86}]} ></TextInput>
+              <TextInput style={[styles.containerInput,{width:86}]} value={periodo} onChangeText={setPeriodo}></TextInput>
             </View>
             <View style={{ borderColor:"blue",marginRight:20}}>
                <Text style = {styles.containerDadosTitulo}>Vencimento</Text>
-                <TextInput style={[styles.containerInput,{width:105}]} ></TextInput>
+                <TextInput style={[styles.containerInput,{width:105}]} value={vencimento} onChangeText={setVencimento}></TextInput>
             </View>
           <View style={{borderColor:"blue", alignItems:"center",}}>
             <Text style = {styles.containerDadosTitulo}>Uso contínuo</Text>
@@ -63,7 +75,7 @@ export default function AdMedicamentos() {
         </View>
        <View style={styles.buttons}>
         <View>
-          <TouchableOpacity style={styles.containerBotao}>
+          <TouchableOpacity style={styles.containerBotao} onPress={handleSave}>
             <Image
               source={require("@/src/assets/botao_salvar.png")}
               style={styles.containerImagemBotaoSalvar}
@@ -161,7 +173,6 @@ const styles = StyleSheet.create({
 
   textoComprimidoP: {
     fontSize: 15,
-    //mudar fonte aqui
     marginLeft: "15%",
   },
   containerBox1: {
@@ -182,7 +193,7 @@ const styles = StyleSheet.create({
   },
   textoForm: {
     fontSize: 15,
-    //mudar fonte aqui
+    
   },
   container: {
     backgroundColor: `${bgThemeColor}`,
