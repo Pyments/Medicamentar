@@ -1,23 +1,10 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  Appearance,
-  SafeAreaView,
-} from "react-native";
+import {View,Text,StyleSheet,Image,TouchableOpacity,TextInput,Appearance,SafeAreaView} from "react-native";
 import CheckBox from "expo-checkbox";
-import {
-  bgThemeColor,
-  fgThemeColor,
-  secBgThemeColor,
-  textThemeColor,
-} from "@/src/constants/ColorTheming";import { router } from "expo-router";
-import { useState } from "react";
+import {bgThemeColor,fgThemeColor,secBgThemeColor,textThemeColor} from "@/src/constants/ColorTheming";
+import { router } from "expo-router";
+import {useState} from "react";
 import Footer from "@/src/components/Footer";
-import { MMKV } from "react-native-mmkv";
+import {MMKV} from "react-native-mmkv";
 
 const storage = new MMKV();
 
@@ -50,7 +37,7 @@ export default function AdMedicamentos() {
   return (
     <SafeAreaView style={styles.container}>
        <View style={styles.header}>
-       <Text style={styles.headerTitle}>Medicamentos</Text>
+       <Text style={styles.headerTitle}>MEDICAMENTOS</Text>
         <View style={styles.imageWrapper}>
           <Image
             style={styles.headerImage}

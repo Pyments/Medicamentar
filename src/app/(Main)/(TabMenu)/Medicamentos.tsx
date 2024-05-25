@@ -1,8 +1,7 @@
 import { View, StyleSheet, Image, Text, SafeAreaView, TouchableOpacity, StatusBar, Platform } from "react-native";
 import { DrawerActions } from "@react-navigation/native";
 import { router, useNavigation } from "expo-router";
-
-import { fgThemeColor } from "@/src/constants/ColorTheming";
+import {fgThemeColor, bgThemeColor} from "@/src/constants/ColorTheming";
 import CardMedicamentos from "@/src/components/CardMedicamento";
 import Footer from "@/src/components/Footer";
 
@@ -24,7 +23,7 @@ export default function Medicamentos() {
           ></Image>
         
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Medicamentos</Text>
+        <Text style={styles.headerTitle}>MEDICAMENTOS</Text>
         <View style={styles.imageWrapper}>
           <Image
             style={styles.headerImage}
@@ -52,6 +51,7 @@ const styles = StyleSheet.create({
   rootView: {
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    backgroundColor: `${bgThemeColor}`,
   },
   header: {
     justifyContent: "space-between",
@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   imageWrapper:{
-    backgroundColor: "#ffffff",
     borderRadius: 10,
     padding: 4,
   },
