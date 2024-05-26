@@ -1,17 +1,14 @@
 import { DrawerActions } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
 import React, { useState } from "react";
+
 import {
-  ScrollView,
+  Linking,
   View,
   StyleSheet,
   Text,
   Image,
-  SafeAreaView,
   TouchableOpacity,
-  Pressable,
-  Button,
-  Alert,
 } from "react-native";
 
 export default function Emergencia() {
@@ -31,24 +28,25 @@ export default function Emergencia() {
   const handleButtonClick = () => {
     setButtonClicked(false);
     setSecondClicked(true);
+    Linking.openURL('tel:+192');
   };
 
   const handleSecondButtonClick = () => {
     setSecondClicked(false);
     setButtonClicked(true);
+    Linking.openURL('tel:+193');
   };
   const handleThirdButtonClick = () => {
     setThirdClicked(false);
     setFourthClicked(true);
+    Linking.openURL('tel:+188');
   };
   const handleFourthButtonClick = () => {
     setThirdClicked(true);
     setFourthClicked(false);
+    Linking.openURL('tel:+190');;
   };
-  const handlePressAddExames = () => {
-    Alert.alert("indisponível no momento");
-  };
-
+  
   return (
     <View style={styles.container}>
       <View style={styles.containerTop}>
@@ -73,7 +71,7 @@ export default function Emergencia() {
           )}
 
          {buttonClicked && (
-            <TouchableOpacity onPress={handleButtonClick} style={styles.stylesContainerEmergencia}>
+            <TouchableOpacity onPress={handleSecondButtonClick} style={styles.stylesContainerEmergencia}>
               
               <Image style = {styles.imagEM} source={require("../../../assets/Emergencia_icons/BOMB_em.png")}/>
               <View style = {styles.textContainer}>
@@ -83,7 +81,7 @@ export default function Emergencia() {
             </TouchableOpacity>
           )}
           {buttonClicked && (
-            <TouchableOpacity onPress={handleButtonClick} style={styles.stylesContainerEmergencia}>
+            <TouchableOpacity onPress={handleThirdButtonClick} style={styles.stylesContainerEmergencia}>
               <Image style = {styles.imagEM} source={require("../../../assets/Emergencia_icons/CVV_em.png")}/>
               <View style = {styles.textContainer}>
               <Text style={styles.stylesContainerEmergenciaText}>CT.DE VALORIZAÇÃO A VIDA</Text>
@@ -93,7 +91,7 @@ export default function Emergencia() {
             </TouchableOpacity>
           )}
           {buttonClicked && (
-            <TouchableOpacity onPress={handleButtonClick} style={styles.stylesContainerEmergencia}>
+            <TouchableOpacity onPress={handleFourthButtonClick} style={styles.stylesContainerEmergencia}>
               
               <Image style = {styles.imagEM} source={require("../../../assets/Emergencia_icons/PM_em.png")}/>
               <View style = {styles.textContainer}>
