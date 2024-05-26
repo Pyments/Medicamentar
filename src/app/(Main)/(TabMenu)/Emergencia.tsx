@@ -1,16 +1,16 @@
+import { DrawerActions } from "@react-navigation/native";
+import { useNavigation } from "expo-router";
+import React, { useState } from "react";
+
 import {
+  Linking,
   View,
   StyleSheet,
   Text,
   Image,
   TouchableOpacity,
-  Alert,
-  Platform,
-  StatusBar,
 } from "react-native";
-import { DrawerActions } from "@react-navigation/native";
-import { useNavigation } from "expo-router";
-import { useState } from "react";
+
 
 import Footer from "@/src/components/Footer";
 import {
@@ -35,24 +35,25 @@ export default function Emergencia() {
   const handleButtonClick = () => {
     setButtonClicked(false);
     setSecondClicked(true);
+    Linking.openURL('tel:+192');
   };
 
   const handleSecondButtonClick = () => {
     setSecondClicked(false);
     setButtonClicked(true);
+    Linking.openURL('tel:+193');
   };
   const handleThirdButtonClick = () => {
     setThirdClicked(false);
     setFourthClicked(true);
+    Linking.openURL('tel:+188');
   };
   const handleFourthButtonClick = () => {
     setThirdClicked(true);
     setFourthClicked(false);
+    Linking.openURL('tel:+190');;
   };
-  const handlePressAddExames = () => {
-    Alert.alert("indisponível no momento");
-  };
-
+  
   return (
     <View style={styles.container}>
       <View style={styles.containerTop}>
