@@ -1,38 +1,58 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Modal,
-  SafeAreaView,
-} from "react-native";
-import { router } from "expo-router";
-import { useState } from "react";
-import Footer from "../../../components/Footer";
-import NotifiCard from "../../../components/NotifiCard";
+import { View, Text, StyleSheet, Image, TouchableOpacity, Modal, SafeAreaView, BackHandler, Alert, Platform, StatusBar, TouchableWithoutFeedback } from "react-native";
+import { router, useNavigation } from "expo-router";
+import { useState, useCallback } from "react";
+import * as animatable from "react-native-animatable"
+import { DrawerActions } from "@react-navigation/native";
+import { useFonts } from "expo-font"
+import * as SplashScreen from 'expo-splash-screen';
 
-export default function Home() {
+import NotifiCard from "@/src/components/NotifiCard";
+import Footer from "@/src/components/Footer";
+import { bgThemeColor, fgThemeColor, textThemeColor, secBgThemeColor, accentThemeColor } from "@/src/constants/ColorTheming"
+
+export default function Home(this: any) {
   const [IsModalVisible, setIsModalVisible] = useState(false);
+
+  const navigation = useNavigation();
+
+  const AbrirNavMenu = () => {
+      navigation.dispatch(DrawerActions.openDrawer());
+  };
+
+  const [fontsLoaded, fontError] = useFonts({
+    "armata-regular-400": require("../../../fonts/armata-regular-400.ttf"),
+  });   
+
+  const onLayoutRootView = useCallback(async () => {
+      if (fontsLoaded || fontError) {
+          await SplashScreen.hideAsync();
+      }
+  }, [fontsLoaded, fontError]);
+
+  if (!fontsLoaded && !fontError) {
+      return null;
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.containerTopo}>
-        <Image
-          source={require("../../../assets/logo_nome.png")}
-          style={styles.containerImage}
-        ></Image>
-        <TouchableOpacity onPress={() => setIsModalVisible(true)}>
+        <TouchableOpacity onPress={AbrirNavMenu}>
           <Image
+            source={require("../../../assets/logo_nome.png")}
+            style={styles.containerImage}
+          ></Image>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {this.animation.shake(600).then(() => setIsModalVisible(true))}}>
+          <animatable.Image     
+            ref={ref => {this.animation = ref;}}
             source={require("../../../assets/notificacao_logo.png")}
             style={styles.containerImageNotificacao}
-          ></Image>
+          ></animatable.Image>
         </TouchableOpacity>
         <Modal 
         visible={IsModalVisible}
         onRequestClose={() => setIsModalVisible(false)}
         transparent= {true}
         animationType="slide"
-        presentationStyle="pageSheet"
         >
           <View style={styles.containerModal}>
             <NotifiCard
@@ -48,21 +68,26 @@ export default function Home() {
           </View>
         </Modal>
       </View>
-      <View style={styles.containerColumns}>
+      <animatable.View animation="zoomIn" delay={50} style={styles.containerColumns}>
         <View style={styles.containerColumn}>
           <TouchableOpacity
+            style={styles.containerBotoes}
             onPress={() =>
               router.navigate({
                 pathname: "./Exames",
               })
             }
           >
+            <View style={{}}>
             <Image
-              source={require("../../../assets/consultaseExames.png")}
-              style={styles.containerBotoes}
+              source={require("@/src/assets/hospital.png")}
+              style={styles.containerBotoesImage}
             ></Image>
+            </View>
           </TouchableOpacity>
+          <Text style={styles.texto}>Consultas e Exames</Text>
           <TouchableOpacity
+          style={styles.containerBotoes}
           onPress={() =>
             router.navigate({
               pathname: "./Emergencia",
@@ -70,22 +95,25 @@ export default function Home() {
           }
           >
             <Image
-              source={require("../../../assets/emergencia.png")}
-              style={styles.containerBotoes}
+              source={require("@/src/assets/emergency.png")}
+              style={styles.containerBotoesImage}
             ></Image>
-            
           </TouchableOpacity>
+          <Text style={styles.texto}>Emergência</Text>
           <TouchableOpacity
+            style={styles.containerBotoes}
             onPress={() => router.navigate({ pathname: "./Configuration" })}
           >
             <Image
-              source={require("../../../assets/config.png")}
-              style={styles.containerBotoes}
+              source={require("@/src/assets/configuracoes.png")}
+              style={styles.containerBotoesImage}
             ></Image>
           </TouchableOpacity>
+          <Text style={styles.texto}>Configurações</Text>
         </View>
-        <View>
+        <View style={styles.containerColumn}>
           <TouchableOpacity
+            style={styles.containerBotoes}
             onPress={() =>
               router.navigate({
                 pathname: "./Medicamentos",
@@ -94,26 +122,43 @@ export default function Home() {
             }
           >
             <Image
-              source={require("../../../assets/medicamentos.png")}
-              style={styles.containerBotoes}
+              source={require("@/src/assets/pilulas.png")}
+              style={styles.containerBotoesImage}
             ></Image>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => router.navigate({pathname: "./Perfil"})}>
+          <Text style={styles.texto}>Medicamentos</Text>
+          <TouchableOpacity 
+          onPress={() => router.navigate({pathname: "./Perfil"})}
+          style={styles.containerBotoes}
+          >
             <Image
-              source={require("../../../assets/perfil_nome.png")}
-              style={styles.containerBotoes}
+              source={require("@/src/assets/user.png")}
+              style={styles.containerBotoesImage}
             ></Image>
-            
           </TouchableOpacity>
-          <TouchableOpacity>
+          <Text style={styles.texto}>Perfil</Text>
+          <TouchableOpacity 
+          style={styles.containerBotoes}
+          onPress={() => Alert.alert("Deseja sair?", "Você tem certeza que deseja sair do app?",
+            [{
+              text: "Não",
+              style: "cancel",
+            },
+            {
+              text: "Sim",
+              onPress: () => BackHandler.exitApp()
+            } 
+            ]
+           )}>
             <Image
-              source={require("../../../assets/sair.png")}
-              style={styles.containerBotoes}
+              source={require("@/src/assets/sair_solo.png")}
+              style={styles.containerBotoesImage}
             ></Image>
           </TouchableOpacity>
+          <Text style={styles.texto}>Sair</Text>
         </View>
-      </View>
-      <Footer></Footer>
+      </animatable.View>
+      <Footer />
     </SafeAreaView>
   );
 }
@@ -121,20 +166,18 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F6F6F6",
+    backgroundColor: `${bgThemeColor}`,
     width: "100%",
     height: "100%",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   containerTopo: {
-    width: "100%",
-    height: 110,
-    minHeight: 100,
-    backgroundColor: "#20A2EB",
+    height: 88,
+    backgroundColor: `${fgThemeColor}`,
     flexDirection: "row",
-    alignSelf: "center",
+    paddingHorizontal: 20,
     alignItems: "center",
-    justifyContent: "space-around",
-    gap: 80,
+    justifyContent: "space-between",
   },
   containerImage: {
     width: 190,
@@ -142,7 +185,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   containerImageNotificacao: {
-    width: 30,
+    width: 35,
     resizeMode: "contain",
   },
   containerColumns: {
@@ -150,17 +193,28 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     flexDirection: "row",
-    marginBottom: 30,
-    gap: 30,
+    gap: 50,
   },
   containerColumn: {
     flexDirection: "column",
   },
   containerBotoes: {
-    resizeMode: "contain",
-    width: 120,
-    height: 120,
+    alignSelf:"center",
+    alignItems: "center",
+    justifyContent:"center",
+    backgroundColor: `${secBgThemeColor}`,
+    width: 80,
+    height: 80,
     marginBottom: 20,
+    borderWidth: 2.5,
+    borderRadius: 10,
+    borderColor: `${fgThemeColor}`,
+    marginVertical: 10,
+  },
+  containerBotoesImage:{
+    resizeMode: "contain",
+    width:65,
+    height:65
   },
   containerModal:{
     width: "100%",
@@ -168,8 +222,8 @@ const styles = StyleSheet.create({
     height: "100%",
     alignSelf: "center",
     marginTop: 140,
-    borderRadius: 15,
-    backgroundColor: "rgba(232,232,228,1)"
+    borderRadius: 20,
+    backgroundColor: "#c1c1c1"
   },
   containerModalBotao:{
     width: 90,
@@ -187,5 +241,13 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "400",
     color: "#ffffff"
+  },
+  texto:{
+    color: `${textThemeColor}`,
+    alignSelf: "center",
+    fontFamily: "armata-regular-400",
+    fontSize: 14,
+    marginBottom: 10,
+    marginTop: -15
   }
 });

@@ -1,7 +1,9 @@
-import { View, StyleSheet, Image, Text, SafeAreaView, TouchableOpacity } from "react-native";
-import CardMedicamentos from "../../../components/CardMedicamento";
+import { View, StyleSheet, Image, Text, SafeAreaView, TouchableOpacity, StatusBar, Platform } from "react-native";
 import { DrawerActions } from "@react-navigation/native";
-import { useNavigation } from "expo-router";
+import { router, useNavigation } from "expo-router";
+import {fgThemeColor, bgThemeColor} from "@/src/constants/ColorTheming";
+import CardMedicamentos from "@/src/components/CardMedicamento";
+import Footer from "@/src/components/Footer";
 
 export default function Medicamentos() {
 
@@ -16,41 +18,63 @@ export default function Medicamentos() {
       <View style={styles.header}>
         <TouchableOpacity onPress={AbrirNavMenu}>
         <Image
-          style={styles.headerHamburguer}
-          source={require("../../../assets/menu-lateral.png")}
-        ></Image>
+            style={styles.headerHamburguer}
+            source={require("@/src/assets/menu-lateral.png")}
+          ></Image>
+        
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Medicamentos</Text>
-        <Image
-          style={styles.headerImage}
-          source={require("../../../assets/Medicamento_icon.png")}
-        ></Image>
+        <Text style={styles.headerTitle}>MEDICAMENTOS</Text>
+        <View style={styles.imageWrapper}>
+          <Image
+            style={styles.headerImage}
+            source={require("@/src/assets/Medicamento_icon.png")}
+          ></Image>
+        </View>
       </View>
       <CardMedicamentos />
+      <View style ={{flex:1}}>
+        <TouchableOpacity 
+        onPress={
+          ()=>router.push("../(DynamicRoutes)/[AdMedicamento]")
+        }
+        style ={{position:"absolute", width:50, bottom:40,right:24}}>
+
+          <Image source={require("@/src/assets/botao_adicionar.png")}></Image>
+
+        </TouchableOpacity>
+      </View>
+      <Footer/>
     </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
   rootView: {
     flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    backgroundColor: `${bgThemeColor}`,
   },
   header: {
     justifyContent: "space-between",
-    backgroundColor: "#20A2EB",
+    backgroundColor: `${fgThemeColor}`,
     paddingHorizontal: 20,
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 10,
     height: 88,
   },
-  headerHamburguer: {
+  headerHamburguer: { 
   },
   headerTitle: {
     color: "#FFFFFF",
     fontSize: 24,
   },
+  imageWrapper:{
+    borderRadius: 10,
+    padding: 4,
+  },
   headerImage: {
     resizeMode: "contain",
-    width: 70,
+    width: 56,
+    height: 56,
   },
 });

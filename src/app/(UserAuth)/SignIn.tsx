@@ -1,7 +1,9 @@
-import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Appearance } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import BotoesLogin from "../../components/BotoesLogin";
 import { useState } from "react";
+import * as Animatable from "react-native-animatable"
+import { accentThemeColor, bgThemeColor, textThemeColor } from "../../constants/ColorTheming"
 
 export default function SignIn() {
 
@@ -40,22 +42,26 @@ export default function SignIn() {
     }
     return (
         <View style={styles.container}>
-            <LinearGradient colors={["#ffffff","#FFFFFF", "#2596BE"]} style={{flex: 1}}>
+            <LinearGradient colors={[Appearance.getColorScheme() === "dark" ? "#d0d0d0": "#ffffff", Appearance.getColorScheme() === "dark" ? "#d0d0d0": "#ffffff", `${accentThemeColor}`]} style={{flex: 1}}>
             <Image
                 style={styles.containerLogo}
                 source={require("../../assets/UserAuth/imagem_registro.png")}
             />
-            <View style={styles.containerForm}>
+            <Animatable.View 
+                style={styles.containerForm}
+                animation="fadeInUp"
+                delay={500}
+                >
                 <TextInput
                 style={NomState ? styles.error : styles.containerInput} 
-                placeholder="NOME COMPLETO:"    
+                placeholder="NOME COMPLETO"    
                 autoCapitalize="words"
                 onChangeText={(text) => nomeIsEmpty(text)}
                 />
                 <Text style={NomState ? styles.textError : styles.noErrorTexto}>Este campo é obrigatório!</Text>
                 <TextInput 
                 style={EmailState ? styles.error : styles.containerInput}
-                placeholder="EMAIL:"
+                placeholder="EMAIL"
                 autoComplete="email"
                 keyboardType="email-address"    
                 onChangeText={(email) => emailIsEmpty(email)}
@@ -64,7 +70,7 @@ export default function SignIn() {
                 <View style={styles.passSection}>
                     <TextInput 
                     style={SenState ? styles.error : styles.containerInput}
-                    placeholder="SENHA:"    
+                    placeholder="SENHA"    
                     secureTextEntry= {ShowPass}  
                     onChangeText={(senha) => SenIsEmpty(senha)}
                     />
@@ -85,7 +91,7 @@ export default function SignIn() {
                 <View style={styles.passSection}>
                     <TextInput 
                     style={SenState ? styles.error : styles.containerInput}
-                    placeholder="REPITA SUA SENHA:"
+                    placeholder="REPITA SUA SENHA"
                     secureTextEntry= {ShowPass}      
                     onChangeText={(senha) => SenIsEmpty(senha)}
                     />
@@ -108,16 +114,13 @@ export default function SignIn() {
                         style={styles.containerBotao}
                         onPress={() => allEmpty()}
                         >
-                        <Image 
-                        source={require("../../assets/UserAuth/logo_entrar.png")}
-                        style={styles.containerImagemBotaoEntrar}
-                        >
-                        </Image>
-                        <Text style={styles.containerBotaoTexto}>CADASTRAR-SE</Text>
+                        <Text style={styles.containerBotaoTexto}>Cadastrar-se</Text>
                     </TouchableOpacity>
-                    <BotoesLogin></BotoesLogin>
+                    <BotoesLogin
+                    texto="Cadastrar-se"
+                    ></BotoesLogin>
                 </View>
-            </View>
+            </Animatable.View>
             </LinearGradient>        
         </View> 
     );
@@ -149,12 +152,11 @@ const styles = StyleSheet.create({
     containerInput:{
         width: "100%",
         maxWidth: 450,
-        height: 30,
-        borderColor: "#000000",
-        backgroundColor: "#ffffff",
+        height: 43,
+        backgroundColor: `${bgThemeColor}`,
+        color: `${textThemeColor}`,
         elevation: 10,
-        shadowColor: '#000000',
-        borderWidth: 1,
+        shadowColor: "#ffffff",
         fontSize:16,
         borderRadius: 3,
         paddingHorizontal: 15,
@@ -172,14 +174,15 @@ const styles = StyleSheet.create({
         alignItems: "center",
         alignSelf: "center",
         flexDirection: "row",
-        backgroundColor: "#ffffff",
-        borderRadius: 20,
-        width: 155,
+        backgroundColor: `${bgThemeColor}`,
+        borderRadius: 50,
+        width: 160.13,
         height:  40,
     },
     containerBotaoTexto:{
-        fontWeight: "bold",
+        color: `${textThemeColor}`,
         fontSize: 15,
+        fontWeight: "400"
     },
     containerImagemBotaoEntrar:{
         width: 20,

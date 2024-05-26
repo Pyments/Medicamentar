@@ -7,7 +7,8 @@ export default function UserAuthLayout() {
         name="[AdMedicamentos]"
         options={{
           title: "Adicionar medicamento",
-          statusBarHidden: false
+          // statusBarHidden: false,
+          headerShown: false
         }}
       />
     </Stack>

@@ -1,7 +1,7 @@
-import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
-import Drawer from "expo-router/drawer";
-import React from "react";
-import { Text, View, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
+import { Text, View, Image, TouchableOpacity, StyleSheet, Alert, BackHandler } from "react-native";
+
+import { accentThemeColor, fgThemeColor } from "@/src/constants/ColorTheming";
 
 export default function NavMenu(props:any){
     const { state, ...rest } = props;
@@ -13,7 +13,7 @@ export default function NavMenu(props:any){
             <View style={styles.containerTopo}>
                 <Image
                 style={styles.containerImage}
-                source={require("../../../assets/DrawerIcons/usuario_icon.png")}
+                source={require("@/src/assets/DrawerIcons/usuario_icon.png")}
                 />
                 <View style={styles.containerTopoTextos}>
                     <Text style={styles.containerNomeUsuario}>Usuário Placeholder</Text>
@@ -23,16 +23,27 @@ export default function NavMenu(props:any){
             <DrawerContentScrollView {...props}>
                 <DrawerItemList state={newState} {...rest}/>
             </DrawerContentScrollView>
-            <View style={styles.containerSair}>
-                <TouchableOpacity style={styles.containerBotaoSair}>
+                <TouchableOpacity 
+                style={styles.containerBotaoSair}
+                onPress={() => Alert.alert("Deseja sair?", "Você tem certeza que deseja sair do app?",
+                    [{
+                    text: "Não",
+                    style: "cancel",
+                    },
+                    {
+                    text: "Sim",
+                    onPress: () => BackHandler.exitApp()
+                    } 
+                    ]
+                )}
+                >
                     <Image
                     style={styles.containerSairImagem}
-                    source={require("../../../assets/DrawerIcons/sair_icon.png")}
+                    source={require("@/src/assets/sair_drawer.png")}
                     >
                     </Image>
                     <Text style={styles.containerBotaoTexto}>Sair</Text>
                 </TouchableOpacity>
-            </View>
         </View> 
     );
 }
@@ -40,7 +51,7 @@ export default function NavMenu(props:any){
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor:"#20a2eb",
+        backgroundColor:`${fgThemeColor}`,
     },
     containerTopo:{
         width: "80%",
@@ -53,7 +64,7 @@ const styles = StyleSheet.create({
         width: 70,
         height: 70,
         borderWidth: 4,
-        borderColor: "#0C689C",
+        borderColor: `${accentThemeColor}`,
         borderRadius: 100
     },
     containerTopoTextos:{
@@ -65,23 +76,19 @@ const styles = StyleSheet.create({
     containerNomeCidade:{
         color: "#c1c1c1"
     },
-    containerSair:{
-        width: "90%",
-        alignSelf:"center",
-        //backgroundColor: "rgba(255, 255, 255, 0.4)",
-        marginBottom: 45,
-    },
     containerSairImagem:{
         width: 30,
         height: 30,
     },
     containerBotaoSair:{
-        width: "90%",
+        alignSelf:"flex-start",
         flexDirection: "row",
-        gap: 30
+        gap: 25,
+        marginBottom:30,
+        paddingHorizontal:20
     },
     containerBotaoTexto:{
-        color: "#d1d1d1",
+        color: "#ffffff",
         alignSelf: "center"
     }
 })
