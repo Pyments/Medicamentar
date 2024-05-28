@@ -6,7 +6,6 @@ import {
     Text,
     StyleSheet,
     Platform,
-    Button,
     TextInput,
     TouchableOpacity,
     Image
@@ -17,18 +16,15 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import DateTimerPicker from "@react-native-community/datetimepicker";
 import RNPickerSelect from "react-native-picker-select";
+import { MMKV } from 'react-native-mmkv'
 
-import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 import Footer from "@/src/components/Footer";
 
-import {
-    bgThemeColor,
-    fgThemeColor,
-    secBgThemeColor,
-    textThemeColor,
-  } from "@/src/constants/ColorTheming";
+import { bgThemeColor, fgThemeColor, secBgThemeColor, textThemeColor } from "@/src/constants/ColorTheming";
+
+export const storage = new MMKV()
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -39,20 +35,28 @@ Notifications.setNotificationHandler({
   });
 
 function ConsultasAdd() {
-
     const navigation = useNavigation();
 
     const AbrirNavMenu = () => {
         navigation.dispatch(DrawerActions.openDrawer());
     };
 
-
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState("date");
     const [show, setShow] = useState(false);
     const [text, setText] = useState("");
+    const [notification, setNotification] = useState("");
 
-    const onChange = (event, selectedDate) => {
+    function handleSave(){
+        storage.set("notification", JSON.stringify({text}));
+        fetchNotification()
+    }
+    function fetchNotification(){
+        const dados = storage.getString("notification");
+        setNotification(dados?JSON.parse(dados): {});
+    }
+
+    const onChange = (event:any, selectedDate:any) => {
         const currentDate = selectedDate || date;
         setShow(Platform.OS === "ios");
         setDate(currentDate);
@@ -64,11 +68,11 @@ function ConsultasAdd() {
 
         console.log(fDate + " (" + fTime + ")");
     }
-    const showMode = (currentMode) => {
+    const showMode = (currentMode:any) => {
         setShow(true);
         setMode(currentMode);
     }
-
+    
             /* -- Carregamento da fonte -- */
     const [fontsLoaded, fontError] = useFonts({
         "armata-regular-400": require("../../../fonts/armata-regular-400.ttf"),
@@ -83,7 +87,12 @@ function ConsultasAdd() {
     if (!fontsLoaded && !fontError) {
         return null;
     }
-    
+    const currentDate = new Date().getDate() + "/" + (new Date().getMonth() + 1) + "/" + new Date().getFullYear() + new Date().getHours() + ":" + new Date().getMinutes()
+    if (storage.getString("notification") == currentDate){
+        () => Notifications.scheduleNotificationAsync({
+            content: {title: "Chegou a hora de sua consulta/exame", body:"Notificações Funcionando!"}, trigger:null
+        })
+    }
     return(
         <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
             <View style={styles.containerTopoItems}>
@@ -101,7 +110,7 @@ function ConsultasAdd() {
             </View>
                
             <View>
-                {/*<Text style={styles.dateTimeText}>{text}</Text>*/}
+                <Text style={styles.dateTimeText}>{text}</Text>
                 <View style={styles.viewBotoesNotificacao}>
                     <TouchableOpacity
                     style={styles.botoesNotificacao}
@@ -147,7 +156,10 @@ function ConsultasAdd() {
                     >
                     </TextInput>
                 </View>                
-                <TouchableOpacity style={styles.botaoConcluido}>
+                <TouchableOpacity 
+                style={styles.botaoConcluido}
+                onPress={handleSave}
+                >
                     <Text style={styles.textoBotaoConcluido}>Concluido</Text>
                 </TouchableOpacity>
 

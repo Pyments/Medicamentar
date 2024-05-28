@@ -205,11 +205,6 @@ const styles = StyleSheet.create({
         flexDirection:"column",
         gap: 15
     },
-    botoes:{
-        alignSelf:"center",
-        flexDirection:"column",
-        gap: 15
-    },
     Registro:{
         alignSelf: "center",
         flexDirection: "row"
@@ -241,6 +236,7 @@ const styles = StyleSheet.create({
     },
     textError:{
         color: "#ff1111",
+        marginTop: -20
     },
     noErrorTexto:{
         width: "100%",
