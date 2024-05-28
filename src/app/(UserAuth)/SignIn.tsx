@@ -207,6 +207,7 @@ const styles = StyleSheet.create({
     },
     textError:{
         color: "#ff1111",
+        marginTop: -15
     },
     noErrorTexto:{
         display: "none"
