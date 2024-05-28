@@ -109,8 +109,15 @@ Este projeto está sob licença [MIT](./.github/LICENSE)
 ---
 ### 7. Contribuidores
 
-<h4>Vinícius Alves Ferreira dos Santos</h4>
-<h4>Pablo Henrique Dantas de Sá</h4>
+- [Alexandre Azevedo de Araújo Siqueira](https://github.com/Alexandre-Siqueira)    
+- [Eduardo Silva Pimenta da Mota](https://github.com/Pyments)  
+- [Guilherme Gabriel de Freitas Silva](https://github.com/GabrielGuilDFS)  
+- [José Klesley Pereira Feitosa](https://github.com/klesleybr)
+- [Lisandro Vieira Almeida](https://github.com/LisandroVA2002)
+- [Pablo Henrique Dantas de Sá](https://github.com/Pablohdantas)  
+- [Pedro Henrique Cavalcante dos Santos](https://github.com/PHCavalcante)  
+- [Thiago Ferreira Batista dos Santos](https://github.com/thiagoffs)    
+- [Vinícius Alves Ferreira dos Santos](https://github.com/Vinilves)  
 
 ---
 ### 8. Tecnologias Utilizadas
