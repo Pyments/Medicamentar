@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
     flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   containerTopoItems: {
     backgroundColor: `${fgThemeColor}`,

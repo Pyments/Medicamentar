@@ -1,6 +1,7 @@
 import { DrawerActions } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
 import React, { useState } from "react";
+import { Platform, StatusBar } from "react-native";
 
 import {
   Linking,
@@ -141,6 +142,7 @@ const styles = StyleSheet.create({
     backgroundColor: `${bgThemeColor}`,
     alignItems: "center",
     flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   containerTop: {
     backgroundColor: `${fgThemeColor}`,

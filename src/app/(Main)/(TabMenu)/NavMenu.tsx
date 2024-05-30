@@ -1,5 +1,5 @@
 import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
-import { Text, View, Image, TouchableOpacity, StyleSheet, Alert, BackHandler } from "react-native";
+import { Text, View, Image, TouchableOpacity, StyleSheet, Alert, BackHandler, Platform, StatusBar } from "react-native";
 
 import { accentThemeColor, fgThemeColor } from "@/src/constants/ColorTheming";
 
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         backgroundColor:`${fgThemeColor}`,
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     },
     containerTopo:{
         width: "80%",

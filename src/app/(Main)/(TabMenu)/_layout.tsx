@@ -1,11 +1,12 @@
 import Drawer from "expo-router/drawer";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import NavMenu from "./NavMenu";
-import { Image } from "react-native";
+import { Image, StatusBar } from "react-native";
 
 export default function UserAuthLayout() {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
+      <StatusBar barStyle={"light-content"} backgroundColor={"#000"}></StatusBar>
       <Drawer 
         drawerContent={NavMenu} 
         screenOptions={{
