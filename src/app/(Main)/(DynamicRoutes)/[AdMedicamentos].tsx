@@ -1,12 +1,10 @@
-import {View,Text,StyleSheet,Image,TouchableOpacity,TextInput,Appearance,SafeAreaView} from "react-native";
+import {View,Text,StyleSheet,Image,TouchableOpacity,TextInput,Appearance,SafeAreaView, ScrollView} from "react-native";
 import CheckBox from "expo-checkbox";
 import {bgThemeColor,fgThemeColor,secBgThemeColor,textThemeColor} from "@/src/constants/ColorTheming";
-import { router } from "expo-router";
+import {router} from "expo-router";
 import {useState} from "react";
 import Footer from "@/src/components/Footer";
-import {MMKV} from "react-native-mmkv";
-
-const storage = new MMKV();
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function AdMedicamentos() {
   const [medicamento, setMedicamento] = useState("");
@@ -16,7 +14,7 @@ export default function AdMedicamentos() {
   const [vencimento, setVencimento] = useState("");
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const novoMedicamento = {
       medicamento,
       dose,
@@ -26,91 +24,115 @@ export default function AdMedicamentos() {
       usoContinuo: isChecked,
     };
 
-    const medicamentos = storage.getString("medicamentos");
-    const medicamentosArray = medicamentos ? JSON.parse(medicamentos) : [];
-    medicamentosArray.push(novoMedicamento);
-    storage.set("medicamentos", JSON.stringify(medicamentosArray));
-    router.push("../(TabMenu)/Medicamentos");
-
+    try {
+      const medicamentos = await AsyncStorage.getItem("medicamentos");
+      const medicamentosArray = medicamentos ? JSON.parse(medicamentos) : [];
+      medicamentosArray.push(novoMedicamento);
+      await AsyncStorage.setItem("medicamentos", JSON.stringify(medicamentosArray));
+      router.push("../(TabMenu)/Medicamentos");
+    } catch (error) {
+      console.error("Error saving data", error);
+    }
   };
 
   return (
     <SafeAreaView style={styles.container}>
-       <View style={styles.header}>
-       <Text style={styles.headerTitle}>MEDICAMENTOS</Text>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>MEDICAMENTOS</Text>
         <View style={styles.imageWrapper}>
           <Image
             style={styles.headerImage}
             source={require("@/src/assets/Medicamento_icon.png")}
-          ></Image>
+          />
         </View>
-        </View>
+      </View>
       <View style={styles.conteinerForm}>
-        <Text style = {styles.containerDadosTitulo}>Medicamento</Text>
-        <TextInput style={[styles.containerInput,{maxWidth:332} ]} value={medicamento} onChangeText={setMedicamento}></TextInput>
+        <Text style={styles.containerDadosTitulo}>Medicamento</Text>
+        <TextInput
+          style={[styles.containerInput, styles.fullWidth]}
+          value={medicamento}
+          onChangeText={setMedicamento}
+        />
 
         <View style={styles.containerInputsTst}>
-          <View style={{ borderColor:"red", marginRight:20,}}>
-            <Text style = {styles.containerDadosTitulo}>Dose</Text>
-            <TextInput style={[styles.containerInput,{width:86}]} value={dose} onChangeText={setDose}></TextInput>
+          <View style={styles.inputWrapperSmall}>
+            <Text style={styles.containerDadosTitulo}>Dose</Text>
+            <TextInput
+              style={styles.containerInput}
+              value={dose}
+              onChangeText={setDose}
+            />
           </View>
-          <View style={{ borderColor:"blue",}}>
-            <Text style = {styles.containerDadosTitulo}>Quantidade por dose</Text>
-            <TextInput style={[styles.containerInput,{width:227}]} value={quantidade} onChangeText={setQuantidade}></TextInput>
-          </View>
-        </View>
-        <View style={{flexDirection:"row"}}>
-            <View style={{ borderColor:"blue",marginRight:20}}>
-              <Text style = {styles.containerDadosTitulo}>Período</Text>
-              <TextInput style={[styles.containerInput,{width:86}]} value={periodo} onChangeText={setPeriodo}></TextInput>
-            </View>
-            <View style={{ borderColor:"blue",marginRight:20}}>
-               <Text style = {styles.containerDadosTitulo}>Vencimento</Text>
-                <TextInput style={[styles.containerInput,{width:105}]} value={vencimento} onChangeText={setVencimento}></TextInput>
-            </View>
-          <View style={{borderColor:"blue", alignItems:"center",}}>
-            <Text style = {styles.containerDadosTitulo}>Uso contínuo</Text>
-            <CheckBox style={styles.checkBox} value = {isChecked} onValueChange={setIsChecked} color={`${secBgThemeColor}`}></CheckBox>
+          <View style={styles.inputWrapperLarge}>
+            <Text style={styles.containerDadosTitulo}>Quantidade por dose</Text>
+            <TextInput
+              style={styles.containerInput}
+              value={quantidade}
+              onChangeText={setQuantidade}
+            />
           </View>
         </View>
-       <View style={styles.buttons}>
-        <View>
+        <View style={styles.containerInputsTst}>
+          <View style={styles.inputWrapperSmall}>
+            <Text style={styles.containerDadosTitulo}>Período</Text>
+            <TextInput
+              style={styles.containerInput}
+              value={periodo}
+              onChangeText={setPeriodo}
+            />
+          </View>
+          <View style={styles.inputWrapperSmall}>
+            <Text style={styles.containerDadosTitulo}>Vencimento</Text>
+            <TextInput
+              style={styles.containerInput}
+              value={vencimento}
+              onChangeText={setVencimento}
+            />
+          </View>
+          <View style={styles.checkboxWrapper}>
+            <Text style={styles.containerDadosTitulo}>Uso contínuo</Text>
+            <CheckBox
+              style={styles.checkBox}
+              value={isChecked}
+              onValueChange={setIsChecked}
+              color={`${secBgThemeColor}`}
+            />
+          </View>
+        </View>
+        <View style={styles.buttons}>
           <TouchableOpacity style={styles.containerBotao} onPress={handleSave}>
             <Image
               source={require("@/src/assets/botao_salvar.png")}
               style={styles.containerImagemBotaoSalvar}
-            ></Image>
+            />
             <Text style={styles.textoForm}>Salvar</Text>
           </TouchableOpacity>
-        </View>
-        <View>
-          <TouchableOpacity 
-          onPress={
-            ()=>router.push("../(TabMenu)/Medicamentos")
-          }
-          style={styles.containerBotao}>
+          <TouchableOpacity
+            onPress={() => router.push("../(TabMenu)/Medicamentos")}
+            style={styles.containerBotao}
+          >
             <Image
               source={require("@/src/assets/seta_voltar.png")}
               style={styles.containerImagemBotaoSalvar}
-            ></Image>
+            />
             <Text style={styles.textoForm}>Voltar</Text>
           </TouchableOpacity>
         </View>
-        </View>
       </View>
-      <Footer></Footer>
+      <Footer />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-
   containerInputsTst: {
-    flexDirection:"row",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
   },
   header: {
-    width:"100%",
-    justifyContent: "space-around",
+    width: "100%",
+    justifyContent: "space-between",
     backgroundColor: `${fgThemeColor}`,
     paddingHorizontal: 20,
     flexDirection: "row",
@@ -127,23 +149,23 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
   },
-  imageWrapper:{
+  imageWrapper: {
     backgroundColor: "#ffffff",
     borderRadius: 10,
     padding: 4,
   },
-  buttons:{
-    flexDirection:"row",
-    justifyContent:"space-evenly",
-    marginTop:146,
+  buttons: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginTop: 90,
   },
   checkBox: {
-    backgroundColor: `${fgThemeColor}`,
-    height:33,
-    width:33,
+    backgroundColor: `${secBgThemeColor}`,
+    height: 33,
+    width: 33,
   },
   containerDadosTitulo: {
-    marginVertical:11,
+    marginVertical: 11,
     color: `${textThemeColor}`,
     fontSize: 15,
   },
@@ -152,8 +174,10 @@ const styles = StyleSheet.create({
     color: `${textThemeColor}`,
     paddingHorizontal: 10,
     borderRadius: 5,
-    width: "100%",
     height: 50,
+  },
+  fullWidth: {
+    width: "100%",
   },
   containerImagemBotaoSalvar: {
     width: 20,
@@ -170,36 +194,32 @@ const styles = StyleSheet.create({
     height: 40,
     flexDirection: "row",
   },
-
-  textoComprimidoP: {
-    fontSize: 15,
-    marginLeft: "15%",
+  inputWrapperSmall: {
+    flex: 1,
+    marginRight: 20,
   },
-  containerBox1: {
-    backgroundColor: `${fgThemeColor}`,
-    width: "100%",
-    height: 40,
+  inputWrapperLarge: {
+    flex: 2,
   },
-
+  checkboxWrapper: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 100,
+  },
   conteinerForm: {
-    paddingHorizontal: 40,
-    position: "absolute",
+    paddingHorizontal: 20,
     width: "100%",
-    alignSelf: "center",
-    top:151,
     maxWidth: 450,
-    minWidth: 350,
-
+    alignSelf: "center",
   },
   textoForm: {
     fontSize: 15,
-    
   },
   container: {
     backgroundColor: `${bgThemeColor}`,
     flex: 1,
     width: "100%",
     height: "100%",
-    alignItems:"center",
+    alignItems: "center",
   },
 });

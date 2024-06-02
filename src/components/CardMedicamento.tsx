@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
-import { Link, router } from "expo-router";
+import { useEffect,useState } from "react";
+import {Link,router} from "expo-router";
 import {bgThemeColor,fgThemeColor,secBgThemeColor,textThemeColor} from "@/src/constants/ColorTheming";
-import { ScrollView, View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
-import { MMKV } from "react-native-mmkv";
-
-const storage = new MMKV();
+import { ScrollView,View,StyleSheet,Image,Text,TouchableOpacity} from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface Medicamento {
   medicamento: string;
@@ -19,16 +17,27 @@ export default function CardMedicamentos() {
   const [medicamentos, setMedicamentos] = useState<Medicamento[]>([]);
 
   useEffect(() => {
-    const medicamentosString = storage.getString("medicamentos");
-    const medicamentosArray: Medicamento[] = medicamentosString ? JSON.parse(medicamentosString) : [];
-    setMedicamentos(medicamentosArray);
+    const fetchMedicamentos = async () => {
+      try {
+        const medicamentosString = await AsyncStorage.getItem("medicamentos");
+        const medicamentosArray: Medicamento[] = medicamentosString ? JSON.parse(medicamentosString) : [];
+        setMedicamentos(medicamentosArray);
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    };
+    fetchMedicamentos();
   }, []);
 
-  const handleDelete = (index: number) => {
-    const updatedMedicamentos = [...medicamentos];
-    updatedMedicamentos.splice(index, 1);
-    setMedicamentos(updatedMedicamentos);
-    storage.set("medicamentos", JSON.stringify(updatedMedicamentos));
+  const handleDelete = async (index: number) => {
+    try {
+      const updatedMedicamentos = [...medicamentos];
+      updatedMedicamentos.splice(index, 1);
+      setMedicamentos(updatedMedicamentos);
+      await AsyncStorage.setItem("medicamentos", JSON.stringify(updatedMedicamentos));
+    } catch (error) {
+      console.error("Error deleting data", error);
+    }
   };
 
   return (
@@ -76,7 +85,7 @@ const styles = StyleSheet.create({
   deleteButton: {
     position: "absolute",
     top: "50%",
-    transform: [{ translateY: "-50%" }],
+    transform: [{translateY: "-50%"}],
     right: 35,
     width: 30,
     height: 30,
