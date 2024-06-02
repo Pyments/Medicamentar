@@ -1,8 +1,10 @@
-import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Appearance } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import BotoesLogin from "../../components/BotoesLogin";
 import { useState } from "react";
 import * as Animatable from "react-native-animatable"
+import { accentThemeColor, bgThemeColor, textThemeColor } from "../../constants/ColorTheming"
+
 export default function SignIn() {
 
     const [NomState, SetNomState] = useState(false);
@@ -40,7 +42,7 @@ export default function SignIn() {
     }
     return (
         <View style={styles.container}>
-            <LinearGradient colors={["#ffffff","#FFFFFF", "#2596BE"]} style={{flex: 1}}>
+            <LinearGradient colors={[Appearance.getColorScheme() === "dark" ? "#d0d0d0": "#ffffff", Appearance.getColorScheme() === "dark" ? "#d0d0d0": "#ffffff", `${accentThemeColor}`]} style={{flex: 1}}>
             <Image
                 style={styles.containerLogo}
                 source={require("../../assets/UserAuth/imagem_registro.png")}
@@ -151,9 +153,10 @@ const styles = StyleSheet.create({
         width: "100%",
         maxWidth: 450,
         height: 43,
-        backgroundColor: "#ffffff",
+        backgroundColor: `${bgThemeColor}`,
+        color: `${textThemeColor}`,
         elevation: 10,
-        shadowColor: '#000000',
+        shadowColor: "#ffffff",
         fontSize:16,
         borderRadius: 3,
         paddingHorizontal: 15,
@@ -171,12 +174,13 @@ const styles = StyleSheet.create({
         alignItems: "center",
         alignSelf: "center",
         flexDirection: "row",
-        backgroundColor: "#ffffff",
+        backgroundColor: `${bgThemeColor}`,
         borderRadius: 50,
         width: 160.13,
         height:  40,
     },
     containerBotaoTexto:{
+        color: `${textThemeColor}`,
         fontSize: 15,
         fontWeight: "400"
     },
@@ -203,6 +207,7 @@ const styles = StyleSheet.create({
     },
     textError:{
         color: "#ff1111",
+        marginTop: -15
     },
     noErrorTexto:{
         display: "none"

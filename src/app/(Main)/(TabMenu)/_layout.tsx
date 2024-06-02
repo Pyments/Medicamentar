@@ -1,11 +1,12 @@
 import Drawer from "expo-router/drawer";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import NavMenu from "./NavMenu";
-import { Image } from "react-native";
+import { Image, StatusBar } from "react-native";
 
 export default function UserAuthLayout() {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
+      <StatusBar barStyle={"light-content"} backgroundColor={"#000"}></StatusBar>
       <Drawer 
         drawerContent={NavMenu} 
         screenOptions={{
@@ -13,7 +14,8 @@ export default function UserAuthLayout() {
           drawerActiveTintColor: "#ffffff",
           drawerInactiveTintColor: "#ffffff",
           drawerType:"slide",
-        }}>
+        }}
+        >
         <Drawer.Screen
         name="Home"
         options={{
@@ -22,7 +24,7 @@ export default function UserAuthLayout() {
           headerShown: false,
           drawerIcon: ({}) => (
             <Image
-              source={require("../../../assets/DrawerIcons/home_icon.png")}
+              source={require("@/src/assets/DrawerIcons/home_icon.png")}
               resizeMode="contain"
               style={{width:30, height:30}}
             />
@@ -37,7 +39,7 @@ export default function UserAuthLayout() {
           headerShown: false,
           drawerIcon: ({}) => (
             <Image
-              source={require("../../../assets/user.png")}
+              source={require("@/src/assets/user.png")}
               resizeMode="contain"
               style={{width:30, height: 30}}
             />
@@ -52,7 +54,7 @@ export default function UserAuthLayout() {
           headerShown: false,
           drawerIcon: ({}) => (
             <Image
-              source={require("../../../assets/hospital.png")}
+              source={require("@/src/assets/hospital.png")}
               resizeMode="contain"
               style={{width:30, height:30}}
             />
@@ -69,7 +71,7 @@ export default function UserAuthLayout() {
           
             drawerIcon: ({}) => (
               <Image
-                source={require("../../../assets/pilulas.png")}
+                source={require("@/src/assets/pilulas.png")}
                 resizeMode="contain"
                 style={{width:30, height:30}}
               />
@@ -85,7 +87,7 @@ export default function UserAuthLayout() {
           
             drawerIcon: ({}) => (
               <Image
-                source={require("../../../assets/DrawerIcons/emergencia_icon.png")}
+                source={require("@/src/assets/DrawerIcons/emergencia_icon.png")}
                 resizeMode="contain"
                 style={{width:30, height:30}}
               />
@@ -100,12 +102,20 @@ export default function UserAuthLayout() {
           headerShown: false,
           drawerIcon: ({}) => (
             <Image
-              source={require("../../../assets/DrawerIcons/config_icon.png")}
+              source={require("@/src/assets/DrawerIcons/config_icon.png")}
               resizeMode="contain"
               style={{width:30, height:30}}
             />
           )
         }}
+        />
+        <Drawer.Screen
+          name="ConsultasAdd"
+          options={{
+            drawerLabel: "Adicionar Consultas",
+            title: "Adicionar Consultas",
+            headerShown: false,
+          }}
         />
       </Drawer>
     </GestureHandlerRootView>

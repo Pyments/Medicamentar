@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet } from "react-native"
+import { fgThemeColor } from "@/src/constants/ColorTheming"
 
 export default function Footer(){
     return(
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
     footer: {
         width: "100%",
         height: 30,
-        backgroundColor: "#20A2EB",
+        backgroundColor: `${fgThemeColor}`,
         position: "absolute",
         bottom: 0,
     }

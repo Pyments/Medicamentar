@@ -16,25 +16,34 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.collab.Medicamentar"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anonymous.Medicamentar"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
     },
     "plugins": [
       "expo-router",
-      "expo-font"
+      "expo-font",
+      "expo-notifications"
     ],
+    "notification": {
+      "icon": "./src/assets/logo_notification.png",
+      "color:": "#ffffff"
+    },
     "fonts": [
       {
-        "fonts": ["./src/assets/fonts/armata-regular-400.ttf"]
+        "fonts": [
+          "./src/assets/fonts/armata-regular-400.ttf"
+        ]
       }
-    ]  
+    ]
   }
 }
