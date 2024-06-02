@@ -23,7 +23,7 @@ export default function CardMedicamentos() {
         const medicamentosArray: Medicamento[] = medicamentosString ? JSON.parse(medicamentosString) : [];
         setMedicamentos(medicamentosArray);
       } catch (error) {
-        console.error("Error fetching data", error);
+        console.error("Erro ao procurar dados", error);
       }
     };
     fetchMedicamentos();
