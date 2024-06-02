@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react";
+import { useEffect,useState, } from "react";
 import {Link,router} from "expo-router";
 import {bgThemeColor,fgThemeColor,secBgThemeColor,textThemeColor} from "@/src/constants/ColorTheming";
 import { ScrollView,View,StyleSheet,Image,Text,TouchableOpacity} from "react-native";
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   deleteButton: {
     position: "absolute",
     top: "50%",
-    transform: [{translateY: "-50%"}],
+    transform: [{translateY: -15}],
     right: 35,
     width: 30,
     height: 30,
