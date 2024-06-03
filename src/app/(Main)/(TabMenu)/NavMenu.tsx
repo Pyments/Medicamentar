@@ -44,6 +44,7 @@ export default function NavMenu(props:any){
                     </Image>
                     <Text style={styles.containerBotaoTexto}>Sair</Text>
                 </TouchableOpacity>
+                
         </View> 
     );
 }
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         backgroundColor:`${fgThemeColor}`,
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : Platform.OS === "ios" ? StatusBar.currentHeight : 0
     },
     containerTopo:{
         width: "80%",

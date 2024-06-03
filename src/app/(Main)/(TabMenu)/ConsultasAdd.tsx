@@ -16,15 +16,12 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import DateTimerPicker from "@react-native-community/datetimepicker";
 import RNPickerSelect from "react-native-picker-select";
-import { MMKV } from 'react-native-mmkv'
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 import Footer from "@/src/components/Footer";
 
 import { bgThemeColor, fgThemeColor, secBgThemeColor, textThemeColor } from "@/src/constants/ColorTheming";
-
-export const storage = new MMKV()
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -36,6 +33,34 @@ Notifications.setNotificationHandler({
 
 function ConsultasAdd() {
     const navigation = useNavigation();
+    const storeData = async () => {
+        const notification_dados = {
+            data,
+            medico,
+            especialidade,
+            descricao
+        }
+        try {
+            setNotificationDate(text);
+            const data = await AsyncStorage.setItem("data", text);
+            const medico = await AsyncStorage.setItem("medico", JSON.stringify(notification_dados.medico));
+            const especialidade = await AsyncStorage.setItem("especialidade", JSON.stringify(notification_dados.especialidade))
+            const descricao = await AsyncStorage.setItem("descricao", JSON.stringify(notification_dados.descricao))
+            } catch (e) {
+                console.log(e);
+                }
+            }
+    
+    const getData = async () => {
+        try {
+          const value =  await AsyncStorage.getItem("notification_date");
+          if(value !== null) {
+            setNotificationDate(value);
+          }
+        } catch (e) {
+          alert("erro");
+        }
+      }
 
     const AbrirNavMenu = () => {
         navigation.dispatch(DrawerActions.openDrawer());
@@ -45,16 +70,36 @@ function ConsultasAdd() {
     const [mode, setMode] = useState("date");
     const [show, setShow] = useState(false);
     const [text, setText] = useState("");
-    const [notification, setNotification] = useState("");
+    const [atualDate, setAtualDate] = useState("");
+    const [notificationDate, setNotificationDate] = useState("")
+    const [data, Setdata] = useState("");
+    const [medico, SetMedico] = useState("");
+    const [especialidade, SetEspecialidade] = useState("");
+    const [descricao, Setdescricao] = useState("");
 
-    function handleSave(){
-        storage.set("notification", JSON.stringify({text}));
-        fetchNotification()
-    }
-    function fetchNotification(){
-        const dados = storage.getString("notification");
-        setNotification(dados?JSON.parse(dados): {});
-    }
+    useEffect(() => {
+        var date = new Date().getDate();
+        var month = new Date().getMonth() + 1;
+        var year = new Date().getFullYear();
+        var hours = new Date().getHours(); 
+        var min = new Date().getMinutes(); 
+        setAtualDate(
+          date + "/" + month + "/" + year 
+          + " " + hours + ":" + min
+        );
+        console.log(atualDate);
+      }, [setTimeout(atualDate, 1000)]);
+    
+    useEffect(() => {    
+            getData();
+            if (notificationDate === atualDate){
+                alert("entrando na condição")
+                Notifications.scheduleNotificationAsync({
+                    content: {title: "Chegou a hora de sua consulta/exame!", body:`O médico(a) ${medico}  especialista em ${especialidade} está a sua espera!`}, trigger:null
+                })
+            }
+        }
+    ,[setTimeout(atualDate, 1000)]);
 
     const onChange = (event:any, selectedDate:any) => {
         const currentDate = selectedDate || date;
@@ -63,17 +108,15 @@ function ConsultasAdd() {
 
         let tempDate = new Date(currentDate);
         let fDate = tempDate.getDate() + "/" + (tempDate.getMonth() + 1) + "/" + tempDate.getFullYear();
-        let fTime = "Horário: " + tempDate.getHours() + ":" + tempDate.getMinutes();
-        setText(fDate + "\n" + fTime);
+        let fTime = tempDate.getHours() + ":" + tempDate.getMinutes();
 
-        console.log(fDate + " (" + fTime + ")");
+        setText(fDate + " " + fTime);
     }
     const showMode = (currentMode:any) => {
         setShow(true);
         setMode(currentMode);
     }
-    
-            /* -- Carregamento da fonte -- */
+
     const [fontsLoaded, fontError] = useFonts({
         "armata-regular-400": require("../../../fonts/armata-regular-400.ttf"),
       });   
@@ -86,12 +129,6 @@ function ConsultasAdd() {
     
     if (!fontsLoaded && !fontError) {
         return null;
-    }
-    const currentDate = new Date().getDate() + "/" + (new Date().getMonth() + 1) + "/" + new Date().getFullYear() + new Date().getHours() + ":" + new Date().getMinutes()
-    if (storage.getString("notification") == currentDate){
-        () => Notifications.scheduleNotificationAsync({
-            content: {title: "Chegou a hora de sua consulta/exame", body:"Notificações Funcionando!"}, trigger:null
-        })
     }
     return(
         <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
@@ -140,11 +177,16 @@ function ConsultasAdd() {
             <View style={styles.containerInput}>
                 <View style={styles.inputOne}>
                     <Text style={styles.labelTextInput}>Médico</Text>
-                    <TextInput style={styles.textInput}></TextInput>
+                    <TextInput 
+                    style={styles.textInput} 
+                    onChangeText={SetMedico}
+                    ></TextInput>
                 </View>
                 <View>
                     <Text style={styles.labelTextInput}>Especialidade</Text>
-                    <TextInput style={styles.textInput}></TextInput>
+                    <TextInput 
+                    style={styles.textInput} 
+                    onChangeText={SetEspecialidade}></TextInput>
                 </View>
                 <View>
                     <Text style={styles.labelTextInput}>Descrição</Text>
@@ -153,30 +195,21 @@ function ConsultasAdd() {
                     multiline={true} 
                     numberOfLines={5}
                     maxLength={300}
+                    onChangeText={Setdescricao}
                     >
                     </TextInput>
                 </View>                
                 <TouchableOpacity 
                 style={styles.botaoConcluido}
-                onPress={handleSave}
+                onPress={storeData}
                 >
                     <Text style={styles.textoBotaoConcluido}>Concluido</Text>
                 </TouchableOpacity>
-
-                {/* Teste exemplo de notificação/}
-                {/*<Button title="teste notifi" onPress={() => Notifications.scheduleNotificationAsync({
-                        content: {title: "teste", body:"teste"}, trigger:null
-                    })
-                }>
-                
-                </Button>
-                */}
             </View>
             <Footer/>
         </SafeAreaView>
-    )
-}
-
+        )
+    }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
