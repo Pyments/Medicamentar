@@ -1,9 +1,32 @@
 import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
 import { Text, View, Image, TouchableOpacity, StyleSheet, Alert, BackHandler, Platform, StatusBar } from "react-native";
-
 import { accentThemeColor, fgThemeColor } from "@/src/constants/ColorTheming";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useState, useEffect } from "react";
 
 export default function NavMenu(props:any){
+    const [nome, setNome] = useState("");
+    const [endereco, setEndereco] = useState("");
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const dados = await AsyncStorage.getItem("dados_usuario");
+            const dadosArray = dados ? JSON.parse(dados) : [];
+            if (dadosArray.length > 0) {
+              const { nome, endereco } = dadosArray[dadosArray.length - 1];
+              setNome(nome);
+              setEndereco(endereco);
+            }
+          } catch (e) {
+            console.error(e);
+          }
+        };
+    
+        fetchData();
+      }, []);
+    
+
     const { state, ...rest } = props;
     const newState = { ...state}
     newState.routes = newState.routes.filter((item: { name: string; }) => item.name !== "AdMedicamentos")
@@ -16,8 +39,8 @@ export default function NavMenu(props:any){
                 source={require("@/src/assets/DrawerIcons/usuario_icon.png")}
                 />
                 <View style={styles.containerTopoTextos}>
-                    <Text style={styles.containerNomeUsuario}>Usuário Placeholder</Text>
-                    <Text style={styles.containerNomeCidade}>Cidade Placeholder</Text>
+                    <Text style={styles.containerNomeUsuario}>{nome}</Text>
+                    <Text style={styles.containerNomeCidade}>{endereco}</Text>
                 </View>
             </View>
             <DrawerContentScrollView {...props}>
