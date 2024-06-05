@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 export default function NavMenu(props:any){
     const [nome, setNome] = useState("");
     const [endereco, setEndereco] = useState("");
+    const [image, setImage] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -14,9 +15,10 @@ export default function NavMenu(props:any){
             const dados = await AsyncStorage.getItem("dados_usuario");
             const dadosArray = dados ? JSON.parse(dados) : [];
             if (dadosArray.length > 0) {
-              const { nome, endereco } = dadosArray[dadosArray.length - 1];
+              const { nome, endereco, foto } = dadosArray[dadosArray.length - 1];
               setNome(nome);
               setEndereco(endereco);
+              setImage(foto);
             }
           } catch (e) {
             console.error(e);
@@ -36,7 +38,7 @@ export default function NavMenu(props:any){
             <View style={styles.containerTopo}>
                 <Image
                 style={styles.containerImage}
-                source={require("@/src/assets/DrawerIcons/usuario_icon.png")}
+                source={{ uri: image }}
                 />
                 <View style={styles.containerTopoTextos}>
                     <Text style={styles.containerNomeUsuario}>{nome}</Text>

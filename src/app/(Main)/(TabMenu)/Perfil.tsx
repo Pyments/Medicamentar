@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -13,6 +14,8 @@ import {
 } from "react-native";
 import { DrawerActions } from "@react-navigation/native";
 import { useNavigation, router } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as ImagePicker from "expo-image-picker"; 
 
 import Footer from "@/src/components/Footer";
 import {
@@ -21,8 +24,6 @@ import {
   secBgThemeColor,
   textThemeColor,
 } from "@/src/constants/ColorTheming";
-import { useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Perfil() {
   const [nome, setNome] = useState("");
@@ -31,6 +32,49 @@ export default function Perfil() {
   const [tipoSanguineo, setTipoSanguineo] = useState("");
   const [peso, setPeso] = useState("");
   const [altura, setAltura] = useState("");
+  const [foto, setFoto] = useState("");
+  const [image, setImage] = useState("");
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      const uri = result.assets[0].uri;
+      setImage(uri);
+      const name = uri.split("/").pop() || "unknown";
+      setFoto(name);
+
+      try {
+        await AsyncStorage.setItem("userImage", uri);
+        Alert.alert("Success", "Image saved successfully!");
+      } catch (e) {
+        console.error(e);
+        Alert.alert("Error", "Failed to save the image.");
+      }
+    }
+  };
+
+  useEffect(() => {
+    const loadImage = async () => {
+      try {
+        const storedImageUri = await AsyncStorage.getItem("userImage");
+        if (storedImageUri) {
+          setImage(storedImageUri);
+          const name = storedImageUri.split("/").pop() || "unknown";
+          setFoto(name);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    loadImage();
+  }, []);
 
   const handleSave = async () => {
     const dadosPerfil = {
@@ -39,7 +83,8 @@ export default function Perfil() {
       endereco,
       tipoSanguineo,
       peso,
-      altura
+      altura,
+      foto: image,
     };
 
     try {
@@ -52,7 +97,6 @@ export default function Perfil() {
       console.error(e);
     }
   };
-
 
   const navigation = useNavigation();
 
@@ -75,12 +119,15 @@ export default function Perfil() {
           style={styles.containerTopoImagem}
         ></Image>
       </View>
+      {image && <Image source={{ uri: image }} style={styles.image}></Image>}
       <View style={styles.containerDadosForms}>
         <Text style={styles.containerDadosTitulo}>NOME:</Text>
         <TextInput
           style={styles.containerInput}
-          placeholder="ex. João Carlos de  Oliveira"
-          placeholderTextColor={Appearance.getColorScheme() === ("light") ? "#00000080": "#FFFFFF80"}
+          placeholder="ex. João Carlos de Oliveira"
+          placeholderTextColor={
+            Appearance.getColorScheme() === "light" ? "#00000080" : "#FFFFFF80"
+          }
           autoCapitalize="words"
           onChangeText={setNome}
           value={nome}
@@ -89,15 +136,19 @@ export default function Perfil() {
         <TextInput
           style={styles.containerInput}
           placeholder="ex. 35"
-          placeholderTextColor={Appearance.getColorScheme() === ("light") ? "#00000080": "#FFFFFF80"}
+          placeholderTextColor={
+            Appearance.getColorScheme() === "light" ? "#00000080" : "#FFFFFF80"
+          }
           onChangeText={setIdade}
           value={idade}
         ></TextInput>
         <Text style={styles.containerDadosTitulo}>ENDEREÇO:</Text>
         <TextInput
           style={styles.containerInput}
-          placeholder="ex. Rua Oliveira 123 - Bairro  Jardim América"
-          placeholderTextColor={Appearance.getColorScheme() === ("light") ? "#00000080": "#FFFFFF80"}
+          placeholder="ex. Rua Oliveira 123 - Bairro Jardim América"
+          placeholderTextColor={
+            Appearance.getColorScheme() === "light" ? "#00000080" : "#FFFFFF80"
+          }
           onChangeText={setEndereco}
           value={endereco}
         ></TextInput>
@@ -105,7 +156,9 @@ export default function Perfil() {
         <TextInput
           style={styles.containerInput}
           placeholder="ex. A+"
-          placeholderTextColor={Appearance.getColorScheme() === ("light") ? "#00000080": "#FFFFFF80"}
+          placeholderTextColor={
+            Appearance.getColorScheme() === "light" ? "#00000080" : "#FFFFFF80"
+          }
           onChangeText={setTipoSanguineo}
           value={tipoSanguineo}
         ></TextInput>
@@ -133,11 +186,13 @@ export default function Perfil() {
                 backgroundColor: `${secBgThemeColor}`,
                 paddingHorizontal: 10,
                 width: "49%",
-                height: 50,
+                height: 40,
               },
             ]}
             placeholder="ex. 70"
-            placeholderTextColor={Appearance.getColorScheme() === ("light") ? "#00000080": "#FFFFFF80"}
+            placeholderTextColor={
+              Appearance.getColorScheme() === "light" ? "#00000080" : "#FFFFFF80"
+            }
             onChangeText={setPeso}
             value={peso}
           ></TextInput>
@@ -146,40 +201,48 @@ export default function Perfil() {
               styles.containerDadosTitulo,
               {
                 width: "49%",
-                height: 50,
+                height: 40,
                 backgroundColor: `${secBgThemeColor}`,
                 paddingHorizontal: 10,
               },
             ]}
             placeholder="ex. 1.75"
-            placeholderTextColor={Appearance.getColorScheme() === ("light") ? "#00000080": "#FFFFFF80"}
+            placeholderTextColor={
+              Appearance.getColorScheme() === "light" ? "#00000080" : "#FFFFFF80"
+            }
             onChangeText={setAltura}
             value={altura}
           ></TextInput>
         </View>
+        <TouchableOpacity 
+          style={styles.botaoUpload}
+          onPress={pickImage}
+        >
+          <Text style={styles.botaoUploadTexto}>Envie Sua Foto</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.buttons}>
-          <TouchableOpacity 
+        <TouchableOpacity 
           style={styles.containerBotao}
           onPress={handleSave}
-          >
-            <Image
-              source={require("@/src/assets/botao_salvar.png")}
-              style={styles.containerImagemBotaoSalvar}
-            />
-            <Text style={styles.textoForm}>Salvar</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => router.push("../(TabMenu)/Home")}
-            style={styles.containerBotao}
-          >
-            <Image
-              source={require("@/src/assets/seta_voltar.png")}
-              style={styles.containerImagemBotaoSalvar}
-            />
-            <Text style={styles.textoForm}>Voltar</Text>
-          </TouchableOpacity>
-        </View>
+        >
+          <Image
+            source={require("@/src/assets/botao_salvar.png")}
+            style={styles.containerImagemBotaoSalvar}
+          />
+          <Text style={styles.textoForm}>Salvar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => router.push("../(TabMenu)/Home")}
+          style={styles.containerBotao}
+        >
+          <Image
+            source={require("@/src/assets/seta_voltar.png")}
+            style={styles.containerImagemBotaoSalvar}
+          />
+          <Text style={styles.textoForm}>Voltar</Text>
+        </TouchableOpacity>
+      </View>
       <Footer />
     </SafeAreaView>
   );
@@ -232,7 +295,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 5,
     width: "100%",
-    height: 50,
+    height: 40,
   },
   buttons: {
     width: "100%",
@@ -240,7 +303,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "center",
     justifyContent: "space-evenly",
-    marginTop: 30,
+    marginTop: 20,
   },
   containerBotao: {
     alignItems: "center",
@@ -258,5 +321,26 @@ const styles = StyleSheet.create({
   },
   textoForm: {
     fontSize: 15,
+  },
+  botaoUpload: {
+    width: 120,
+    height: 40,
+    borderRadius: 10,
+    alignSelf: "center",
+    backgroundColor: `${fgThemeColor}`,
+    marginTop: 15
+  },
+  botaoUploadTexto: {
+    margin: "auto",
+    alignSelf: "center",
+    color: "#fff",
+    fontSize: 15,
+  },
+  image: {
+    marginTop: 10,
+    width: 90,
+    height: 90,
+    alignSelf: "center",
+    borderRadius: 50,
   },
 });

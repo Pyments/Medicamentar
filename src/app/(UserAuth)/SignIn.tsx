@@ -4,6 +4,7 @@ import BotoesLogin from "../../components/BotoesLogin";
 import { useState } from "react";
 import * as Animatable from "react-native-animatable"
 import { accentThemeColor, bgThemeColor, textThemeColor } from "../../constants/ColorTheming"
+import { Shadow } from "react-native-shadow-2";
 
 export default function SignIn() {
 
@@ -52,12 +53,14 @@ export default function SignIn() {
                 animation="fadeInUp"
                 delay={500}
                 >
+                <Shadow style={{alignSelf: "stretch"}}>
                 <TextInput
                 style={NomState ? styles.error : styles.containerInput} 
                 placeholder="NOME COMPLETO"    
                 autoCapitalize="words"
                 onChangeText={(text) => nomeIsEmpty(text)}
                 />
+                </Shadow>
                 <Text style={NomState ? styles.textError : styles.noErrorTexto}>Este campo é obrigatório!</Text>
                 <TextInput 
                 style={EmailState ? styles.error : styles.containerInput}
