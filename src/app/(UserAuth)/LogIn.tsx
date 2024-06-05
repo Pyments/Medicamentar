@@ -14,6 +14,7 @@ import { useState } from "react";
 import * as Animatable from "react-native-animatable"
 import BotoesLogin from "../../components/BotoesLogin";
 import { accentThemeColor, bgThemeColor, fgThemeColor, textThemeColor } from "../../constants/ColorTheming"
+import { Shadow } from 'react-native-shadow-2';
 
 export default function LogIn() {
     const [EmailState, SetEmailState] = useState(false);
