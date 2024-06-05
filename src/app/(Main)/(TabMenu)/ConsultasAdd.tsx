@@ -7,19 +7,17 @@ import {
   StyleSheet,
   Platform,
   TextInput,
-  TouchableOpacity,
   Image,
+  TouchableOpacity,
   Alert,
 } from "react-native";
 import { DrawerActions } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import DateTimerPicker from "@react-native-community/datetimepicker";
-import RNPickerSelect from "react-native-picker-select";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Notifications from "expo-notifications";
-import Constants from "expo-constants";
 import Footer from "@/src/components/Footer";
 import Header from "@/src/components/Header";
 import {
@@ -37,9 +35,11 @@ Notifications.setNotificationHandler({
   }),
 });
 
-interface ItituloECaminho {
-  titulo: string;
-  caminhoImagem: string;
+interface NotificationData {
+  data: string;
+  medico: string;
+  especialidade: string;
+  descricao: string;
 }
 
 function ConsultasAdd() {
@@ -47,47 +47,43 @@ function ConsultasAdd() {
   const AbrirNavMenu = () => {
     navigation.dispatch(DrawerActions.openDrawer());
   };
-
   const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState("date");
+  const [mode, setMode] = useState<"date" | "time">("date");
   const [show, setShow] = useState(false);
-  const [notificationDate, setNotificationDate] = useState("");
-  const [data, setdata] = useState("");
   const [medico, setMedico] = useState("");
   const [especialidade, setEspecialidade] = useState("");
-  const [descricao, setdescricao] = useState("");
+  const [descricao, setDescricao] = useState("");
 
   useEffect(() => {
     const checkNotification = async () => {
       const storedData = await AsyncStorage.getItem("notification_date");
       if (storedData) {
-        setNotificationDate(storedData);
-        const notification_dados = JSON.parse(storedData);
-        setdata(notification_dados.data);
-        setMedico(notification_dados.medico);
-        setEspecialidade(notification_dados.especialidade);
-        setdescricao(notification_dados.descricao);
+        const notificationData: NotificationData = JSON.parse(storedData);
+        setDate(new Date(notificationData.data));
+        setMedico(notificationData.medico);
+        setEspecialidade(notificationData.especialidade);
+        setDescricao(notificationData.descricao);
       }
     };
 
     checkNotification();
   }, []);
 
-  const agendarNotificacoes = async (notification_dados: any) => {
-    const triggerDate = new Date(notification_dados.data);
+  const agendarNotificacoes = async (notificationData: NotificationData) => {
+    const triggerDate = new Date(notificationData.data);
     await Notifications.scheduleNotificationAsync({
       content: {
         title: "Chegou a hora de sua consulta/exame!",
-        body: `O médico(a) ${medico}  especialista em ${especialidade} está a sua espera!`,
+        body: `O médico(a) ${notificationData.medico} especialista em ${notificationData.especialidade} está a sua espera!`,
       },
-      trigger: triggerDate,
+      trigger: { date: triggerDate },
     });
     Alert.alert("Notificação Agendada");
   };
 
-  const storeData = async (notification_dados: any) => {
+  const storeData = async (notificationData: NotificationData) => {
     try {
-      const notificationDateStr = JSON.stringify(notification_dados);
+      const notificationDateStr = JSON.stringify(notificationData);
       await AsyncStorage.setItem("notification_date", notificationDateStr);
       Alert.alert(
         "Dados Salvos!",
@@ -98,37 +94,24 @@ function ConsultasAdd() {
     }
   };
 
-  const tempoFormatado = (date: any) => {
-    var dia = date.getDate().toString().padStart(2, "0");
-    var mes = (date.getMonth() + 1).toString().padStart(2, "0");
-    var ano = date.getFullYear();
-    var horas = date.getHours().toString().padStart(2, "0");
-    var minutos = date.getMinutes().toString().padStart(2, "0");
-    return `${dia}/${mes}/${ano} ${horas}:${minutos}`;
-  };
-
   const saveNotification = async () => {
-    const formattedDate = tempoFormatado(date);
-    const notification_dados = {
+    const notificationData: NotificationData = {
       data: date.toISOString(),
       medico,
       especialidade,
       descricao,
     };
-    setNotificationDate(formattedDate);
-    await storeData(notification_dados);
-    await agendarNotificacoes(notification_dados);
+    await storeData(notificationData);
+    await agendarNotificacoes(notificationData);
   };
 
   const onChange = (event: any, selectedDate: any) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
     setDate(currentDate);
-
-    const formattedDate = tempoFormatado(currentDate);
-    setNotificationDate(formattedDate);
   };
-  const showMode = (currentMode: any) => {
+
+  const showMode = (currentMode: "date" | "time") => {
     setShow(true);
     setMode(currentMode);
   };
@@ -146,14 +129,19 @@ function ConsultasAdd() {
   if (!fontsLoaded && !fontError) {
     return null;
   }
+
   return (
     <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
-      <Header
-        tituloECaminho={{
-          titulo: "Consultas e Exames",
-          imagem: "@/src/assets/hospital.png",
-        }}
-      />{" "}
+      <View style={styles.containerTopoItems}>
+        <TouchableOpacity onPress={AbrirNavMenu}>
+          <Image
+            source={require("@/src/assets/menu-lateral.png")}
+            style={styles.containerTopoMenuLat}
+          ></Image>
+        </TouchableOpacity>
+        <Text style={styles.containerTopoTexto}>Consultas e Exames</Text>
+        <Image source={require("@/src/assets/perfil.png")} style={styles.containerTopoImagem}></Image>
+      </View>
       <View>
         <View style={styles.viewBotoesNotificacao}>
           <TouchableOpacity
@@ -171,7 +159,7 @@ function ConsultasAdd() {
         </View>
       </View>
       {show && (
-        <DateTimerPicker
+        <DateTimePicker
           testID="dateTimePicker"
           value={date}
           mode={mode}
@@ -187,7 +175,7 @@ function ConsultasAdd() {
             style={styles.textInput}
             onChangeText={setMedico}
             value={medico}
-          ></TextInput>
+          />
         </View>
         <View>
           <Text style={styles.labelTextInput}>Especialidade</Text>
@@ -195,7 +183,7 @@ function ConsultasAdd() {
             style={styles.textInput}
             onChangeText={setEspecialidade}
             value={especialidade}
-          ></TextInput>
+          />
         </View>
         <View>
           <Text style={styles.labelTextInput}>Descrição</Text>
@@ -210,9 +198,9 @@ function ConsultasAdd() {
             multiline={true}
             numberOfLines={5}
             maxLength={300}
-            onChangeText={setdescricao}
+            onChangeText={setDescricao}
             value={descricao}
-          ></TextInput>
+          />
         </View>
         <TouchableOpacity
           style={styles.botaoConcluido}
@@ -225,6 +213,7 @@ function ConsultasAdd() {
     </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -286,12 +275,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   botaoConcluido: {
-    backgroundColor: `${fgThemeColor}`, // #58C0F3 PARA DISABLED
+    backgroundColor: `${fgThemeColor}`,
     width: 310,
     height: 59,
     alignSelf: "center",
     borderRadius: 5,
     marginTop: 15,
+    justifyContent: "center",
+    alignItems: "center",
   },
   viewBotoesNotificacao: {
     gap: 10,
@@ -303,16 +294,16 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     backgroundColor: `${fgThemeColor}`,
     borderRadius: 3,
+    justifyContent: "center",
+    alignItems: "center",
   },
   textoBotoesNotificacao: {
     color: "#ffffff",
-    margin: "auto",
     fontSize: 15,
     fontWeight: "400",
     opacity: 0.6,
   },
   textoBotaoConcluido: {
-    margin: "auto",
     fontSize: 24,
     color: "#ffffff",
     fontWeight: "400",
